@@ -81,7 +81,22 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "start" : [
+            "Composer\\Config::disableProcessTimeout",
+            "symfony serve"
+        ],
+        "test:cs" : [
+            "php-cs-fixer fix --dry-run"
+        ],
+        "fix:cs": [
+            "php-cs-fixer fix"
         ]
+    },
+    "scripts-descriptions": {
+        "start" : "Run Web server on Linux & Windows without timeout (need symfony into your $PATH)",
+        "test:cs" : "Test PHP code with PHP CS Fixer",
+        "fix:cs" : "Fix PHP code with PHP CS Fixer"
     },
     "conflict": {
         "symfony/symfony": "*"
