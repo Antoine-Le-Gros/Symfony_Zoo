@@ -91,12 +91,25 @@
         ],
         "fix:cs": [
             "php-cs-fixer fix"
+        ],
+        "test:codeception": [
+            "php vendor/bin/codecept clean",
+            "php bin/console doctrine:database:drop --force --quiet --env=test",
+            "php bin/console doctrine:database:create --quiet --env=test",
+            "php bin/console doctrine:schema:create --quiet --env=test",
+            "php vendor/bin/codecept run"
+        ],
+        "test": [
+            "composer run-script fix:cs",
+            "composer run-script test:codeception"
         ]
     },
     "scripts-descriptions": {
         "start" : "Run Web server on Linux & Windows without timeout (need symfony into your $PATH)",
         "test:cs" : "Test PHP code with PHP CS Fixer",
-        "fix:cs" : "Fix PHP code with PHP CS Fixer"
+        "fix:cs" : "Fix PHP code with PHP CS Fixer",
+        "test:codeception" : "Test PHP code with codeception, recreate the sqlLite database for the code test",
+        "test" : "Run all tests"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -108,6 +121,9 @@
         }
     },
     "require-dev": {
+        "codeception/codeception": "^5.0",
+        "codeception/module-asserts": "^3.0",
+        "codeception/module-symfony": "^3.1",
         "friendsofphp/php-cs-fixer": "^3.38",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "6.3.*",
