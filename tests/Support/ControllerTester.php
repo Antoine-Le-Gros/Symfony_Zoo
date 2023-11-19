@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\\Tests\Support;
+namespace App\Tests\Support;
 
 /**
- * Inherited Methods
+ * Inherited Methods.
+ *
  * @method void wantTo($text)
  * @method void wantToTest($text)
  * @method void execute($callable)
@@ -18,12 +19,12 @@ namespace App\\Tests\Support;
  * @method void pause($vars = [])
  *
  * @SuppressWarnings(PHPMD)
-*/
+ */
 class ControllerTester extends \Codeception\Actor
 {
     use _generated\ControllerTesterActions;
 
-    /**
+    /*
      * Define custom actions here
      */
 }
