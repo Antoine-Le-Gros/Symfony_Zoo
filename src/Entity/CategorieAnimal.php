@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategorieAnimalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategorieAnimalRepository::class)]
@@ -18,6 +20,14 @@ class CategorieAnimal
 
     #[ORM\Column(length: 512)]
     private ?string $descriptionCategorie = null;
+
+    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: FamilleAnimal::class, orphanRemoval: true)]
+    private Collection $familleAnimals;
+
+    public function __construct()
+    {
+        $this->familleAnimals = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,6 +54,36 @@ class CategorieAnimal
     public function setDescriptionCategorie(string $descriptionCategorie): static
     {
         $this->descriptionCategorie = $descriptionCategorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FamilleAnimal>
+     */
+    public function getFamilleAnimals(): Collection
+    {
+        return $this->familleAnimals;
+    }
+
+    public function addFamilleAnimal(FamilleAnimal $familleAnimal): static
+    {
+        if (!$this->familleAnimals->contains($familleAnimal)) {
+            $this->familleAnimals->add($familleAnimal);
+            $familleAnimal->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFamilleAnimal(FamilleAnimal $familleAnimal): static
+    {
+        if ($this->familleAnimals->removeElement($familleAnimal)) {
+            // set the owning side to null (unless already changed)
+            if ($familleAnimal->getCategorie() === $this) {
+                $familleAnimal->setCategorie(null);
+            }
+        }
 
         return $this;
     }
