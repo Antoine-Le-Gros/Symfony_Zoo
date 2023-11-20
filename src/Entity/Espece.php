@@ -28,6 +28,10 @@ class Espece
     #[ORM\JoinColumn(nullable: false)]
     private ?FamilleAnimal $famille = null;
 
+    #[ORM\ManyToOne(inversedBy: 'especes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Regime $regime = null;
+
     public function __construct()
     {
         $this->animals = new ArrayCollection();
@@ -100,6 +104,18 @@ class Espece
     public function setFamille(?FamilleAnimal $famille): static
     {
         $this->famille = $famille;
+
+        return $this;
+    }
+
+    public function getRegime(): ?Regime
+    {
+        return $this->regime;
+    }
+
+    public function setRegime(?Regime $regime): static
+    {
+        $this->regime = $regime;
 
         return $this;
     }
