@@ -24,6 +24,10 @@ class Espece
     #[ORM\OneToMany(mappedBy: 'espece', targetEntity: Animal::class, orphanRemoval: true)]
     private Collection $animals;
 
+    #[ORM\ManyToOne(inversedBy: 'especes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?FamilleAnimal $famille = null;
+
     public function __construct()
     {
         $this->animals = new ArrayCollection();
@@ -84,6 +88,18 @@ class Espece
                 $animal->setEspece(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFamille(): ?FamilleAnimal
+    {
+        return $this->famille;
+    }
+
+    public function setFamille(?FamilleAnimal $famille): static
+    {
+        $this->famille = $famille;
 
         return $this;
     }
