@@ -20,7 +20,7 @@ class AnimalController extends AbstractController
         ]);
     }
 
-    #[Route('/animal/create')]
+    #[Route('/animal/create.html.twig')]
     public function create(EntityManagerInterface $entityManager, Request $request): Response
     {
         $animal = new Animal();
@@ -33,6 +33,6 @@ class AnimalController extends AbstractController
             return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
         }
 
-        return $this->render('animal/create', ['form' => $form]);
+        return $this->render('animal/create.html.twig', ['form' => $form]);
     }
 }
