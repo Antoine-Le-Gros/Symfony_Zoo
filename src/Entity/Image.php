@@ -25,10 +25,14 @@ class Image
     #[ORM\OneToMany(mappedBy: 'image', targetEntity: Espece::class)]
     private Collection $especes;
 
+    #[ORM\OneToMany(mappedBy: 'image', targetEntity: FamilleAnimal::class)]
+    private Collection $familleAnimals;
+
     public function __construct()
     {
         $this->animals = new ArrayCollection();
         $this->especes = new ArrayCollection();
+        $this->familleAnimals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,6 +106,36 @@ class Image
             // set the owning side to null (unless already changed)
             if ($espece->getImage() === $this) {
                 $espece->setImage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FamilleAnimal>
+     */
+    public function getFamilleAnimals(): Collection
+    {
+        return $this->familleAnimals;
+    }
+
+    public function addFamilleAnimal(FamilleAnimal $familleAnimal): static
+    {
+        if (!$this->familleAnimals->contains($familleAnimal)) {
+            $this->familleAnimals->add($familleAnimal);
+            $familleAnimal->setImage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFamilleAnimal(FamilleAnimal $familleAnimal): static
+    {
+        if ($this->familleAnimals->removeElement($familleAnimal)) {
+            // set the owning side to null (unless already changed)
+            if ($familleAnimal->getImage() === $this) {
+                $familleAnimal->setImage(null);
             }
         }
 
