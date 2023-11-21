@@ -24,6 +24,10 @@ class Inscription
     #[ORM\JoinColumn(nullable: false)]
     private ?Evenement $evenement = null;
 
+    #[ORM\ManyToOne(inversedBy: 'inscriptions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Utilisateur $utilisateur = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +65,18 @@ class Inscription
     public function setEvenement(?Evenement $evenement): static
     {
         $this->evenement = $evenement;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): static
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
