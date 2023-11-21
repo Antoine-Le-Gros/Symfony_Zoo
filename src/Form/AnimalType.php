@@ -18,7 +18,7 @@ class AnimalType extends AbstractType
             ->add('nomAnimal', null, ['empty_data' => ''])
             ->add('descriptionAnimal', null, ['empty_data' => ''])
             ->add('espece', EntityType::class, [
-                'espece' => Espece::class,
+                'class' => Espece::class,
                 'choice_label' => 'libEspece',
                 'required' => true,
                 'query_builder' => function (EntityRepository $entityRepository) {
@@ -33,6 +33,7 @@ class AnimalType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Animal::class,
+            'csrf_protection' => false,
         ]);
     }
 }
