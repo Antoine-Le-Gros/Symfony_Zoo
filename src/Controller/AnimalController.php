@@ -20,7 +20,7 @@ class AnimalController extends AbstractController
         ]);
     }
 
-    #[Route('/animal/create.html.twig')]
+    #[Route('/animal/create')]
     public function create(EntityManagerInterface $entityManager, Request $request): Response
     {
         $animal = new Animal();
