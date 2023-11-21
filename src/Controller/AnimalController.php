@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Animal;
+use App\Form\AnimalType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,11 +21,18 @@ class AnimalController extends AbstractController
     }
 
     #[Route('/animal/create')]
-    public function create(EntityManagerInterface $entityManager, Request $request): bool
+    public function create(EntityManagerInterface $entityManager, Request $request): Response
     {
         $animal = new Animal();
+        $form = $this->createForm(AnimalType::class, $animal);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($animal);
+            $entityManager->flush();
 
-        // Regénerer l'entité et générer le form avec symfony
-        return false;
+            return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
+        }
+
+        return $this->render('animal/create', ['form' => $form]);
     }
 }
