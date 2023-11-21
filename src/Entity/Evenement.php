@@ -29,6 +29,10 @@ class Evenement
     #[ORM\Column]
     private ?int $quotaVisiteurs = null;
 
+    #[ORM\ManyToOne(inversedBy: 'evenements')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Enclos $enclos = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +94,18 @@ class Evenement
     public function setQuotaVisiteurs(int $quotaVisiteurs): static
     {
         $this->quotaVisiteurs = $quotaVisiteurs;
+
+        return $this;
+    }
+
+    public function getEnclos(): ?Enclos
+    {
+        return $this->enclos;
+    }
+
+    public function setEnclos(?Enclos $enclos): static
+    {
+        $this->enclos = $enclos;
 
         return $this;
     }
