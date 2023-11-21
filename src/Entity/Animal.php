@@ -19,6 +19,10 @@ class Animal
     #[ORM\Column(length: 512)]
     private ?string $descriptionAnimal = null;
 
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Espece $espece = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class Animal
     public function setDescriptionAnimal(string $descriptionAnimal): static
     {
         $this->descriptionAnimal = $descriptionAnimal;
+
+        return $this;
+    }
+
+    public function getEspece(): ?Espece
+    {
+        return $this->espece;
+    }
+
+    public function setEspece(?Espece $espece): static
+    {
+        $this->espece = $espece;
 
         return $this;
     }
