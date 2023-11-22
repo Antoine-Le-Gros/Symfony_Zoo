@@ -6,6 +6,7 @@ use App\Entity\Animal;
 use App\Form\AnimalType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,6 +33,7 @@ class AnimalController extends AbstractController
 
             return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
         }
+
         /* @var FormView $form */
         return $this->render('animal/update.html.twig', ['animal' => $animal, 'form' => $form]);
     }
@@ -48,6 +50,7 @@ class AnimalController extends AbstractController
 
             return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
         }
+
         /* @var FormView $form */
         return $this->render('animal/create.html.twig', ['form' => $form]);
     }
@@ -58,6 +61,27 @@ class AnimalController extends AbstractController
         EntityManagerInterface $entityManager,
         Request $request): Response
     {
-        return $this->render('animal/delete.html.twig');
+        $form = $this->createFormBuilder()
+            ->add('delete', SubmitType::class)
+            ->add('cancel', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('delete')->isClicked()) {
+                $entityManager->remove($animal);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_animal');
+            }
+
+            return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
+        }
+
+        /* @var FormView $form */
+        return $this->render('animal/delete.html.twig', [
+            'form' => $form,
+            'animal' => $animal,
+        ]);
     }
 }
