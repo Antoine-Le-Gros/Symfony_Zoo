@@ -50,4 +50,13 @@ class AnimalController extends AbstractController
 
         return $this->render('animal/create.html.twig', ['form' => $form]);
     }
+
+    #[Route('/animal/{id}/delete', name: 'app_animal_delete', requirements: ['id' => '\d+'])]
+    public function delete(
+        Animal $animal,
+        EntityManagerInterface $entityManager,
+        Request $request): Response
+    {
+        return $this->render('animal/delete.html.twig');
+    }
 }
