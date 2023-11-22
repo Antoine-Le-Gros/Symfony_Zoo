@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    {{ include('animal/_form.html.twig', {submit_label: 'Créer', form:form}, with_context = false ) }}
+{% endblock %}
