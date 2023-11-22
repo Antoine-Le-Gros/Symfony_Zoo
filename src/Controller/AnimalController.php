@@ -6,6 +6,7 @@ use App\Entity\Animal;
 use App\Form\AnimalType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +32,7 @@ class AnimalController extends AbstractController
 
             return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
         }
-
+        /* @var FormView $form */
         return $this->render('animal/update.html.twig', ['animal' => $animal, 'form' => $form]);
     }
 
@@ -47,7 +48,7 @@ class AnimalController extends AbstractController
 
             return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
         }
-
+        /* @var FormView $form */
         return $this->render('animal/create.html.twig', ['form' => $form]);
     }
 
