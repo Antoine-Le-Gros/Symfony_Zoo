@@ -32,6 +32,9 @@ class Espece
     #[ORM\JoinColumn(nullable: false)]
     private ?Regime $regime = null;
 
+    #[ORM\ManyToOne(inversedBy: 'especes')]
+    private ?Image $image = null;
+
     public function __construct()
     {
         $this->animals = new ArrayCollection();
@@ -116,6 +119,18 @@ class Espece
     public function setRegime(?Regime $regime): static
     {
         $this->regime = $regime;
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

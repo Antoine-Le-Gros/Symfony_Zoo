@@ -28,6 +28,9 @@ class FamilleAnimal
     #[ORM\JoinColumn(nullable: false)]
     private ?CategorieAnimal $categorie = null;
 
+    #[ORM\ManyToOne(inversedBy: 'familleAnimals')]
+    private ?Image $image = null;
+
     public function __construct()
     {
         $this->especes = new ArrayCollection();
@@ -100,6 +103,18 @@ class FamilleAnimal
     public function setCategorie(?CategorieAnimal $categorie): static
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

@@ -23,6 +23,13 @@ class Animal
     #[ORM\JoinColumn(nullable: false)]
     private ?Espece $espece = null;
 
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Enclos $enclos = null;
+
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    private ?Image $image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +67,30 @@ class Animal
     public function setEspece(?Espece $espece): static
     {
         $this->espece = $espece;
+
+        return $this;
+    }
+
+    public function getEnclos(): ?Enclos
+    {
+        return $this->enclos;
+    }
+
+    public function setEnclos(?Enclos $enclos): static
+    {
+        $this->enclos = $enclos;
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

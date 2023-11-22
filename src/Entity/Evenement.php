@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EvenementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,18 @@ class Evenement
 
     #[ORM\Column]
     private ?int $quotaVisiteurs = null;
+
+    #[ORM\ManyToOne(inversedBy: 'evenements')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Enclos $enclos = null;
+
+    #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Inscription::class, orphanRemoval: true)]
+    private Collection $inscriptions;
+
+    public function __construct()
+    {
+        $this->inscriptions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +104,48 @@ class Evenement
     public function setQuotaVisiteurs(int $quotaVisiteurs): static
     {
         $this->quotaVisiteurs = $quotaVisiteurs;
+
+        return $this;
+    }
+
+    public function getEnclos(): ?Enclos
+    {
+        return $this->enclos;
+    }
+
+    public function setEnclos(?Enclos $enclos): static
+    {
+        $this->enclos = $enclos;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Inscription>
+     */
+    public function getInscriptions(): Collection
+    {
+        return $this->inscriptions;
+    }
+
+    public function addInscription(Inscription $inscription): static
+    {
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions->add($inscription);
+            $inscription->setEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscription(Inscription $inscription): static
+    {
+        if ($this->inscriptions->removeElement($inscription)) {
+            // set the owning side to null (unless already changed)
+            if ($inscription->getEvenement() === $this) {
+                $inscription->setEvenement(null);
+            }
+        }
 
         return $this;
     }
