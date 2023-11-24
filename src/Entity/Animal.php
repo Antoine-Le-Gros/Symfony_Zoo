@@ -30,6 +30,12 @@ class Animal
     #[ORM\ManyToOne(inversedBy: 'animals')]
     private ?Image $image = null;
 
+    #[ORM\ManyToOne(targetEntity: self::class)]
+    private ?self $parent1 = null;
+
+    #[ORM\ManyToOne(targetEntity: self::class)]
+    private ?self $parent2 = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +97,30 @@ class Animal
     public function setImage(?Image $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getParent1(): ?self
+    {
+        return $this->parent1;
+    }
+
+    public function setParent1(?self $parent1): static
+    {
+        $this->parent1 = $parent1;
+
+        return $this;
+    }
+
+    public function getParent2(): ?self
+    {
+        return $this->parent2;
+    }
+
+    public function setParent2(?self $parent2): static
+    {
+        $this->parent2 = $parent2;
 
         return $this;
     }
