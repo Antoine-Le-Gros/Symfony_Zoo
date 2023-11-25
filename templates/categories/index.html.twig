@@ -6,7 +6,7 @@
     <h1>Liste des catégories présentes au sein du zoo</h1>
     <ul class="categoriesAnimal">
         {% for categorie in categories %}
-            <li> {{ categorie.nomCategorie }}   <span class="badge bg-secondary">{{ categorie.descriptionCategorie }} </span></li>
+            <li><a class="nav-link"  href="{{ path('app_families', {idCategory: categorie.id}) }}">{{ categorie.nomCategorie }} <span class="badge bg-secondary">{{ categorie.descriptionCategorie }} </span> </a> </li>
 
         {% endfor %}
     </ul>
