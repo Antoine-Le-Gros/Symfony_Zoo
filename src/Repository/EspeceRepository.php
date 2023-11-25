@@ -25,6 +25,8 @@ class EspeceRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('e');
         $qb->leftJoin('e.animals', 'animals')
+            ->join('animals.image', 'image')
+            ->addSelect('image')
             ->addSelect('animals')
             ->where('e.id = :id')
             ->setParameter('id', $idEspece);
