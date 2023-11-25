@@ -36,6 +36,16 @@ class CategorieAnimalRepository extends ServiceEntityRepository
         return $qb->getQuery()->execute();
     }
 
+    public function getAllFamilies(int $idCategory): CategorieAnimal
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->leftJoin('c.familleAnimals', 'familles')
+            ->addSelect('familles')
+            ->where('c.id = :id')
+            ->setParameter('id', $idCategory);
+
+        return $qb->getQuery()->execute()[0];
+    }
     //    /**
     //     * @return CategorieAnimal[] Returns an array of CategorieAnimal objects
     //     */
