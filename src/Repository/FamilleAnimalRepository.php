@@ -21,28 +21,39 @@ class FamilleAnimalRepository extends ServiceEntityRepository
         parent::__construct($registry, FamilleAnimal::class);
     }
 
-//    /**
-//     * @return FamilleAnimal[] Returns an array of FamilleAnimal objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('f.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function getAllSpecies(int $idFamily): FamilleAnimal
+    {
+        $qb = $this->createQueryBuilder('f');
+        $qb->leftJoin('f.especes', 'especes')
+            ->addSelect('especes')
+            ->where('f.id = :id')
+            ->setParameter('id', $idFamily);
 
-//    public function findOneBySomeField($value): ?FamilleAnimal
-//    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $qb->getQuery()->execute()[0];
+    }
+
+    //    /**
+    //     * @return FamilleAnimal[] Returns an array of FamilleAnimal objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('f')
+    //            ->andWhere('f.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('f.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?FamilleAnimal
+    //    {
+    //        return $this->createQueryBuilder('f')
+    //            ->andWhere('f.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
