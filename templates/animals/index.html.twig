@@ -5,7 +5,8 @@
     <h1>Liste des espèces appartenant à l'espèce {{ especeName }}</h1>
     <ul class="animals">
         {% for animal in animaux %}
-            <li> {{ animal.nomAnimal  }} <span class="badge bg-secondary">{{ animal.descriptionAnimal }} </span></li>
+            <li>{{ animal.nomAnimal  }} <span class="badge bg-secondary">{{ animal.descriptionAnimal }} </span>
+                <img src="{{ animal.image.image }}" alt="Image inconnue"></li>
         {% endfor %}
     </ul>
 
