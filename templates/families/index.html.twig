@@ -5,7 +5,7 @@
     <h1>Liste des familles appartenant à la catégorie {{ categoryName }}</h1>
     <ul class="famillesAnimal">
         {% for famille in families %}
-            <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': famille.id}) }}">{{ famille.nomFamille }} <span class="badge bg-secondary">{{ famille.descriptionFamille }} </span></a> </li>
+            <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': famille.id}) }}">{{ famille.nomFamille }} <span class="badge bg-secondary">{{ famille.descriptionFamille }} </span><img src="{{ famille.image.image }}" alt="Image inconnue" width="256" height="256"></a> </li>
         {% endfor %}
     </ul>
 
