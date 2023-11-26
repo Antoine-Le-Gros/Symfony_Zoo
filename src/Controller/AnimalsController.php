@@ -22,7 +22,7 @@ class AnimalsController extends AbstractController
         ]);
     }
 
-    #[Route('/animals/', name: 'app_animals_all')]
+    #[Route('/animals/', name: 'app_animals_showall')]
     public function showAll(AnimalRepository $animalRepository): Response
     {
         return $this->render('animals/index.html.twig', [

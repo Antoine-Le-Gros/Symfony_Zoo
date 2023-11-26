@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\CategorieAnimalRepository;
+use App\Repository\EspeceRepository;
 use App\Repository\FamilleAnimalRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +19,16 @@ class EspecesController extends AbstractController
         return $this->render('especes/index.html.twig', [
             'species' => $famille->getEspeces(),
             'familyName' => $famille->getNomFamille(),
+            'famille' => true,
+        ]);
+    }
+
+    #[Route('/familles/', name: 'app_especes_showall')]
+    public function showAll(EspeceRepository $especeRepository): Response
+    {
+        return $this->render('especes/index.html.twig', [
+            'species' => $especeRepository->getAllSpeciesWithPicture(),
+            'famille' => false,
         ]);
     }
 }
