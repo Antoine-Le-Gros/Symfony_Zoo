@@ -5,7 +5,8 @@
     <h1>Liste des espèces appartenant à la famille {{ familyName }}</h1>
     <ul class="especesAnimal">
         {% for espece in species %}
-            <li><a class="nav-link" href="{{ path('app_animals', {'idEspece': espece.id}) }}"> {{ espece.libEspece  }} <span class="badge bg-secondary">{{ espece.descriptionEspece }} </span></a></li>
+            <li><a class="nav-link" href="{{ path('app_animals', {'idEspece': espece.id}) }}"> {{ espece.libEspece  }} <span class="badge bg-secondary">{{ espece.descriptionEspece }} </span
+                    ><img src="{{ espece.image.image }}" alt="Image inconnue" width="256" height="256"></a></li>
         {% endfor %}
     </ul>
 
