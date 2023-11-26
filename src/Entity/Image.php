@@ -40,7 +40,7 @@ class Image
         return $this->id;
     }
 
-    public function getImage()
+    public function getImage(): string
     {
         return 'data:image/png;base64,'.base64_encode(stream_get_contents($this->image));
     }

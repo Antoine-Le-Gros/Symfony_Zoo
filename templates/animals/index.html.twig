@@ -6,7 +6,7 @@
     <ul class="animals">
         {% for animal in animaux %}
             <li>{{ animal.nomAnimal  }} <span class="badge bg-secondary">{{ animal.descriptionAnimal }} </span>
-                <img src="{{ animal.image.image }}" alt="Image inconnue"></li>
+                <img src="{{ animal.image.image }}" alt="Image inconnue" width="256" height="256"> </li>
         {% endfor %}
     </ul>
 
