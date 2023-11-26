@@ -34,6 +34,19 @@ class FamilleAnimalRepository extends ServiceEntityRepository
         return $qb->getQuery()->execute()[0];
     }
 
+    /**
+     * @return FamilleAnimal[]
+     */
+    public function getAllFamiliesWithPicture(): array
+    {
+        $qb = $this->createQueryBuilder('f');
+        $qb->leftJoin('f.image', 'image')
+            ->addSelect('image')
+            ->orderBy('f.nomAnimal');
+
+        return $qb->getQuery()->execute();
+    }
+
     //    /**
     //     * @return FamilleAnimal[] Returns an array of FamilleAnimal objects
     //     */
