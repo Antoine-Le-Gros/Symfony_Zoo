@@ -4,9 +4,10 @@ namespace App\DataFixtures;
 
 use App\Factory\FamilleAnimalFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class FamilleAnimalFixtures extends Fixture
+class FamilleAnimalFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -15,6 +16,10 @@ class FamilleAnimalFixtures extends Fixture
         FamilleAnimalFactory::createSequence($file_j);
     }
 
-        $manager->flush();
+    public function getDependencies(): array
+    {
+        return [
+            CategorieAnimalFixtures::class,
+        ];
     }
 }
