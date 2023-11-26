@@ -34,6 +34,19 @@ class EspeceRepository extends ServiceEntityRepository
         return $qb->getQuery()->execute()[0];
     }
 
+    /**
+     * @return Espece[]
+     */
+    public function getAllSpeciesWithPicture(): array
+    {
+        $qb = $this->createQueryBuilder('e');
+        $qb->leftJoin('e.image', 'image')
+            ->addSelect('image')
+            ->orderBy('e.libEspece');
+
+        return $qb->getQuery()->execute();
+    }
+
     //    /**
     //     * @return Espece[] Returns an array of Espece objects
     //     */
