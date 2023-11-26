@@ -2,16 +2,14 @@
 
 namespace App\Controller;
 
+use App\Repository\AnimalRepository;
 use App\Repository\EspeceRepository;
-use App\Repository\FamilleAnimalRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AnimalsController extends AbstractController
 {
-
-
     #[Route('/animals/{idEspece}', name: 'app_animals', requirements: ['idEspece' => '\d+'])]
     public function index(int $idEspece, EspeceRepository $especeRepository): Response
     {
@@ -20,6 +18,18 @@ class AnimalsController extends AbstractController
         return $this->render('animals/index.html.twig', [
             'animaux' => $espece->getAnimals(),
             'especeName' => $espece->getLibEspece(),
+            'espece' => true,
         ]);
     }
+
+    #[Route('/animals/', name: 'app_animals_all')]
+    public function showAll(AnimalRepository $animalRepository): Response
+    {
+        return $this->render('animals/index.html.twig', [
+            'animaux' => $animalRepository->getAllAnimalsWithPicture(),
+            'espece' => false,
+        ]);
+    }
+
+
 }
