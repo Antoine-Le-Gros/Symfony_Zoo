@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Animal>
  *
- * @method        Animal|Proxy create(array|callable $attributes = [])
- * @method static Animal|Proxy createOne(array $attributes = [])
- * @method static Animal|Proxy find(object|array|mixed $criteria)
- * @method static Animal|Proxy findOrCreate(array $attributes)
- * @method static Animal|Proxy first(string $sortedField = 'id')
- * @method static Animal|Proxy last(string $sortedField = 'id')
- * @method static Animal|Proxy random(array $attributes = [])
- * @method static Animal|Proxy randomOrCreate(array $attributes = [])
+ * @method        Animal|Proxy                     create(array|callable $attributes = [])
+ * @method static Animal|Proxy                     createOne(array $attributes = [])
+ * @method static Animal|Proxy                     find(object|array|mixed $criteria)
+ * @method static Animal|Proxy                     findOrCreate(array $attributes)
+ * @method static Animal|Proxy                     first(string $sortedField = 'id')
+ * @method static Animal|Proxy                     last(string $sortedField = 'id')
+ * @method static Animal|Proxy                     random(array $attributes = [])
+ * @method static Animal|Proxy                     randomOrCreate(array $attributes = [])
  * @method static AnimalRepository|RepositoryProxy repository()
- * @method static Animal[]|Proxy[] all()
- * @method static Animal[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Animal[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static Animal[]|Proxy[] findBy(array $attributes)
- * @method static Animal[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static Animal[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static Animal[]|Proxy[]                 all()
+ * @method static Animal[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static Animal[]|Proxy[]                 createSequence(iterable|callable $sequence)
+ * @method static Animal[]|Proxy[]                 findBy(array $attributes)
+ * @method static Animal[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static Animal[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class AnimalFactory extends ModelFactory
 {
@@ -41,8 +41,6 @@ final class AnimalFactory extends ModelFactory
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
-     * @todo add your default values here
      */
     protected function getDefaults(): array
     {

@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Evenement>
  *
- * @method        Evenement|Proxy create(array|callable $attributes = [])
- * @method static Evenement|Proxy createOne(array $attributes = [])
- * @method static Evenement|Proxy find(object|array|mixed $criteria)
- * @method static Evenement|Proxy findOrCreate(array $attributes)
- * @method static Evenement|Proxy first(string $sortedField = 'id')
- * @method static Evenement|Proxy last(string $sortedField = 'id')
- * @method static Evenement|Proxy random(array $attributes = [])
- * @method static Evenement|Proxy randomOrCreate(array $attributes = [])
+ * @method        Evenement|Proxy                     create(array|callable $attributes = [])
+ * @method static Evenement|Proxy                     createOne(array $attributes = [])
+ * @method static Evenement|Proxy                     find(object|array|mixed $criteria)
+ * @method static Evenement|Proxy                     findOrCreate(array $attributes)
+ * @method static Evenement|Proxy                     first(string $sortedField = 'id')
+ * @method static Evenement|Proxy                     last(string $sortedField = 'id')
+ * @method static Evenement|Proxy                     random(array $attributes = [])
+ * @method static Evenement|Proxy                     randomOrCreate(array $attributes = [])
  * @method static EvenementRepository|RepositoryProxy repository()
- * @method static Evenement[]|Proxy[] all()
- * @method static Evenement[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Evenement[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static Evenement[]|Proxy[] findBy(array $attributes)
- * @method static Evenement[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static Evenement[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static Evenement[]|Proxy[]                 all()
+ * @method static Evenement[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static Evenement[]|Proxy[]                 createSequence(iterable|callable $sequence)
+ * @method static Evenement[]|Proxy[]                 findBy(array $attributes)
+ * @method static Evenement[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static Evenement[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class EvenementFactory extends ModelFactory
 {
@@ -41,7 +41,6 @@ final class EvenementFactory extends ModelFactory
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
      */
     protected function getDefaults(): array
     {

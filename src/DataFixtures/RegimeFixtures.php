@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use App\Factory\RegimeFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-;
 
 class RegimeFixtures extends Fixture
 {

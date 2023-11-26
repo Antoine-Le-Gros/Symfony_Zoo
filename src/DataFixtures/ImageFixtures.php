@@ -11,7 +11,7 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        ImageFactory::createMany(10);
+        ImageFactory::createMany(2);
     }
 
     public function getDependencies(): array

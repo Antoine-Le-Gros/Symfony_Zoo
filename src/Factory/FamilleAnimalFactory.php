@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<FamilleAnimal>
  *
- * @method        FamilleAnimal|Proxy create(array|callable $attributes = [])
- * @method static FamilleAnimal|Proxy createOne(array $attributes = [])
- * @method static FamilleAnimal|Proxy find(object|array|mixed $criteria)
- * @method static FamilleAnimal|Proxy findOrCreate(array $attributes)
- * @method static FamilleAnimal|Proxy first(string $sortedField = 'id')
- * @method static FamilleAnimal|Proxy last(string $sortedField = 'id')
- * @method static FamilleAnimal|Proxy random(array $attributes = [])
- * @method static FamilleAnimal|Proxy randomOrCreate(array $attributes = [])
+ * @method        FamilleAnimal|Proxy                     create(array|callable $attributes = [])
+ * @method static FamilleAnimal|Proxy                     createOne(array $attributes = [])
+ * @method static FamilleAnimal|Proxy                     find(object|array|mixed $criteria)
+ * @method static FamilleAnimal|Proxy                     findOrCreate(array $attributes)
+ * @method static FamilleAnimal|Proxy                     first(string $sortedField = 'id')
+ * @method static FamilleAnimal|Proxy                     last(string $sortedField = 'id')
+ * @method static FamilleAnimal|Proxy                     random(array $attributes = [])
+ * @method static FamilleAnimal|Proxy                     randomOrCreate(array $attributes = [])
  * @method static FamilleAnimalRepository|RepositoryProxy repository()
- * @method static FamilleAnimal[]|Proxy[] all()
- * @method static FamilleAnimal[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static FamilleAnimal[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static FamilleAnimal[]|Proxy[] findBy(array $attributes)
- * @method static FamilleAnimal[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static FamilleAnimal[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static FamilleAnimal[]|Proxy[]                 all()
+ * @method static FamilleAnimal[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static FamilleAnimal[]|Proxy[]                 createSequence(iterable|callable $sequence)
+ * @method static FamilleAnimal[]|Proxy[]                 findBy(array $attributes)
+ * @method static FamilleAnimal[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static FamilleAnimal[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class FamilleAnimalFactory extends ModelFactory
 {
@@ -41,8 +41,6 @@ final class FamilleAnimalFactory extends ModelFactory
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
-     * @todo add your default values here
      */
     protected function getDefaults(): array
     {
