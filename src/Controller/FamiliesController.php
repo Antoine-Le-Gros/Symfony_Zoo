@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\FamilleAnimal;
 use App\Repository\CategorieAnimalRepository;
 use App\Repository\FamilleAnimalRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,11 +24,14 @@ class FamiliesController extends AbstractController
     }
 
     #[Route('/families/', name: 'app_families_showall')]
-    public function showAll(FamilleAnimalRepository $familleAnimalRepository): Response
+    public function showAll(FamilleAnimalRepository $familleAnimalRepository, Request $request): Response
     {
+        $search = $request->query->get('search', '');
+
         return $this->render('families/index.html.twig', [
-            'families' => $familleAnimalRepository->getAllFamiliesWithPicture(),
+            'families' => $familleAnimalRepository->getAllFamiliesWithPicture($search),
             'category' => false,
+            'search' => $search,
         ]);
     }
 }

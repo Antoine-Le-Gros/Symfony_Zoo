@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block route %} {{ path('app_families_showall') }} {% endblock %}
 {% block title %}Liste des familles {% if category %}appartenant à la catégorie {{ categoryName }} {% endif %} {% endblock %}
 {% block body %}
     <h1>Liste des familles {% if category %}appartenant à la catégorie {{ categoryName }} {% endif %}</h1>

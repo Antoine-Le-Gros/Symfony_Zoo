@@ -37,11 +37,13 @@ class FamilleAnimalRepository extends ServiceEntityRepository
     /**
      * @return FamilleAnimal[]
      */
-    public function getAllFamiliesWithPicture(): array
+    public function getAllFamiliesWithPicture(string $search): array
     {
         $qb = $this->createQueryBuilder('f');
         $qb->leftJoin('f.image', 'image')
             ->addSelect('image')
+            ->where('f.nomFamille LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
             ->orderBy('f.nomFamille');
 
         return $qb->getQuery()->execute();
