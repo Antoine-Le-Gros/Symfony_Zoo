@@ -2,17 +2,26 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\AnimalFactory;
+use App\Factory\EnclosFactory;
+use App\Factory\EspeceFactory;
+use App\Factory\RegimeFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-;
 
-class AnimalFixtures extends Fixture
+class AnimalFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        AnimalFactory::createMany(20);
+    }
 
-        $manager->flush();
+    public function getDependencies(): array
+    {
+        return [
+            EspeceFixtures::class,
+            EnclosFixtures::class,
+        ];
     }
 }
