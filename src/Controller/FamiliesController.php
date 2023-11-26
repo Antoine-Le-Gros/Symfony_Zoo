@@ -27,7 +27,7 @@ class FamiliesController extends AbstractController
     public function showAll(FamilleAnimalRepository $familleAnimalRepository): Response
     {
         return $this->render('families/index.html.twig', [
-            'species' => $familleAnimalRepository->getAllFamiliesWithPicture(),
+            'families' => $familleAnimalRepository->getAllFamiliesWithPicture(),
             'category' => false,
         ]);
     }

@@ -42,7 +42,7 @@ class FamilleAnimalRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('f');
         $qb->leftJoin('f.image', 'image')
             ->addSelect('image')
-            ->orderBy('f.nomAnimal');
+            ->orderBy('f.nomFamille');
 
         return $qb->getQuery()->execute();
     }
