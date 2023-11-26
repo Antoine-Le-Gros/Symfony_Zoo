@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des espèces appartenant à la famille {{ familyName }} {% endblock %}
+{% block title %}Liste des espèces {% if famille %} appartenant à la famille {{ familyName }} {% endif %} {% endblock %}
 {% block body %}
-    <h1>Liste des espèces appartenant à la famille {{ familyName }}</h1>
+    <h1>Liste des espèces {% if famille %} appartenant à la famille {{ familyName }} {% endif %}</h1>
     <ul class="especesAnimal">
         {% for espece in species %}
             <li><a class="nav-link" href="{{ path('app_animals', {'idEspece': espece.id}) }}"> {{ espece.libEspece  }} <span class="badge bg-secondary">{{ espece.descriptionEspece }} </span
