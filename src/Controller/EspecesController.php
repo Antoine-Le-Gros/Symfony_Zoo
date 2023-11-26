@@ -23,7 +23,7 @@ class EspecesController extends AbstractController
         ]);
     }
 
-    #[Route('/familles/', name: 'app_especes_showall')]
+    #[Route('/especes/', name: 'app_especes_showall')]
     public function showAll(EspeceRepository $especeRepository): Response
     {
         return $this->render('especes/index.html.twig', [
