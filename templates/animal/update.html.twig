@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <h1>Édition de {{ animal.nomAnimal }} </h1>
+    {{ include('animal/_form.html.twig', {submit_label: 'Modifier  ', form:form}, with_context = false ) }}
+{% endblock %}
+
+
+
