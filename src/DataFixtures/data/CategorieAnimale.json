@@ -1,0 +1,18 @@
+[
+    {
+        "nom_categorie": "mammifere",
+        "descriptionCategorie" : "test amphi"
+    },
+    {
+        "nom_categorie": "oiseau",
+        "descriptionCategorie" : "test oiseau"
+    },
+    {
+        "nom_categorie": "reptile",
+        "descriptionCategorie" : "test reprt"
+    },
+    {
+        "nom_categorie": "amphibien",
+        "descriptionCategorie": "test mammi"
+    }
+]
