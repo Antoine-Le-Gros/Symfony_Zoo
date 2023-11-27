@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
-
+{% block route %} {% if famille %}{{ path('app_especes',{idFamily : idFamily })}}
+{% else %} {{ path('app_especes_showall') }} {% endif %}{% endblock %}
 {% block title %}Liste des espèces {% if famille %} appartenant à la famille {{ familyName }} {% endif %} {% endblock %}
 {% block body %}
     <h1>Liste des espèces {% if famille %} appartenant à la famille {{ familyName }} {% endif %}</h1>

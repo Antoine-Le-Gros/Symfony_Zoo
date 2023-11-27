@@ -22,6 +22,7 @@ class AnimalsController extends AbstractController
             'especeName' => $especeRepository->find($idEspece)->getLibEspece(),
             'espece' => true,
             'search' => $search,
+            'idEspece' => $idEspece,
         ]);
     }
 

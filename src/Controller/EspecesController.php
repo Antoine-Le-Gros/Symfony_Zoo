@@ -21,6 +21,7 @@ class EspecesController extends AbstractController
             'species' => $famille,
             'familyName' => $familleAnimalRepository->find($idFamily)->getNomFamille(),
             'famille' => true,
+            'idFamily' => $idFamily,
             'search' => $search,
         ]);
     }

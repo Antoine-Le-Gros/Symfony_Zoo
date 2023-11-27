@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
+{% block route %} {% if espece %}{{ path('app_animals',{idEspece : idEspece })}}
+{% else %} {{ path('app_animals_showall') }} {% endif %}{% endblock %}
 {% block title %}Liste des animaux {% if espece %}appartenant à l'espèce {{ especeName }}{% endif %} {% endblock %}
-{% dump(espece) %}
 {% block body %}
     <h1>Liste des espèces {% if espece %}appartenant à l'espèce {{ especeName }}{% endif %}</h1>
     <ul class="animals">
