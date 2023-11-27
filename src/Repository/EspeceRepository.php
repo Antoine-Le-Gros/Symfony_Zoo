@@ -21,7 +21,7 @@ class EspeceRepository extends ServiceEntityRepository
         parent::__construct($registry, Espece::class);
     }
 
-    public function getAllAnimals(int $idEspece): array
+    public function getAllAnimals(int $idEspece, string $search): array
     {
         $qb = $this->createQueryBuilder('e');
         $qb->leftJoin('e.animals', 'animals')
@@ -29,7 +29,9 @@ class EspeceRepository extends ServiceEntityRepository
             ->addSelect('image')
             ->addSelect('animals')
             ->where('e.id = :id')
-            ->setParameter('id', $idEspece);
+            ->andWhere('animals.nomAnimal LIKE :search')
+            ->setParameter('id', $idEspece)
+            ->setParameter('search', '%'.$search.'%');
 
         return $qb->getQuery()->execute();
     }
@@ -37,11 +39,13 @@ class EspeceRepository extends ServiceEntityRepository
     /**
      * @return Espece[]
      */
-    public function getAllSpeciesWithPicture(): array
+    public function getAllSpeciesWithPicture(string $search): array
     {
         $qb = $this->createQueryBuilder('e');
         $qb->leftJoin('e.image', 'image')
             ->addSelect('image')
+            ->Where('e.libEspece LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
             ->orderBy('e.libEspece');
 
         return $qb->getQuery()->execute();

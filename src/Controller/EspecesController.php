@@ -11,7 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EspecesController extends AbstractController
 {
-
     #[Route('/especes/{idFamily}', name: 'app_especes', requirements: ['idFamily' => '\d+'])]
     public function index(int $idFamily, FamilleAnimalRepository $familleAnimalRepository, Request $request): Response
     {
@@ -27,11 +26,14 @@ class EspecesController extends AbstractController
     }
 
     #[Route('/especes/', name: 'app_especes_showall')]
-    public function showAll(EspeceRepository $especeRepository): Response
+    public function showAll(EspeceRepository $especeRepository, Request $request): Response
     {
+        $search = $request->query->get('search', '');
+
         return $this->render('especes/index.html.twig', [
-            'species' => $especeRepository->getAllSpeciesWithPicture(),
+            'species' => $especeRepository->getAllSpeciesWithPicture($search),
             'famille' => false,
+            'search' => $search,
         ]);
     }
 }
