@@ -26,19 +26,17 @@ class CategorieAnimalRepository extends ServiceEntityRepository
      *
      * @return CategorieAnimal[]
      */
-    public function getAllCategories(string $search): array
+    public function getAllCategories(): array
     {
         $qb = $this->createQueryBuilder('c');
         $qb->leftJoin('c.familleAnimals', 'familles')
             ->addSelect('familles')
-            ->where('c.nomCategorie LIKE :search')
-            ->setParameter('search', '%'.$search.'%')
             ->groupBy('c.id');
 
         return $qb->getQuery()->execute();
     }
 
-    public function getAllFamilies(int $idCategory): CategorieAnimal
+    public function getAllFamilies(int $idCategory): array
     {
         $qb = $this->createQueryBuilder('c');
         $qb->leftJoin('c.familleAnimals', 'familles')
@@ -47,8 +45,7 @@ class CategorieAnimalRepository extends ServiceEntityRepository
             ->addSelect('familles')
             ->where('c.id = :id')
             ->setParameter('id', $idCategory);
-
-        return $qb->getQuery()->execute()[0];
+        return $qb->getQuery()->execute();
     }
 
     //    /**
