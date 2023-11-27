@@ -30,7 +30,7 @@ class FamiliesController extends AbstractController
         $search = $request->query->get('search', '');
 
         return $this->render('families/index.html.twig', [
-            'families' => $familleAnimalRepository->getAllFamiliesWithPicture(),
+            'families' => $familleAnimalRepository->getAllFamiliesWithPicture($search),
             'category' => false,
             'search' => $search,
         ]);
