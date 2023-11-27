@@ -1,12 +1,21 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Liste des animaux {% if espece %}appartenant à l'espèce {{ especeName }}{% endif %} {% endblock %}
+{% dump(espece) %}
 {% block body %}
     <h1>Liste des espèces {% if espece %}appartenant à l'espèce {{ especeName }}{% endif %}</h1>
     <ul class="animals">
+
         {% for animal in animaux %}
-            <li>{{ animal.nomAnimal  }} <span class="badge bg-secondary">{{ animal.descriptionAnimal }} </span>
-                <img src="{{ animal.image.image }}" alt="Image inconnue" width="256" height="256"> </li>
+
+            {% if espece %}
+                {% for an in animal.animals %}
+                    <li>{{ an.nomAnimal  }} <span class="badge bg-secondary">{{ an.descriptionAnimal }} </span>
+                        <img src="{{ an.image.image }}" alt="Image inconnue" width="256" height="256"> </li>
+                {% endfor %}
+            {% else %}
+                <li>{{ animal.nomAnimal  }} <span class="badge bg-secondary">{{ animal.descriptionAnimal }} </span>
+                    <img src="{{ animal.image.image }}" alt="Image inconnue" width="256" height="256"> </li>
+            {% endif %}
         {% endfor %}
     </ul>
     {% endblock %}
