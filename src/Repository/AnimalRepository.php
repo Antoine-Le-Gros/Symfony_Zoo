@@ -24,11 +24,13 @@ class AnimalRepository extends ServiceEntityRepository
     /**
      * @return Animal[]
      */
-    public function getAllAnimalsWithPicture(): array
+    public function getAllAnimalsWithPicture(string $search): array
     {
         $qb = $this->createQueryBuilder('a');
         $qb->leftJoin('a.image', 'image')
             ->addSelect('image')
+            ->where('a.nomAnimal LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
             ->orderBy('a.nomAnimal');
 
         return $qb->getQuery()->execute();

@@ -26,11 +26,13 @@ class AnimalsController extends AbstractController
     }
 
     #[Route('/animals/', name: 'app_animals_showall')]
-    public function showAll(AnimalRepository $animalRepository): Response
+    public function showAll(AnimalRepository $animalRepository, Request $request): Response
     {
+        $search = $request->query->get('search', '');
         return $this->render('animals/index.html.twig', [
-            'animaux' => $animalRepository->getAllAnimalsWithPicture(),
+            'animaux' => $animalRepository->getAllAnimalsWithPicture($search),
             'espece' => false,
+            'search' => $search,
         ]);
     }
 
