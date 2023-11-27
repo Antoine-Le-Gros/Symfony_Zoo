@@ -21,7 +21,7 @@ class FamilleAnimalRepository extends ServiceEntityRepository
         parent::__construct($registry, FamilleAnimal::class);
     }
 
-    public function getAllSpecies(int $idFamily): FamilleAnimal
+    public function getAllSpecies(int $idFamily): array
     {
         $qb = $this->createQueryBuilder('f');
         $qb->leftJoin('f.especes', 'especes')
@@ -31,19 +31,17 @@ class FamilleAnimalRepository extends ServiceEntityRepository
             ->where('f.id = :id')
             ->setParameter('id', $idFamily);
 
-        return $qb->getQuery()->execute()[0];
+        return $qb->getQuery()->execute();
     }
 
     /**
      * @return FamilleAnimal[]
      */
-    public function getAllFamiliesWithPicture(string $search): array
+    public function getAllFamiliesWithPicture(): array
     {
         $qb = $this->createQueryBuilder('f');
         $qb->leftJoin('f.image', 'image')
             ->addSelect('image')
-            ->where('f.nomFamille LIKE :search')
-            ->setParameter('search', '%'.$search.'%')
             ->orderBy('f.nomFamille');
 
         return $qb->getQuery()->execute();
