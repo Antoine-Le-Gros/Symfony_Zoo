@@ -21,7 +21,7 @@ class EspeceRepository extends ServiceEntityRepository
         parent::__construct($registry, Espece::class);
     }
 
-    public function getAllAnimals(int $idEspece): Espece
+    public function getAllAnimals(int $idEspece): array
     {
         $qb = $this->createQueryBuilder('e');
         $qb->leftJoin('e.animals', 'animals')
@@ -31,7 +31,7 @@ class EspeceRepository extends ServiceEntityRepository
             ->where('e.id = :id')
             ->setParameter('id', $idEspece);
 
-        return $qb->getQuery()->execute()[0];
+        return $qb->getQuery()->execute();
     }
 
     /**

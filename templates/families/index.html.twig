@@ -6,7 +6,6 @@
     <h1>Liste des familles {% if category %}appartenant à la catégorie {{ categoryName }} {% endif %}</h1>
     <ul class="famillesAnimal">
         {% for famille in families %}
-            {% dump(famille) %}
             {% if category %}
              {% for fam in famille.familleAnimals %}
             <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': fam.id}) }}">{{ fam.nomFamille }} <span class="badge bg-secondary">{{ fam.descriptionFamille }} </span><img src="{{ fam.image.image }}" alt="Image inconnue" width="256" height="256"></a> </li>

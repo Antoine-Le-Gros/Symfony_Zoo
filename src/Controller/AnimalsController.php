@@ -16,8 +16,8 @@ class AnimalsController extends AbstractController
         $espece = $especeRepository->getAllAnimals($idEspece);
 
         return $this->render('animals/index.html.twig', [
-            'animaux' => $espece->getAnimals(),
-            'especeName' => $espece->getLibEspece(),
+            'animaux' => $espece,
+            'especeName' => $especeRepository->find($idEspece)->getLibEspece(),
             'espece' => true,
         ]);
     }
