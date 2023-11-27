@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% set title = "Suppression de #{animal.nomAnimal}" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+    {{ form_start(form, {'attr': {'class': ' d-flex justify-content-around'}}) }}
+    {{ form_row(form.cancel, {'label': 'Annuler', 'attr': {'class': 'btn btn-secondary'}}) }}
+    {{ form_row(form.delete, {'label': 'Supprimer', 'attr': {'class': 'btn btn-primary'}}) }}
+    {{ form_end(form) }}
+{% endblock %}
