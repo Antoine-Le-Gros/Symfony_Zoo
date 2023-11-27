@@ -21,28 +21,60 @@ class CategorieAnimalRepository extends ServiceEntityRepository
         parent::__construct($registry, CategorieAnimal::class);
     }
 
-//    /**
-//     * @return CategorieAnimal[] Returns an array of CategorieAnimal objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Listage des catégories avec leurs familles.
+     *
+     * @return CategorieAnimal[]
+     */
+    public function getAllCategories(string $search): array
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->leftJoin('c.familleAnimals', 'familles')
+            ->addSelect('familles')
+            ->where('c.nomCategorie LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->groupBy('c.id');
 
-//    public function findOneBySomeField($value): ?CategorieAnimal
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $qb->getQuery()->execute();
+    }
+
+    public function getAllFamilies(int $idCategory, string $search): array
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->leftJoin('c.familleAnimals', 'familles')
+            ->leftJoin('familles.image', 'images')
+            ->addSelect('images')
+            ->addSelect('familles')
+            ->where('c.id = :id')
+            ->andWhere('familles.nomFamille LIKE :search')
+            ->setParameter('id', $idCategory)
+            ->setParameter('search', '%'.$search.'%');
+
+        return $qb->getQuery()->execute();
+    }
+
+    //    /**
+    //     * @return CategorieAnimal[] Returns an array of CategorieAnimal objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('c.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?CategorieAnimal
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

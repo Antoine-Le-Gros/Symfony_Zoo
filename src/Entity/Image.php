@@ -17,7 +17,7 @@ class Image
     private ?int $id = null;
 
     #[ORM\Column(type: Types::BLOB)]
-    private $image = null;
+    private $image;
 
     #[ORM\OneToMany(mappedBy: 'image', targetEntity: Animal::class)]
     private Collection $animals;
@@ -40,9 +40,9 @@ class Image
         return $this->id;
     }
 
-    public function getImage()
+    public function getImage(): string
     {
-        return $this->image;
+        return 'data:image/png;base64,'.base64_encode(stream_get_contents($this->image));
     }
 
     public function setImage($image): static

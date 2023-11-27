@@ -21,28 +21,58 @@ class FamilleAnimalRepository extends ServiceEntityRepository
         parent::__construct($registry, FamilleAnimal::class);
     }
 
-//    /**
-//     * @return FamilleAnimal[] Returns an array of FamilleAnimal objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('f.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function getAllSpecies(int $idFamily, string $search): array
+    {
+        $qb = $this->createQueryBuilder('f');
+        $qb->leftJoin('f.especes', 'especes')
+            ->leftJoin('especes.image', 'images')
+            ->addSelect('images')
+            ->addSelect('especes')
+            ->where('f.id = :id')
+            ->andWhere('especes.libEspece LIKE :search')
+            ->setParameter('id', $idFamily)
+            ->setParameter('search', '%'.$search.'%');
 
-//    public function findOneBySomeField($value): ?FamilleAnimal
-//    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $qb->getQuery()->execute();
+    }
+
+    /**
+     * @return FamilleAnimal[]
+     */
+    public function getAllFamiliesWithPicture(string $search): array
+    {
+        $qb = $this->createQueryBuilder('f');
+        $qb->leftJoin('f.image', 'image')
+            ->addSelect('image')
+            ->where('f.nomFamille LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->orderBy('f.nomFamille');
+
+        return $qb->getQuery()->execute();
+    }
+
+    //    /**
+    //     * @return FamilleAnimal[] Returns an array of FamilleAnimal objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('f')
+    //            ->andWhere('f.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('f.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?FamilleAnimal
+    //    {
+    //        return $this->createQueryBuilder('f')
+    //            ->andWhere('f.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
