@@ -24,6 +24,9 @@ class CategorieAnimal
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: FamilleAnimal::class, orphanRemoval: true)]
     private Collection $familleAnimals;
 
+    #[ORM\ManyToOne(inversedBy: 'categorieAnimals')]
+    private ?Image $image = null;
+
     public function __construct()
     {
         $this->familleAnimals = new ArrayCollection();
@@ -84,6 +87,18 @@ class CategorieAnimal
                 $familleAnimal->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
