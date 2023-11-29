@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Animal;
+use App\Entity\Image;
 use App\Form\AnimalType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,6 +46,11 @@ class AnimalController extends AbstractController
         $form = $this->createForm(AnimalType::class, $animal);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = new Image();
+            $image->setImage(file_get_contents($form->get('image')->getData()));
+            dump($image);
+            $entityManager->persist($image);
+            $animal->setImage($image);
             $entityManager->persist($animal);
             $entityManager->flush();
 
