@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Animal;
+use App\Entity\Enclos;
 use App\Entity\Espece;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -17,6 +18,14 @@ class AnimalType extends AbstractType
         $builder
             ->add('nomAnimal', null, ['empty_data' => ''])
             ->add('descriptionAnimal', null, ['empty_data' => ''])
+            ->add('enclos', EntityType::class, [
+                'class' => Enclos::class,
+                'choice_label' => 'nomEnclos',
+                'required' => true,
+                'query_builder' => function (EntityRepository $entityRepository) {
+                    return $entityRepository->createQueryBuilder('e')
+                        ->orderBy('e.nomEnclos', 'ASC');
+                }])
             ->add('espece', EntityType::class, [
                 'class' => Espece::class,
                 'choice_label' => 'libEspece',
