@@ -37,7 +37,6 @@ class AnimalController extends AbstractController
                 $image = $animal->getImage();
             }
             $image->setImage(file_get_contents($form->get('image')->getData()));
-            dump($image);
             $entityManager->persist($image);
             $entityManager->flush();
 
@@ -57,7 +56,6 @@ class AnimalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $image = new Image();
             $image->setImage(file_get_contents($form->get('image')->getData()));
-            dump($image);
             $entityManager->persist($image);
             $animal->setImage($image);
             $entityManager->persist($animal);
