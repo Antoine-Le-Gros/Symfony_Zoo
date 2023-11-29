@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Tests\Controller\Animals;
+namespace App\Tests\Controller\Animal;
 
 use App\Tests\Support\ControllerTester;
 
