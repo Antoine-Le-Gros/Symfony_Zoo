@@ -45,7 +45,7 @@ final class ImageFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'image' => self::faker()->image(),
+            'image' => file_get_contents(self::faker()->image()),
         ];
     }
 
