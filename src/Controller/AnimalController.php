@@ -30,6 +30,10 @@ class AnimalController extends AbstractController
         $form = $this->createForm(AnimalType::class, $animal);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $animal->getImage();
+            $image->setImage(file_get_contents($form->get('image')->getData()));
+            dump($image);
+            $entityManager->persist($image);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
