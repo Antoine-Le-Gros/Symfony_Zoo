@@ -2,6 +2,11 @@
 
 namespace App\Tests\Controller\Animal;
 
+use App\Factory\CategorieAnimalFactory;
+use App\Factory\EnclosFactory;
+use App\Factory\EspeceFactory;
+use App\Factory\FamilleAnimalFactory;
+use App\Factory\RegimeFactory;
 use App\Tests\Support\ControllerTester;
 
 class CreateCest
@@ -18,5 +23,23 @@ class CreateCest
         $I->amOnPage('/animal/create');
         $I->submitForm('form', [], 'Créer');
         $I->seeCurrentRouteIs('app_animal_create');
+    }
+
+    public function formWithDataIsOk(ControllerTester $I): void
+    {
+        RegimeFactory::createOne();
+        CategorieAnimalFactory::createOne();
+        FamilleAnimalFactory::createOne();
+        EnclosFactory::createOne(['nomEnclos' => 'Le cirque']);
+        EspeceFactory::createOne(['libEspece' => 'stone']);
+
+        $I->amOnPage('/animal/create');
+        $I->submitForm('form', [
+            'animal[nomAnimal]' => 'Pierre',
+            'animal[descriptionAnimal]' => 'Pierre est un cailloux',
+            'animal[espece]' => 'stone',
+            'animal[enclos]' => 'nomEnclos',
+        ], 'Créer');
+        $I->seeCurrentRouteIs('app_animal');
     }
 }
