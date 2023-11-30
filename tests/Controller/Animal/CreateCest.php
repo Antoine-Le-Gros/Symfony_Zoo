@@ -1,18 +1,15 @@
 <?php
 
-
 namespace App\Tests\Controller\Animal;
 
 use App\Tests\Support\ControllerTester;
 
 class CreateCest
 {
-    public function _before(ControllerTester $I)
+    public function formCreateAnimal(ControllerTester $I): void
     {
-    }
-
-    // tests
-    public function tryToTest(ControllerTester $I)
-    {
+        $I->amOnPage('/animal/create');
+        $I->seeInTitle("Création d'un nouvel animal");
+        $I->see("Création d'un nouvel animal", 'h1');
     }
 }
