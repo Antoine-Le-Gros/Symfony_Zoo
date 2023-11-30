@@ -8,10 +8,10 @@
         {% for famille in families %}
             {% if category %}
              {% for fam in famille.familleAnimals %}
-            <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': fam.id}) }}">{{ fam.nomFamille }} <span class="badge bg-secondary">{{ fam.descriptionFamille }} </span><img src="{{ fam.image.image }}" alt="Image inconnue" width="256" height="256"></a> </li>
+            <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': fam.id}) }}">{{ fam.nomFamille }} <span class="badge bg-secondary">{{ fam.descriptionFamille }} </span><img src="{{ fam.image.image ?? asset('/img/default.png') }}" alt="Image inconnue" width="256" height="256"></a> </li>
             {% endfor %}
             {% else %}
-                 <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': famille.id}) }}">{{ famille.nomFamille }} <span class="badge bg-secondary">{{ famille.descriptionFamille }} </span><img src="{{ famille.image.image }}" alt="Image inconnue" width="256" height="256"></a> </li>
+                 <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': famille.id}) }}">{{ famille.nomFamille }} <span class="badge bg-secondary">{{ famille.descriptionFamille }} </span><img src="{{ famille.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256"></a> </li>
         {% endif %}
         {% endfor %}
     </ul>

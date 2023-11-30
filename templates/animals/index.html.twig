@@ -11,11 +11,11 @@
             {% if espece %}
                 {% for an in animal.animals %}
                     <li>{{ an.nomAnimal  }} <span class="badge bg-secondary">{{ an.descriptionAnimal }} </span>
-                        <img src="{{ an.image.image }}" alt="Image inconnue" width="256" height="256"> </li>
+                        <img src="{{ an.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256"> </li>
                 {% endfor %}
             {% else %}
                 <li>{{ animal.nomAnimal  }} <span class="badge bg-secondary">{{ animal.descriptionAnimal }} </span>
-                    <img src="{{ animal.image.image }}" alt="Image inconnue" width="256" height="256"> </li>
+                    <img src="{{ animal.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256"> </li>
             {% endif %}
         {% endfor %}
     </ul>

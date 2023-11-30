@@ -8,11 +8,11 @@
         {% for espece in species %}
             {% if famille %}
                 {% for esp in espece.especes %}
-                    <li><a class="nav-link" href="{{ path('app_animals', {'idEspece': esp.id}) }}"> {{ esp.libEspece  }} <span class="badge bg-secondary">{{ esp.descriptionEspece }} </span
-                            ><img src="{{ esp.image.image }}" alt="Image inconnue" width="256" height="256"></a></li>
+                    <li><a class="nav-link" href="{{ path('app_animals', {'idEspece': esp.id}) }}"> {{ esp.libEspece  }} <span class="badge bg-secondary">{{ esp.descriptionEspece }} </span>
+                            <img src="{{ esp.image.image ?? asset('img/default.png')}}" alt="Image inconnue" width="256" height="256"></a></li>
                 {% endfor %}
             {% else %}
-                <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': espece.id}) }}">{{ espece.libEspece }} <span class="badge bg-secondary">{{ espece.descriptionEspece }} </span><img src="{{ espece.image.image }}" alt="Image inconnue" width="256" height="256"></a> </li>
+                <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': espece.id}) }}">{{ espece.libEspece }} <span class="badge bg-secondary">{{ espece.descriptionEspece }} </span><img src="{{ espece.image.image ?? asset('img/default.png') }}"  alt="Image inconnue" width="256" height="256"></a> </li>
             {% endif %}
         {% endfor %}
     </ul>
