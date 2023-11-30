@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Tests\Controller\Animal;
 
 use App\Tests\Support\ControllerTester;
