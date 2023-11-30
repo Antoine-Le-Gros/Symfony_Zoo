@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Animal;
+use App\Entity\Image;
 use App\Form\AnimalType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,6 +30,14 @@ class AnimalController extends AbstractController
         $form = $this->createForm(AnimalType::class, $animal);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            if (null === $animal->getImage()) {
+                $image = new Image();
+                $animal->setImage($image);
+            } else {
+                $image = $animal->getImage();
+            }
+            $image->setImage(file_get_contents($form->get('image')->getData()));
+            $entityManager->persist($image);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
@@ -45,6 +54,10 @@ class AnimalController extends AbstractController
         $form = $this->createForm(AnimalType::class, $animal);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = new Image();
+            $image->setImage(file_get_contents($form->get('image')->getData()));
+            $entityManager->persist($image);
+            $animal->setImage($image);
             $entityManager->persist($animal);
             $entityManager->flush();
 
@@ -70,6 +83,7 @@ class AnimalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('delete')->isClicked()) {
                 $entityManager->remove($animal);
+                $entityManager->remove($animal->getImage());
                 $entityManager->flush();
 
                 return $this->redirectToRoute('app_animal');

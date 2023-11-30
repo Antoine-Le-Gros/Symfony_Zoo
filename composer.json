@@ -108,6 +108,9 @@
           "php bin/console doctrine:database:create",
           "php bin/console doctrine:migrations:migrate --no-interaction",
           "php bin/console doctrine:fixtures:load --no-interaction"
+        ],
+        "migrate": [
+            "php bin/console doctrine:migrations:migrate"
         ]
     },
     "scripts-descriptions": {
@@ -116,7 +119,8 @@
         "fix:cs" : "Fix PHP code with PHP CS Fixer",
         "test:codeception" : "Test PHP code with codeception, recreate the sqlLite database for the code test",
         "test" : "Run all tests",
-        "db" : "Destroy, Create, Add migration, and generate factices data of database"
+        "db" : "Destroy, Create, Add migration, and generate factices data of database",
+        "migrate": "Perform all migrations needed to match the migrations files"
     },
     "conflict": {
         "symfony/symfony": "*"
