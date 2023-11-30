@@ -62,10 +62,12 @@ class AnimalController extends AbstractController
         $form = $this->createForm(AnimalType::class, $animal);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $image = new Image();
-            $image->setImage(file_get_contents($form->get('image')->getData()));
-            $entityManager->persist($image);
-            $animal->setImage($image);
+            if (null !== $form->get('image')->getData()) {
+                $image = new Image();
+                $image->setImage(file_get_contents($form->get('image')->getData()));
+                $entityManager->persist($image);
+                $animal->setImage($image);
+            }
             $entityManager->persist($animal);
             $entityManager->flush();
 
