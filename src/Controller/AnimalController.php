@@ -24,6 +24,14 @@ class AnimalController extends AbstractController
         ]);
     }
 
+    #[Route('/animal/{id}', name: 'app_animal_show', requirements: ['id' => '\d+'])]
+    public function show(Animal $animal): Response
+    {
+        return $this->render('animal/show.html.twig', [
+            'animal' => $animal,
+        ]);
+    }
+
     #[Route('/animal/{id}/update', requirements: ['id' => '\d+'])]
     public function update(EntityManagerInterface $entityManager, Animal $animal, Request $request): RedirectResponse|Response
     {
@@ -70,9 +78,9 @@ class AnimalController extends AbstractController
 
     #[Route('/animal/{id}/delete', name: 'app_animal_delete', requirements: ['id' => '\d+'])]
     public function delete(
-        Animal $animal,
+        Animal                 $animal,
         EntityManagerInterface $entityManager,
-        Request $request): Response
+        Request                $request): Response
     {
         $form = $this->createFormBuilder()
             ->add('delete', SubmitType::class)
