@@ -30,15 +30,16 @@ class CreateCest
         RegimeFactory::createOne();
         CategorieAnimalFactory::createOne();
         FamilleAnimalFactory::createOne();
-        EnclosFactory::createOne(['nomEnclos' => 'Le cirque']);
-        EspeceFactory::createOne(['libEspece' => 'stone']);
+        $enclos = EnclosFactory::createOne(['nomEnclos' => 'Le cirque']);
+        $espece = EspeceFactory::createOne(['libEspece' => 'stone']);
 
         $I->amOnPage('/animal/create');
+        $I->attachFile('animal[image]', './Animal-formWithDataIsOk-image.jpg');
         $I->submitForm('form', [
             'animal[nomAnimal]' => 'Pierre',
             'animal[descriptionAnimal]' => 'Pierre est un cailloux',
-            'animal[espece]' => 'stone',
-            'animal[enclos]' => 'nomEnclos',
+            'animal[espece]' => $espece->getId(),
+            'animal[enclos]' => $enclos->getId(),
         ], 'Créer');
         $I->seeCurrentRouteIs('app_animal');
     }
