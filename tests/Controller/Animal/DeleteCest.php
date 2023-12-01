@@ -35,6 +35,16 @@ class DeleteCest
         // $I->seeCurrentRouteIs('app_animal', ['id' => $animal->getId()]);
     }
 
+    public function formDeleteAnimalAccepted(ControllerTester $I): void
+    {
+        $animal = $this->generateAnimalDB();
+
+        $I->amOnPage("/animal/{$animal->getId()}/delete");
+        $I->click('#form_delete');
+
+        $I->seeCurrentRouteIs('app_animal');
+    }
+
     public function generateAnimalDB(): Proxy|Animal
     {
         RegimeFactory::createOne();
