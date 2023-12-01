@@ -48,7 +48,7 @@ class AnimalController extends AbstractController
             $entityManager->persist($image);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
+            return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], 301);
         }
 
         /* @var FormView $form */
@@ -69,7 +69,7 @@ class AnimalController extends AbstractController
             $entityManager->persist($animal);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
+            return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], 301);
         }
 
         /* @var FormView $form */
@@ -78,9 +78,9 @@ class AnimalController extends AbstractController
 
     #[Route('/animal/{id}/delete', name: 'app_animal_delete', requirements: ['id' => '\d+'])]
     public function delete(
-        Animal                 $animal,
+        Animal $animal,
         EntityManagerInterface $entityManager,
-        Request                $request): Response
+        Request $request): Response
     {
         $form = $this->createFormBuilder()
             ->add('delete', SubmitType::class)
@@ -99,7 +99,7 @@ class AnimalController extends AbstractController
                 return $this->redirectToRoute('app_animal');
             }
 
-            return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
+            return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], 301);
         }
 
         /* @var FormView $form */
