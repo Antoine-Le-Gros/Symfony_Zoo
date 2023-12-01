@@ -83,7 +83,9 @@ class AnimalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('delete')->isClicked()) {
                 $entityManager->remove($animal);
-                $entityManager->remove($animal->getImage());
+                if (null !== $image = $animal->getImage()) {
+                    $entityManager->remove($image);
+                }
                 $entityManager->flush();
 
                 return $this->redirectToRoute('app_animal');
