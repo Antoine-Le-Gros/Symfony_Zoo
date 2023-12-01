@@ -30,9 +30,7 @@ class DeleteCest
         $I->amOnPage("/animal/{$animal->getId()}/delete");
         $I->click('#form_cancel');
 
-        $I->seeInCurrentUrl("/animal?id={$animal->getId()}");
-        // Changer la ligne du dessus pour celle en dessous pour une fois l'implémentation de la route faite
-        // $I->seeCurrentRouteIs('app_animal', ['id' => $animal->getId()]);
+        $I->seeCurrentRouteIs('app_animal_show', ['id' => $animal->getId()]);
     }
 
     public function formDeleteAnimalAccepted(ControllerTester $I): void

@@ -41,6 +41,6 @@ class CreateCest
             'animal[espece]' => $espece->getId(),
             'animal[enclos]' => $enclos->getId(),
         ], 'Créer');
-        $I->seeCurrentRouteIs('app_animal');
+        $I->seeCurrentRouteIs('app_animal_show', ['id' => 1]);
     }
 }
