@@ -27,4 +27,32 @@ class IndexCest
         $I->seeResponseCodeIs(200);
         $I->seeCurrentRouteIs('app_families');
     }
+
+    public function isCategoryListSorted(ControllerTester $I): void
+    {
+        CategorieAnimalFactory::createSequence(
+            [
+                ['nom_categorie' => 'amphibien',
+                    'descriptionCategorie' => 'description'],
+                ['nom_categorie' => 'reptile',
+                    'descriptionCategorie' => 'description'],
+                ['nom_categorie' => 'mammifère',
+                    'descriptionCategorie' => 'description'],
+                ['nom_categorie' => 'oiseau',
+                    'descriptionCategorie' => 'description'],
+            ]
+        );
+        $I->amOnPage('/categories');
+        $I->assertEquals(
+            [
+            'amphibien description',
+            'mammifère description',
+            'oiseau description',
+            'reptile description',
+            ],
+            $I->grabMultiple('.categoriesAnimal li>a'));
+    }
+
+
+
 }
