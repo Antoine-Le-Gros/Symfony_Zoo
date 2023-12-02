@@ -53,6 +53,27 @@ class IndexCest
             $I->grabMultiple('.categoriesAnimal li>a'));
     }
 
-
-
+    public function testSearchCategory(ControllerTester $I): void
+    {
+        CategorieAnimalFactory::createSequence(
+            [
+                ['nom_categorie' => 'amphibien',
+                    'descriptionCategorie' => 'description'],
+                ['nom_categorie' => 'reptile',
+                    'descriptionCategorie' => 'description'],
+                ['nom_categorie' => 'mammifère',
+                    'descriptionCategorie' => 'description'],
+                ['nom_categorie' => 'oiseau',
+                    'descriptionCategorie' => 'description'],
+            ]
+        );
+        $I->amOnPage('/categories?search=am');
+        $I->assertEquals(
+            [
+                'amphibien description',
+                'mammifère description',
+            ],
+            $I->grabMultiple('.categoriesAnimal li>a')
+        );
+    }
 }
