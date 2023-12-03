@@ -3,7 +3,7 @@
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
 {% block title %}
-
+    Édition de {{ animal.nomAnimal }}
 {% endblock %}
 
 {% block body %}
@@ -15,7 +15,7 @@
     {% endif %}
     {% if animal.image == null %}
         <div class="text-center">
-            <img class="text-center w-50" src="{{ asset('/img/logo.png')}}">
+            <img class="text-center w-50" src="{{ asset('/img/logo.png') }}">
         </div>
     {% endif %}
     {{ include('animal/_form.html.twig', {submit_label: 'Modifier  ', form:form}, with_context = false ) }}
