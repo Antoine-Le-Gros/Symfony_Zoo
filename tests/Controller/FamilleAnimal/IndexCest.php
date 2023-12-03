@@ -70,4 +70,42 @@ class IndexCest
                         ],
             $I->grabMultiple('.famillesAnimal li'));
     }
+
+    public function testSearchForFamilyList(ControllerTester $I): void
+    {
+        $category = CategorieAnimalFactory::createOne(['nom_categorie' => 'mammifère',
+            'descriptionCategorie' => 'description']);
+        FamilleAnimalFactory::createSequence(
+            [
+                ['nomFamille' => 'homnidé',
+                    'descriptionFamille' => 'description',
+                    'categorie' => $category,
+                ],
+
+                ['nomFamille' => 'bovidé',
+                    'descriptionFamille' => 'description',
+                    'categorie' => $category,
+                ],
+
+                ['nomFamille' => 'félidé',
+                    'descriptionFamille' => 'description',
+                    'categorie' => $category,
+                ],
+
+                ['nomFamille' => 'cervidé',
+                    'descriptionFamille' => 'description',
+                    'categorie' => $category,
+                ],
+
+                [
+                    'nomFamille' => 'cebidé',
+                    'descriptionFamille' => 'description',
+                    'categorie' => $category,
+                ],
+            ]
+        );
+        $I->amOnPage('/families/?search=ce');
+        $I->seeResponseCodeIs(200);
+        $I->assertEquals(['cebidé description', 'cervidé description'], $I->grabMultiple('.famillesAnimal li'));
+    }
 }
