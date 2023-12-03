@@ -7,7 +7,6 @@
     <ul class="animals">
 
         {% for animal in animaux %}
-
             {% if espece %}
                 {% for an in animal.animals %}
                     <li>{{ an.nomAnimal  }} <span class="badge bg-secondary">{{ an.descriptionAnimal }} </span>
