@@ -25,6 +25,7 @@ class CreateCest
         $I->seeCurrentRouteIs('app_animal_create');
     }
 
+    // Activate "extension=fileinfo" in PHP.ini
     public function formWithDataIsOk(ControllerTester $I): void
     {
         RegimeFactory::createOne();
