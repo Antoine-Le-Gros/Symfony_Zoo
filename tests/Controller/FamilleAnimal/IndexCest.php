@@ -19,4 +19,18 @@ class IndexCest
         $I->seeNumberOfElements('.famillesAnimal li>a[href]', 10);
     }
 
+    public function clickOnFirstElementOfFamilyList(ControllerTester $I): void
+    {
+        FamilleAnimalFactory::createOne(
+            [
+                'nomFamille' => 'canidé',
+                'descriptionFamille' => 'description',
+                'categorie' => CategorieAnimalFactory::createOne(['nom_categorie' => 'mammifère',
+                    'descriptionCategorie' => 'description']),
+            ]);
+        $I->amOnPage('/families/');
+        $I->seeResponseCodeIs(200);
+        $I->click('canidé description');
+        $I->seeCurrentRouteIs('app_especes');
+    }
 }
