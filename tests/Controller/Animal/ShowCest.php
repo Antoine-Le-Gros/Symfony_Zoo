@@ -36,5 +36,4 @@ class ShowCest
         $I->see($animal->getEspece()->getLibEspece(), 'dl dt:nth-child(5) + dd');
         $I->see($animal->getEnclos()->getNomEnclos(), 'dl dt:nth-child(7) + dd');
     }
-
 }
