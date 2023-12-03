@@ -43,7 +43,7 @@ class DeleteCest
         $I->seeCurrentRouteIs('app_animal');
     }
 
-    public function generateAnimalDB(): Proxy|Animal
+    private function generateAnimalDB(): Proxy|Animal
     {
         RegimeFactory::createOne();
         CategorieAnimalFactory::createOne();

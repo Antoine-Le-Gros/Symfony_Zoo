@@ -14,7 +14,7 @@ use Zenstruck\Foundry\Proxy;
 
 class ShowCest
 {
-    public function generateAnimalDB(): Proxy|Animal
+    private function generateAnimalDB(): Proxy|Animal
     {
         RegimeFactory::createOne();
         CategorieAnimalFactory::createOne();

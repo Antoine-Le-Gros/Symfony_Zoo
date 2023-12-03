@@ -14,7 +14,7 @@ class UpdateCest
 {
     public function formUpdateAnimal(ControllerTester $I): void
     {
-        $this->createAnimal();
+        $this->generateAnimalDB();
 
         $I->amOnRoute('app_animal_update', ['id' => 1]);
         $I->seeInTitle('Édition de Pierre');
@@ -27,14 +27,14 @@ class UpdateCest
 
     public function FormUpdateAnimalSend(ControllerTester $I): void
     {
-        $this->createAnimal();
+        $this->generateAnimalDB();
 
         $I->amOnRoute('app_animal_update', ['id' => 1]);
         $I->submitForm('form', [], 'Créer');
         $I->amOnRoute('app_animal_show', ['id' => 1]);
     }
 
-    public function createAnimal(): void
+    private function generateAnimalDB(): void
     {
         RegimeFactory::createOne();
         CategorieAnimalFactory::createOne();
