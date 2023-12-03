@@ -33,4 +33,41 @@ class IndexCest
         $I->click('canidé description');
         $I->seeCurrentRouteIs('app_especes');
     }
+
+    public function isListofFamilySorted(ControllerTester $I): void
+    {
+        $category = CategorieAnimalFactory::createOne(['nom_categorie' => 'mammifère',
+            'descriptionCategorie' => 'description']);
+        FamilleAnimalFactory::createSequence(
+            [
+                ['nomFamille' => 'homnidé',
+                    'descriptionFamille' => 'description',
+                    'categorie' => $category,
+                ],
+
+                ['nomFamille' => 'bovidé',
+                    'descriptionFamille' => 'description',
+                    'categorie' => $category,
+                ],
+
+                ['nomFamille' => 'félidé',
+                    'descriptionFamille' => 'description',
+                    'categorie' => $category,
+                ],
+
+                ['nomFamille' => 'cerbidé',
+                    'descriptionFamille' => 'description',
+                    'categorie' => $category,
+                ],
+            ]
+        );
+        $I->amOnPage('/families/');
+        $I->seeResponseCodeIs(200);
+        $I->assertEquals(['bovidé description',
+                          'cerbidé description',
+                          'félidé description',
+                          'homnidé description',
+                        ],
+            $I->grabMultiple('.famillesAnimal li'));
+    }
 }
