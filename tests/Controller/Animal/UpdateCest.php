@@ -14,6 +14,28 @@ class UpdateCest
 {
     public function formUpdateAnimal(ControllerTester $I): void
     {
+        $this->createAnimal();
+
+        $I->amOnRoute('app_animal_update', ['id' => 1]);
+        $I->seeInTitle('Édition de Pierre');
+        $I->see('Édition de Pierre', 'h1');
+        $I->seeInField('input[name="animal[nomAnimal]"]', 'Pierre');
+        $I->seeInField('input[name="animal[descriptionAnimal]"]', 'Pierre est un cailloux');
+        $I->seeOptionIsSelected('select[name="animal[espece]"]', 'stone');
+        $I->seeOptionIsSelected('select[name="animal[enclos]"]', 'Le cirque');
+    }
+
+    public function FormUpdateAnimalSend(ControllerTester $I): void
+    {
+        $this->createAnimal();
+
+        $I->amOnRoute('app_animal_update', ['id' => 1]);
+        $I->submitForm('form', [], 'Créer');
+        $I->amOnRoute('app_animal_show', ['id' => 1]);
+    }
+
+    public function createAnimal(): void
+    {
         RegimeFactory::createOne();
         CategorieAnimalFactory::createOne();
         FamilleAnimalFactory::createOne();
@@ -25,13 +47,5 @@ class UpdateCest
             'espece' => $espece,
             'enclos' => $enclos,
         ]);
-
-        $I->amOnRoute('app_animal_update', ['id' => 1]);
-        $I->seeInTitle('Édition de Pierre');
-        $I->see('Édition de Pierre', 'h1');
-        $I->seeInField('input[name="animal[nomAnimal]"]', 'Pierre');
-        $I->seeInField('input[name="animal[descriptionAnimal]"]', 'Pierre est un cailloux');
-        $I->seeOptionIsSelected('select[name="animal[espece]"]', 'stone');
-        $I->seeOptionIsSelected('select[name="animal[enclos]"]', 'Le cirque');
     }
 }
