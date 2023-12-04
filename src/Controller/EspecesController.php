@@ -19,7 +19,7 @@ class EspecesController extends AbstractController
 
         return $this->render('especes/index.html.twig', [
             'species' => $famille,
-            'familyName' => $familleAnimalRepository->find($idFamily)->getNomFamille(),
+            'familyName' => $familleAnimalRepository->find($idFamily)?->getNomFamille(),
             'famille' => true,
             'idFamily' => $idFamily,
             'search' => $search,
