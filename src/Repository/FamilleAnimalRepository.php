@@ -26,6 +26,8 @@ class FamilleAnimalRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('f');
         $qb->leftJoin('f.especes', 'especes')
             ->leftJoin('especes.image', 'images')
+            ->leftjoin('especes.regime', 'regime')
+            ->addSelect('regime')
             ->addSelect('images')
             ->addSelect('especes')
             ->where('f.id = :id')
