@@ -16,10 +16,14 @@ class EspecesController extends AbstractController
     {
         $search = $request->query->get('search', '');
         $famille = $familleAnimalRepository->getAllSpecies($idFamily, $search);
+        $nomFamille = '';
+        if ([] != $famille) {
+            $nomFamille = $famille[0]->getNomFamille();
+        }
 
         return $this->render('especes/index.html.twig', [
             'species' => $famille,
-            'familyName' => $familleAnimalRepository->find($idFamily)->getNomFamille(),
+            'familyName' => $familleAnimalRepository->find($idFamily)?->getNomFamille(),
             'famille' => true,
             'idFamily' => $idFamily,
             'search' => $search,
