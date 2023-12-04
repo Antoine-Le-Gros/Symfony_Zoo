@@ -8,18 +8,28 @@
         {% for famille in families %}
             {% if category %}
                 {% for fam in famille.familleAnimals %}
-                    {% set image = fam.image.image|default('') %}
-                    <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': fam.id}) }}">{{ fam.nomFamille }} <span class="badge bg-secondary">{{ fam.descriptionFamille }} </span
-                            >
-                            {% if image != '' %}
+                    {% set image = fam.image.image|default(asset('/img/default.png')) %}
+                    <li>
+                        <a class="nav-link" href="{{ path('app_especes', {'idFamily': fam.id}) }}">
+                            {{ fam.nomFamille }} 
+                            <span class="badge bg-secondary">
+                                {{ fam.descriptionFamille }} 
+                            </span>
                             <img src="{{ image }}" alt="Image inconnue" width="256" height="256">
-                        {% endif %}
-                        </a></li>
+                        </a>
+                    </li>
                 {% endfor %}
             {% else %}
-                {% set image = famille.image.image|default('') %}
-                <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': famille.id}) }}">{{ famille.nomFamille }} <span class="badge bg-secondary">{{ famille.descriptionFamille }}</span
-            >{% if image != '' %}<img src="{{ image }}" alt="Image inconnue" width="256" height="256">{% endif %}</a></li>
+                {% set image = famille.image.image|default(asset('/img/default.png')) %}
+                <li>
+                    <a class="nav-link" href="{{ path('app_especes', {'idFamily': famille.id}) }}">
+                        {{ famille.nomFamille }} 
+                        <span class="badge bg-secondary">
+                            {{ famille.descriptionFamille }}
+                        </span>
+                        <img src="{{ image }}" alt="Image inconnue" width="256" height="256">{% endif %}
+                    </a>
+                </li>
             {% endif %}
         {% endfor %}
     </ul>
