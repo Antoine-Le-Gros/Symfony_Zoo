@@ -30,12 +30,11 @@ class AnimalsController extends AbstractController
     public function showAll(AnimalRepository $animalRepository, Request $request): Response
     {
         $search = $request->query->get('search', '');
+
         return $this->render('animals/index.html.twig', [
             'animaux' => $animalRepository->getAllAnimalsWithPicture($search),
             'espece' => false,
             'search' => $search,
         ]);
     }
-
-
 }
