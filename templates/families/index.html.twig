@@ -7,12 +7,20 @@
     <ul class="famillesAnimal">
         {% for famille in families %}
             {% if category %}
-             {% for fam in famille.familleAnimals %}
-            <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': fam.id}) }}">{{ fam.nomFamille }} <span class="badge bg-secondary">{{ fam.descriptionFamille }} </span><img src="{{ fam.image.image }}" alt="Image inconnue" width="256" height="256"></a> </li>
-            {% endfor %}
+                {% for fam in famille.familleAnimals %}
+                    {% set image = fam.image.image|default('') %}
+                    <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': fam.id}) }}">{{ fam.nomFamille }} <span class="badge bg-secondary">{{ fam.descriptionFamille }} </span
+                            >
+                            {% if image != '' %}
+                            <img src="{{ image }}" alt="Image inconnue" width="256" height="256">
+                        {% endif %}
+                        </a></li>
+                {% endfor %}
             {% else %}
-                 <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': famille.id}) }}">{{ famille.nomFamille }} <span class="badge bg-secondary">{{ famille.descriptionFamille }} </span><img src="{{ famille.image.image }}" alt="Image inconnue" width="256" height="256"></a> </li>
-        {% endif %}
+                {% set image = famille.image.image|default('') %}
+                <li><a class="nav-link" href="{{ path('app_especes', {'idFamily': famille.id}) }}">{{ famille.nomFamille }} <span class="badge bg-secondary">{{ famille.descriptionFamille }}</span
+            >{% if image != '' %}<img src="{{ image }}" alt="Image inconnue" width="256" height="256">{% endif %}</a></li>
+            {% endif %}
         {% endfor %}
     </ul>
 

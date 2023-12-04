@@ -15,6 +15,7 @@ class FamiliesController extends AbstractController
     public function index(int $idCategory, CategorieAnimalRepository $categorieAnimalRepository, Request $request): Response
     {
         $search = $request->query->get('search', '');
+
         return $this->render('families/index.html.twig', [
             'families' => $categorieAnimalRepository->getAllFamilies($idCategory, $search),
             'categoryName' => $categorieAnimalRepository->find($idCategory)->getNomCategorie(),

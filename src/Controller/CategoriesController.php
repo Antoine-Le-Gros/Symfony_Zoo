@@ -15,6 +15,7 @@ class CategoriesController extends AbstractController
     {
         $search = $request->query->get('search', '');
         $categories = $categoryAnimalRepository->getAllCategories($search);
+
         return $this->render('categories/index.html.twig', [
             'categories' => $categories,
             'search' => $search,

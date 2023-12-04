@@ -33,6 +33,7 @@ class CategorieAnimalRepository extends ServiceEntityRepository
             ->addSelect('familles')
             ->where('c.nomCategorie LIKE :search')
             ->setParameter('search', '%'.$search.'%')
+            ->orderBy('c.nomCategorie')
             ->groupBy('c.id');
 
         return $qb->getQuery()->execute();
