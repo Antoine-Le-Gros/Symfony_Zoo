@@ -104,6 +104,7 @@ composer fix:cs
 ## ✔️ Test du code
 
 Le test du code se base sur une db SQLite régénéré à chaque test.<br>
+Activé extension : `extension=fileinfo` dans php.ini<br>
 Pour déclencher les tests unitaires utilisé :
 
 ```bash

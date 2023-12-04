@@ -24,6 +24,14 @@ class AnimalController extends AbstractController
         ]);
     }
 
+    #[Route('/animal/{id}', name: 'app_animal_show', requirements: ['id' => '\d+'])]
+    public function show(Animal $animal): Response
+    {
+        return $this->render('animal/show.html.twig', [
+            'animal' => $animal,
+        ]);
+    }
+
     #[Route('/animal/{id}/update', requirements: ['id' => '\d+'])]
     public function update(EntityManagerInterface $entityManager, Animal $animal, Request $request): RedirectResponse|Response
     {
@@ -40,7 +48,7 @@ class AnimalController extends AbstractController
             $entityManager->persist($image);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
+            return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], 301);
         }
 
         /* @var FormView $form */
@@ -63,7 +71,7 @@ class AnimalController extends AbstractController
             $entityManager->persist($animal);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
+            return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], 301);
         }
 
         /* @var FormView $form */
@@ -85,13 +93,15 @@ class AnimalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('delete')->isClicked()) {
                 $entityManager->remove($animal);
-                $entityManager->remove($animal->getImage());
+                if (null !== $image = $animal->getImage()) {
+                    $entityManager->remove($image);
+                }
                 $entityManager->flush();
 
                 return $this->redirectToRoute('app_animal');
             }
 
-            return $this->redirectToRoute('app_animal', ['id' => $animal->getId()], 301);
+            return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], 301);
         }
 
         /* @var FormView $form */

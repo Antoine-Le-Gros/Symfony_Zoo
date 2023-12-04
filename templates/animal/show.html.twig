@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ animal.nomAnimal }}</h1>
+    <dl>
+        <dt>Nom :</dt>
+        <dd>{{ animal.nomAnimal }}</dd>
+        <dt>Description :</dt>
+        <dd>{{ animal.descriptionAnimal }}</dd>
+        <dt>Espèce :</dt>
+        <dd>{{ animal.espece.libEspece }}</dd>
+        <dt>Enclos :</dt>
+        <dd>{{ animal.enclos.nomEnclos }}</dd>
+        <dt>Image :</dt>
+        {% if (animal.image is not null) %}
+            <dd><img src="{{ animal.image.image }}" width="300" height="200" alt="Image animal"></dd>
+        {% else %}
+            <dd><img src="{{ asset('img/default-placeholder.png') }}" width="300" height="200" alt="Image animal"></dd>
+        {% endif %}
+
+        {#  A implémenter lorque les entités auront été liées
+        {% if (animal.parent1 is not null) %}
+            <dt>Parent(s) :</dt>
+            <dd>{{ animal.parent1 }}</dd>
+            {% if (animal.parent2 is not null) %}
+                <dd>{{ animal.parent2 }}</dd>
+                {% endif %}
+        {% endif %}
+        #}
+    </dl>
+{% endblock %}
+
+{% block title %}
+    {{ animal.nomAnimal }}
+{% endblock %}
