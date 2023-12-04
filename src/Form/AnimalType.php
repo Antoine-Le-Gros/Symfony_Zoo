@@ -40,6 +40,7 @@ class AnimalType extends AbstractType
             ->add('image', FileType::class, [
                 'data_class' => null,
                 'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',

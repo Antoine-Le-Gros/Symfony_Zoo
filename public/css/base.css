@@ -1,0 +1,83 @@
+html,body {
+    width: 100%;
+    height: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    background-color: #40DED5;
+    gap: 1%;
+}
+
+.container-fluid  * , .navbar-nav .nav-link.active {
+    color: yellow;
+}
+
+.navbar.navbar-expand-lg.bg-danger {
+    margin-top : 5px;
+    border: 1mm inset rgb(255,255,0);
+    border-radius: 8px;
+}
+.navbar.navbar-expand-lg.bg-light {
+    background-color: red !important;
+    border: solid 1px yellow;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.btn.btn-outline-success{
+    background-color: white;
+    color: grey ;
+}
+
+h1{
+    background-color: yellow;
+    border-radius: 10px;
+    border: solid 5px;
+    text-align: center;
+}
+
+ul.famillesAnimal, ul.animals{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    list-style-type: none;
+}
+ul.famillesAnimal li, ul.animals li{
+    width: 100%;
+    margin-bottom: 10px;
+}
+li a.nav-link{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5%;
+
+}
+li a.nav-link p{
+    background-color: #ffb53f;
+    padding: 2%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+ul.animals li{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content:center;
+    align-items: center;
+    gap: 5%;
+}
+ul.animals li p{
+    background-color: #ffb53f;
+    padding: 2%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}

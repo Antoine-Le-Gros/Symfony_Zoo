@@ -11,18 +11,12 @@
                 {% for an in animal.animals %}
                     {% set image = an.image.image|default('') %}
                     <li>{{ an.nomAnimal  }} <span class="badge bg-secondary">{{ an.descriptionAnimal }} </span>
-                        {% if image != '' %}
-                        <img src="{{ image }}" alt="Image inconnue" width="256" height="256">
-                        {% endif%}
-                    </li>
+                        <img src="{{ an.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256"> </li>
                 {% endfor %}
             {% else %}
                 {% set image = animal.image.image|default('') %}
                 <li>{{ animal.nomAnimal  }} <span class="badge bg-secondary">{{ animal.descriptionAnimal }} </span>
-                    {% if image != '' %}
-                    <img src="{{ image }}" alt="Image inconnue" width="256" height="256">
-                    {% endif%}
-                </li>
+                    <img src="{{ animal.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256"> </li>
             {% endif %}
         {% endfor %}
     </ul>
