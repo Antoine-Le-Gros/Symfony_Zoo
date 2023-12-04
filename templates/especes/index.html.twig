@@ -2,6 +2,7 @@
 {% block route %} {% if famille %}{{ path('app_especes',{idFamily : idFamily })}}
 {% else %} {{ path('app_especes_showall') }} {% endif %}{% endblock %}
 {% block title %}Liste des espèces {% if famille %} appartenant à la famille {{ familyName }} {% endif %} {% endblock %}
+{% block stylesheets %} <link href="{{ asset('css/especes.css') }}" rel="stylesheet"> {% endblock %}
 {% block body %}
     <h1 class="species">Liste des espèces {% if famille %} appartenant à la famille {{ familyName }} {% endif %}</h1>
     <ul class="especesAnimal">
