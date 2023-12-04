@@ -1,0 +1,67 @@
+a.nav-link.category {
+    margin-left: 10px ;
+}
+
+li.category-familly {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 1;
+    margin-bottom: 5px;
+}
+
+img.category-img{
+    width: 150px;
+    height: 150px;
+}
+
+ul.categoriesAnimal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-y: scroll;
+}
+
+
+
+h1.category {
+    margin : 10px;
+    background-color: rgb(255,255,0);
+    border: 2mm inset rgb(128,128,128);
+    text-align: center;
+    border-radius: 15px;
+}
+
+
+
+a.nav-link.category {
+    display: flex;
+    flex-direction: column;
+    background-color: darkorange;
+    flex: 1;
+    height: 60px;
+    text-align: center;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    align-items: center;
+}
+
+span.badge.bg-secondary.category {
+
+    width: 80%;
+}
+
+@media (max-width: 500px){
+    h1.category{
+        font-size: 17px;
+    }
+}
+
+@media (min-width: 850px) {
+    img.category-img{
+        width: 250px;
+    }
+}
+
+
