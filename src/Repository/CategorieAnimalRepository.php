@@ -30,7 +30,9 @@ class CategorieAnimalRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('c');
         $qb->leftJoin('c.familleAnimals', 'familles')
+            ->leftJoin('c.image', 'image')
             ->addSelect('familles')
+            ->addSelect('image')
             ->where('c.nomCategorie LIKE :search')
             ->setParameter('search', '%'.$search.'%')
             ->orderBy('c.nomCategorie')
