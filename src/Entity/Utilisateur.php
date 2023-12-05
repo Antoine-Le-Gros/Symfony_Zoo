@@ -38,9 +38,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateNaisUser = null;
 
-    #[ORM\Column(length: 256)]
-    private ?string $emailUser = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateEmbauche = null;
 
@@ -49,9 +46,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateVisiteur = null;
-
-    #[ORM\Column(length: 1)]
-    private ?string $role = null;
 
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Inscription::class, orphanRemoval: true)]
     private Collection $inscriptions;
