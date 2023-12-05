@@ -33,8 +33,16 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ path('app_animals_showall') }}">Animaux</a>
                 </li>
-
-
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-danger" href="{{ path('app_logout') }}">Déconnexion de {{ app.user.pnomUser }}</a>
+                    </li>
+                {% endif%}
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-success" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+                {% endif%}
             </ul>
             <form class="d-flex" role="search" action="{% block route %}{% endblock %}">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" value="{{ search |default('') }}">
