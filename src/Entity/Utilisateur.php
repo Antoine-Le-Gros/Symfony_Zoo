@@ -3,24 +3,31 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-class Utilisateur
+class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $loginUser = null;
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $email = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $mdpUser = null;
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
 
     #[ORM\Column(length: 128)]
     private ?string $nomUser = null;
@@ -49,38 +56,74 @@ class Utilisateur
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Inscription::class, orphanRemoval: true)]
     private Collection $inscriptions;
 
-    public function __construct()
-    {
-        $this->inscriptions = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getLoginUser(): ?string
+    public function getEmail(): ?string
     {
-        return $this->loginUser;
+        return $this->email;
     }
 
-    public function setLoginUser(string $loginUser): static
+    public function setEmail(string $email): static
     {
-        $this->loginUser = $loginUser;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getMdpUser(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
     {
-        return $this->mdpUser;
+        return (string) $this->email;
     }
 
-    public function setMdpUser(string $mdpUser): static
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        $this->mdpUser = $mdpUser;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
 
         return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getNomUser(): ?string
@@ -115,18 +158,6 @@ class Utilisateur
     public function setDateNaisUser(\DateTimeInterface $dateNaisUser): static
     {
         $this->dateNaisUser = $dateNaisUser;
-
-        return $this;
-    }
-
-    public function getEmailUser(): ?string
-    {
-        return $this->emailUser;
-    }
-
-    public function setEmailUser(string $emailUser): static
-    {
-        $this->emailUser = $emailUser;
 
         return $this;
     }
@@ -167,21 +198,6 @@ class Utilisateur
         return $this;
     }
 
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): static
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Inscription>
-     */
     public function getInscriptions(): Collection
     {
         return $this->inscriptions;
