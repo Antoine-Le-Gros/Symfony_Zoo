@@ -63,10 +63,18 @@ class DeleteCest
         // $I->amLoggedInAs($adminUser);
 
         $animal = $this->generateAnimalDB();
+        AnimalFactory::createOne([
+            'nomAnimal' => 'Pierre',
+            'descriptionAnimal' => 'Pierre est un cailloux',
+        ]);
 
-        $I->amOnPage("/animal/{$animal->getId()}/delete");
+        $I->amOnPage('/animal/1/delete');
         $I->click('#form_delete');
 
         $I->seeCurrentRouteIs('app_animal');
+        $I->dontSeeInRepository(Animal::class, [
+            'nomAnimal' => 'Pierre',
+            'descriptionAnimal' => 'Pierre est un cailloux',
+        ]);
     }
 }
