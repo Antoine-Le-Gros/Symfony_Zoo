@@ -45,7 +45,7 @@ final class FamilleAnimalFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'categorie' => CategorieAnimalFactory::random(),
+            'categorie' => CategorieAnimalFactory::new(),
             'descriptionFamille' => self::faker()->text(50),
             'nomFamille' => self::faker()->word(),
         ];
