@@ -11,6 +11,14 @@ use App\Tests\Support\ControllerTester;
 
 class CreateCest
 {
+    /*
+    public function accessIsRestrictedForNoAdmin(ControllerTester $I): void
+    {
+        $I->amOnPage('/animal/create');
+        $I->amOnRoute('app_login');
+    }
+     */
+
     public function formCreateAnimal(ControllerTester $I): void
     {
         // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
