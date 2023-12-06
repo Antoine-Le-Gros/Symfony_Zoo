@@ -16,6 +16,8 @@ class DeleteCest
 {
     public function formDeleteAnimal(ControllerTester $I): void
     {
+        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        // $I->amLoggedInAs($adminUser);
         $animal = $this->generateAnimalDB();
 
         $I->amOnPage("/animal/{$animal->getId()}/delete");
@@ -23,8 +25,22 @@ class DeleteCest
         $I->see("Suppression de {$animal->getNomAnimal()}", 'h1');
     }
 
+    private function generateAnimalDB(): Proxy|Animal
+    {
+        RegimeFactory::createOne();
+        CategorieAnimalFactory::createOne();
+        FamilleAnimalFactory::createOne();
+        EnclosFactory::createOne();
+        EspeceFactory::createOne();
+
+        return AnimalFactory::createOne();
+    }
+
     public function formDeleteAnimalDenied(ControllerTester $I): void
     {
+        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        // $I->amLoggedInAs($adminUser);
+
         $animal = $this->generateAnimalDB();
 
         $I->amOnPage("/animal/{$animal->getId()}/delete");
@@ -35,6 +51,9 @@ class DeleteCest
 
     public function formDeleteAnimalAccepted(ControllerTester $I): void
     {
+        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        // $I->amLoggedInAs($adminUser);
+
         $animal = $this->generateAnimalDB();
 
         $I->amOnPage("/animal/{$animal->getId()}/delete");
