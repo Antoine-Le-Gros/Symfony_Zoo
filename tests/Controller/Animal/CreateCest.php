@@ -13,6 +13,9 @@ class CreateCest
 {
     public function formCreateAnimal(ControllerTester $I): void
     {
+        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        // $I->amLoggedInAs($adminUser);
+
         $I->amOnPage('/animal/create');
         $I->seeInTitle("Création d'un nouvel animal");
         $I->see("Création d'un nouvel animal", 'h1');
@@ -20,6 +23,9 @@ class CreateCest
 
     public function formErrorWithNoData(ControllerTester $I): void
     {
+        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        // $I->amLoggedInAs($adminUser);
+
         $I->amOnPage('/animal/create');
         $I->submitForm('form', [], 'Créer');
         $I->seeCurrentRouteIs('app_animal_create');
@@ -28,6 +34,9 @@ class CreateCest
     // Activate "extension=fileinfo" in PHP.ini
     public function formWithDataIsOk(ControllerTester $I): void
     {
+        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        // $I->amLoggedInAs($adminUser);
+
         RegimeFactory::createOne();
         CategorieAnimalFactory::createOne();
         FamilleAnimalFactory::createOne();
