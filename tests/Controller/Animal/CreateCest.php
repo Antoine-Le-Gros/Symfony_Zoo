@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller\Animal;
 
+use App\Entity\Animal;
 use App\Factory\CategorieAnimalFactory;
 use App\Factory\EnclosFactory;
 use App\Factory\EspeceFactory;
@@ -60,5 +61,15 @@ class CreateCest
             'animal[enclos]' => $enclos->getId(),
         ], 'Créer');
         $I->seeCurrentRouteIs('app_animal_show', ['id' => 1]);
+        $I->SeeInRepository(Animal::class, [
+            'nomAnimal' => 'Pierre',
+            'descriptionAnimal' => 'Pierre est un cailloux',
+            'espece' => [
+                'libEspece' => 'stone',
+            ],
+            'enclos' => [
+                'nomEnclos' => 'Le cirque',
+            ],
+        ]);
     }
 }
