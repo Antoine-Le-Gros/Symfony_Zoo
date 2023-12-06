@@ -46,9 +46,9 @@ final class EspeceFactory extends ModelFactory
     {
         return [
             'descriptionEspece' => self::faker()->text(50),
-            'famille' => FamilleAnimalFactory::random(),
+            'famille' => FamilleAnimalFactory::new(),
             'libEspece' => self::faker()->word(),
-            'regime' => RegimeFactory::random(),
+            'regime' => RegimeFactory::new(),
         ];
     }
 
