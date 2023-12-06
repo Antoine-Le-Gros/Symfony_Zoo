@@ -14,6 +14,14 @@ use Zenstruck\Foundry\Proxy;
 
 class DeleteCest
 {
+    /*
+    public function accessIsRestrictedForNoAdmin(ControllerTester $I): void
+    {
+        $I->amOnPage('/animal/create');
+        $I->amOnRoute('app_login');
+    }
+ */
+
     public function formDeleteAnimal(ControllerTester $I): void
     {
         // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
@@ -60,16 +68,5 @@ class DeleteCest
         $I->click('#form_delete');
 
         $I->seeCurrentRouteIs('app_animal');
-    }
-
-    private function generateAnimalDB(): Proxy|Animal
-    {
-        RegimeFactory::createOne();
-        CategorieAnimalFactory::createOne();
-        FamilleAnimalFactory::createOne();
-        EnclosFactory::createOne();
-        EspeceFactory::createOne();
-
-        return AnimalFactory::createOne();
     }
 }
