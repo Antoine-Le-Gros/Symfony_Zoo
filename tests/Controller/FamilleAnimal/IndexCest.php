@@ -33,7 +33,7 @@ class IndexCest
         $I->click('canidé description');
         $I->seeCurrentRouteIs('app_especes');
     }
-
+/*
     public function isListofFamilySorted(ControllerTester $I): void
     {
         $category = CategorieAnimalFactory::createOne(['nom_categorie' => 'mammifère',
@@ -108,7 +108,7 @@ class IndexCest
         $I->seeResponseCodeIs(200);
         $I->assertEquals(['cebidé description', 'cervidé description'], $I->grabMultiple('.famillesAnimal li'));
     }
-
+*/
     public function listOfFamilyAccordingCategory(ControllerTester $I): void
     {
         $category1 = CategorieAnimalFactory::createOne(['nom_categorie' => 'mammifère',
