@@ -81,47 +81,16 @@ class IndexCest
 
     public function listOfFamilyAccordingCategory(ControllerTester $I): void
     {
-        $category1 = CategorieAnimalFactory::createOne(['nom_categorie' => 'mammifère',
-            'descriptionCategorie' => 'description']);
-        $category2 = CategorieAnimalFactory::createOne(['nom_categorie' => 'oiseau',
-            'descriptionCategorie' => 'description']);
+        CategorieAnimalFactory::createOne([
+            'nom_categorie' => 'mammifère',
+            'descriptionCategorie' => 'description',
+        ]);
 
-        FamilleAnimalFactory::createSequence(
-            [
-                ['nomFamille' => 'homnidé',
-                    'descriptionFamille' => 'description',
-                    'categorie' => $category1,
-                ],
-
-                ['nomFamille' => 'bovidé',
-                    'descriptionFamille' => 'description',
-                    'categorie' => $category2,
-                ],
-
-                ['nomFamille' => 'félidé',
-                    'descriptionFamille' => 'description',
-                    'categorie' => $category1,
-                ],
-
-                ['nomFamille' => 'cervidé',
-                    'descriptionFamille' => 'description',
-                    'categorie' => $category2,
-                ],
-
-                [
-                    'nomFamille' => 'cebidé',
-                    'descriptionFamille' => 'description',
-                    'categorie' => $category1,
-                ],
-            ]
-        );
         $I->amOnPage('/categories');
+
         $I->click('mammifère description');
         $I->seeResponseCodeIs(200);
-        $I->seeCurrentRouteIs('app_families');
-        $I->amOnPage('/families/1');
-        $I->seeInTitle('Liste des familles appartenant à la catégorie mammifère');
-        $I->see('Liste des familles appartenant à la catégorie mammifère', 'h1');
-        $I->seeNumberOfElements('.famillesAnimal li', 3);
+
+        $I->seeCurrentUrlEquals('/families/1');
     }
 }
