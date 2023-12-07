@@ -30,7 +30,7 @@ class EspecesController extends AbstractController
         ]);
     }
 
-    #[Route('/especes/', name: 'app_especes_showall')]
+    #[Route('/especes', name: 'app_especes_showall')]
     public function showAll(EspeceRepository $especeRepository, Request $request): Response
     {
         $search = $request->query->get('search', '');
