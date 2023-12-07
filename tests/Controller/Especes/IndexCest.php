@@ -19,8 +19,14 @@ class IndexCest
         $I->seeNumberOfElements('.especesAnimal li>a[href]', 10);
     }
 
-    // tests
-    public function tryToTest(ControllerTester $I)
+    public function listAnimalOfOneEspece(ControllerTester $I): void
     {
+        EspeceFactory::createOne(['libEspece' => 'stone', 'descriptionEspece' => 'pierre',]);
+
+        $I->amOnPage('/especes');
+        $I->seeResponseCodeIs(200);
+
+        $I->click('.especesAnimal .species-list a.nav-link');
+        $I->seeCurrentUrlEquals('/animals/1');
     }
 }
