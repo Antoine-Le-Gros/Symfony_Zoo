@@ -22,6 +22,9 @@ class UpdateCest
 
     public function formUpdateAnimal(ControllerTester $I): void
     {
+        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        // $I->amLoggedInAs($adminUser);
+
         $this->generateAnimalDB();
 
         $I->amOnRoute('app_animal_update', ['id' => 1]);
@@ -35,6 +38,9 @@ class UpdateCest
 
     private function generateAnimalDB(): void
     {
+        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        // $I->amLoggedInAs($adminUser);
+
         RegimeFactory::createOne();
         CategorieAnimalFactory::createOne();
         FamilleAnimalFactory::createOne();
@@ -50,6 +56,9 @@ class UpdateCest
 
     public function FormUpdateAnimalSend(ControllerTester $I): void
     {
+        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        // $I->amLoggedInAs($adminUser);
+
         $this->generateAnimalDB();
 
         $I->amOnRoute('app_animal_update', ['id' => 1]);
