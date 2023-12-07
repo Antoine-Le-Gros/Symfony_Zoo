@@ -12,6 +12,14 @@ use App\Tests\Support\ControllerTester;
 
 class UpdateCest
 {
+    /*
+    public function accessIsRestrictedForNoAdmin(ControllerTester $I): void
+    {
+        $I->amOnPage('/animal/create');
+        $I->amOnRoute('app_login');
+    }
+ */
+
     public function formUpdateAnimal(ControllerTester $I): void
     {
         $this->generateAnimalDB();
@@ -23,15 +31,6 @@ class UpdateCest
         $I->seeInField('input[name="animal[descriptionAnimal]"]', 'Pierre est un cailloux');
         $I->seeOptionIsSelected('select[name="animal[espece]"]', 'stone');
         $I->seeOptionIsSelected('select[name="animal[enclos]"]', 'Le cirque');
-    }
-
-    public function FormUpdateAnimalSend(ControllerTester $I): void
-    {
-        $this->generateAnimalDB();
-
-        $I->amOnRoute('app_animal_update', ['id' => 1]);
-        $I->submitForm('form', [], 'Créer');
-        $I->amOnRoute('app_animal_show', ['id' => 1]);
     }
 
     private function generateAnimalDB(): void
@@ -47,5 +46,14 @@ class UpdateCest
             'espece' => $espece,
             'enclos' => $enclos,
         ]);
+    }
+
+    public function FormUpdateAnimalSend(ControllerTester $I): void
+    {
+        $this->generateAnimalDB();
+
+        $I->amOnRoute('app_animal_update', ['id' => 1]);
+        $I->submitForm('form', [], 'Créer');
+        $I->amOnRoute('app_animal_show', ['id' => 1]);
     }
 }

@@ -42,7 +42,7 @@ class DeleteCest
         ]);
 
         $I->amOnPage('/animal/1/delete');
-        $I->click('#form_cancel');
+        $I->click('Annuler');
 
         $I->seeCurrentRouteIs('app_animal_show', ['id' => 1]);
     }
@@ -58,7 +58,7 @@ class DeleteCest
         ]);
 
         $I->amOnPage('/animal/1/delete');
-        $I->click('#form_delete');
+        $I->click('Supprimer');
 
         $I->seeCurrentRouteIs('app_animal');
         $I->dontSeeInRepository(Animal::class, [
