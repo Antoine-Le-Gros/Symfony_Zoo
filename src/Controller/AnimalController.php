@@ -104,7 +104,7 @@ class AnimalController extends AbstractController
                 }
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_animal');
+                return $this->redirectToRoute('app_animals_showall');
             }
 
             return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], 301);
