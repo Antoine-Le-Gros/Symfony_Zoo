@@ -21,12 +21,38 @@ class IndexCest
 
     public function listAnimalOfOneEspece(ControllerTester $I): void
     {
-        EspeceFactory::createOne(['libEspece' => 'stone', 'descriptionEspece' => 'pierre',]);
+        EspeceFactory::createOne([
+            'libEspece' => 'stone',
+            'descriptionEspece' => 'pierre',
+        ]);
 
         $I->amOnPage('/especes');
         $I->seeResponseCodeIs(200);
 
         $I->click('.especesAnimal .species-list a.nav-link');
         $I->seeCurrentUrlEquals('/animals/1');
+    }
+
+    public function isListofEspeceSorted(ControllerTester $I): void
+    {
+        EspeceFactory::createSequence(
+            [
+                ['libEspece' => 'Pierre'],
+                ['libEspece' => 'Antoine'],
+                ['libEspece' => 'Gabriellebg'],
+                ['libEspece' => 'Feur'],
+            ]
+        );
+
+        $I->amOnPage('/especes');
+        $I->seeResponseCodeIs(200);
+
+        $I->assertEquals([
+            'Antoine',
+            'Feur',
+            'Gabriellebg',
+            'Pierre',
+        ],
+            $I->grabMultiple('#libEspece'));
     }
 }
