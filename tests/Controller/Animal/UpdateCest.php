@@ -36,33 +36,35 @@ class UpdateCest
         $I->seeOptionIsSelected('select[name="animal[enclos]"]', 'Le cirque');
     }
 
-    private function generateAnimalDB(): void
-    {
-        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
-        // $I->amLoggedInAs($adminUser);
-
-        RegimeFactory::createOne();
-        CategorieAnimalFactory::createOne();
-        FamilleAnimalFactory::createOne();
-        $enclos = EnclosFactory::createOne(['nomEnclos' => 'Le cirque']);
-        $espece = EspeceFactory::createOne(['libEspece' => 'stone']);
-        AnimalFactory::createOne([
-            'nomAnimal' => 'Pierre',
-            'descriptionAnimal' => 'Pierre est un cailloux',
-            'espece' => $espece,
-            'enclos' => $enclos,
-        ]);
-    }
-
     public function FormUpdateAnimalSend(ControllerTester $I): void
     {
         // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
         // $I->amLoggedInAs($adminUser);
 
-        $this->generateAnimalDB();
+        AnimalFactory::createOne([
+            'nomAnimal' => 'Pierre',
+            'descriptionAnimal' => 'Pierre est un cailloux',
+            'enclos' => EnclosFactory::createOne(['nomEnclos' => 'Le cirque']),
+            'espece' => EspeceFactory::createOne(['libEspece' => 'stone']),
+        ]);
 
-        $I->amOnRoute('app_animal_update', ['id' => 1]);
-        $I->submitForm('form', [], 'Créer');
-        $I->amOnRoute('app_animal_show', ['id' => 1]);
+        $I->amOnPage('/animal/1/update');
+
+        $this->generateAnimalDB();
+        $I->fillField('Nom de l\'animal', 'Antoine');
+        $I->fillField('Description de l\'animal', 'Antoine le go muscu');
+        $I->click('Modifier');
+
+        $I->seeCurrentUrlEquals('/animal/1');
+        $I->SeeInRepository(Animal::class, [
+            'nomAnimal' => 'Antoine',
+            'descriptionAnimal' => 'Antoine le go muscu',
+            'espece' => [
+                'libEspece' => 'stone',
+            ],
+            'enclos' => [
+                'nomEnclos' => 'Le cirque',
+            ],
+        ]);
     }
 }
