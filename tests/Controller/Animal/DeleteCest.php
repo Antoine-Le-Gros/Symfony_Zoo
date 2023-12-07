@@ -27,6 +27,7 @@ class DeleteCest
         ]);
 
         $I->amOnPage('/animal/1/delete');
+
         $I->seeInTitle('Suppression de Pierre');
         $I->see('Suppression de Pierre', 'h1');
     }
@@ -44,7 +45,7 @@ class DeleteCest
         $I->amOnPage('/animal/1/delete');
         $I->click('Annuler');
 
-        $I->seeCurrentRouteIs('app_animal_show', ['id' => 1]);
+        $I->seeCurrentUrlEquals('/animal/1');
     }
 
     public function formDeleteAnimalAccepted(ControllerTester $I): void
@@ -58,9 +59,10 @@ class DeleteCest
         ]);
 
         $I->amOnPage('/animal/1/delete');
+
         $I->click('Supprimer');
 
-        $I->seeCurrentRouteIs('app_animal');
+        $I->seeInCurrentUrl('/animals');
         $I->dontSeeInRepository(Animal::class, [
             'nomAnimal' => 'Pierre',
             'descriptionAnimal' => 'Pierre est un cailloux',
