@@ -53,6 +53,27 @@ class IndexCest
             'Gabriellebg',
             'Pierre',
         ],
-            $I->grabMultiple('#libEspece'));
+            $I->grabMultiple('.libEspece'));
+    }
+
+    public function testSearchEspece(ControllerTester $I): void
+    {
+        EspeceFactory::createSequence(
+            [
+                ['libEspece' => 'Pierre'],
+                ['libEspece' => 'Antoine'],
+                ['libEspece' => 'Gabriellebg'],
+                ['libEspece' => 'Gabriellebg2'],
+                ['libEspece' => 'Feur'],
+            ]
+        );
+
+        $I->amOnPage('/especes?search=Gabriellebg');
+        $I->seeResponseCodeIs(200);
+
+        $I->assertEquals([
+            'Gabriellebg',
+            'Gabriellebg2',
+        ], $I->grabMultiple('.libEspece'));
     }
 }
