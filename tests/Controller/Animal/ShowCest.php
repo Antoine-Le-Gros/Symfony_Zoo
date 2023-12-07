@@ -25,10 +25,19 @@ class ShowCest
         return AnimalFactory::createOne();
     }
 
+    public function RedirectIfAnimalNotFound(ControllerTester $I): void
+    {
+        $I->amOnPage('/animal/1');
+
+        $I->seeCurrentUrlEquals('/animals');
+    }
+
     public function ShowPageIsOk(ControllerTester $I): void
     {
         $animal = $this->generateAnimalDB();
-        $I->amOnRoute('app_animal_show', ['id' => $animal->getId()]);
+
+        $I->amOnPage('/animal/1');
+
         $I->seeInTitle($animal->getNomAnimal());
         $I->see($animal->getNomAnimal(), 'h1');
         $I->see($animal->getNomAnimal(), 'dl dt:nth-child(1) + dd');
