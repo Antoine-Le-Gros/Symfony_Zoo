@@ -30,7 +30,7 @@
                 {% set image = espece.image.image|default(asset('img/default.png')) %}
                 <li class="species-list"><a class="nav-link species-link" href="{{ path('app_animals', {'idEspece': espece.id}) }}">
                         <div class="DescriptionEspèce">
-                            <span id="libEspece">{{ espece.libEspece |capitalize }}</span>
+                            <span class="libEspece">{{ espece.libEspece |capitalize }}</span>
                             <span>{{ espece.descriptionEspece |capitalize}}</span>
                         </div>
                             <div class="img-centre">
