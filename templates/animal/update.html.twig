@@ -15,7 +15,7 @@
     {% endif %}
     {% if animal.image == null %}
         <div class="text-center">
-            <img class="text-center w-50" src="{{ asset('/img/logo.png') }}">
+            <img class="text-center w-50" src="{{ asset('img/default.png') }}">
         </div>
     {% endif %}
     {{ include('animal/_form.html.twig', {submit_label: 'Modifier  ', form:form}, with_context = false ) }}
