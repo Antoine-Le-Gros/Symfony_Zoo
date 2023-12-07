@@ -11,7 +11,7 @@
                     {% set image = fam.image.image|default(asset('/img/default.png')) %}
                     <li>
                         <a class="nav-link" href="{{ path('app_especes', {'idFamily': fam.id}) }}">
-                            {{ fam.nomFamille }}
+                            <p>{{ fam.nomFamille }}</p>
                             <span class="badge bg-secondary">
                                 {{ fam.descriptionFamille }}
                             </span>
@@ -23,7 +23,7 @@
                 {% set image = famille.image.image|default(asset('/img/default.png')) %}
                 <li>
                     <a class="nav-link" href="{{ path('app_especes', {'idFamily': famille.id}) }}">
-                        {{ famille.nomFamille }}
+                        <p>{{ famille.nomFamille }}</p>
                         <span class="badge bg-secondary">
                             {{ famille.descriptionFamille }}
                         </span>

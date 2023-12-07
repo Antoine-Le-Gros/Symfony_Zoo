@@ -12,7 +12,7 @@ class IndexCest
     {
         FamilleAnimalFactory::createMany(10);
 
-        $I->amOnPage('/families/');
+        $I->amOnPage('/families');
         $I->seeResponseCodeIs(200);
 
         $I->seeInTitle('Liste des familles');
@@ -28,89 +28,75 @@ class IndexCest
                 'descriptionFamille' => 'description',
             ]);
 
-        $I->amOnPage('/families/');
+        $I->amOnPage('/families');
         $I->seeResponseCodeIs(200);
 
         $I->click('canidé description');
         $I->seeCurrentUrlEquals('/especes/1');
     }
 
+    public function isListofFamilySorted(ControllerTester $I): void
+    {
+        FamilleAnimalFactory::createSequence(
+            [
+                ['nomFamille' => 'homnidé'],
+                ['nomFamille' => 'bovidé'],
+                ['nomFamille' => 'félidé'],
+                ['nomFamille' => 'cerbidé'],
+            ]
+        );
+
+        $I->amOnPage('/families');
+        $I->seeResponseCodeIs(200);
+
+        $I->assertEquals([
+            'bovidé',
+            'cerbidé',
+            'félidé',
+            'homnidé',
+        ],
+            $I->grabMultiple('.famillesAnimal li a p'));
+    }
+
     /*
-        public function isListofFamilySorted(ControllerTester $I): void
-        {
-            $category = CategorieAnimalFactory::createOne(['nom_categorie' => 'mammifère',
-                'descriptionCategorie' => 'description']);
-            FamilleAnimalFactory::createSequence(
-                [
-                    ['nomFamille' => 'homnidé',
-                        'descriptionFamille' => 'description',
-                        'categorie' => $category,
-                    ],
-
-                    ['nomFamille' => 'bovidé',
-                        'descriptionFamille' => 'description',
-                        'categorie' => $category,
-                    ],
-
-                    ['nomFamille' => 'félidé',
-                        'descriptionFamille' => 'description',
-                        'categorie' => $category,
-                    ],
-
-                    ['nomFamille' => 'cerbidé',
-                        'descriptionFamille' => 'description',
-                        'categorie' => $category,
-                    ],
-                ]
-            );
-            $I->amOnPage('/families/');
-            $I->seeResponseCodeIs(200);
-            $I->assertEquals(['bovidé description',
-                              'cerbidé description',
-                              'félidé description',
-                              'homnidé description',
-                            ],
-                $I->grabMultiple('.famillesAnimal li'));
-        }
-
-        public function testSearchForFamilyList(ControllerTester $I): void
-        {
-            $category = CategorieAnimalFactory::createOne(['nom_categorie' => 'mammifère',
-                'descriptionCategorie' => 'description']);
-            FamilleAnimalFactory::createSequence(
-                [
-                    ['nomFamille' => 'homnidé',
-                        'descriptionFamille' => 'description',
-                        'categorie' => $category,
-                    ],
-
-                    ['nomFamille' => 'bovidé',
-                        'descriptionFamille' => 'description',
-                        'categorie' => $category,
-                    ],
-
-                    ['nomFamille' => 'félidé',
-                        'descriptionFamille' => 'description',
-                        'categorie' => $category,
-                    ],
-
-                    ['nomFamille' => 'cervidé',
-                        'descriptionFamille' => 'description',
-                        'categorie' => $category,
-                    ],
-
+            public function testSearchForFamilyList(ControllerTester $I): void
+            {
+                $category = CategorieAnimalFactory::createOne(['nom_categorie' => 'mammifère',
+                    'descriptionCategorie' => 'description']);
+                FamilleAnimalFactory::createSequence(
                     [
-                        'nomFamille' => 'cebidé',
-                        'descriptionFamille' => 'description',
-                        'categorie' => $category,
-                    ],
-                ]
-            );
-            $I->amOnPage('/families/?search=ce');
-            $I->seeResponseCodeIs(200);
-            $I->assertEquals(['cebidé description', 'cervidé description'], $I->grabMultiple('.famillesAnimal li'));
-        }
-    */
+                        ['nomFamille' => 'homnidé',
+                            'descriptionFamille' => 'description',
+                            'categorie' => $category,
+                        ],
+
+                        ['nomFamille' => 'bovidé',
+                            'descriptionFamille' => 'description',
+                            'categorie' => $category,
+                        ],
+
+                        ['nomFamille' => 'félidé',
+                            'descriptionFamille' => 'description',
+                            'categorie' => $category,
+                        ],
+
+                        ['nomFamille' => 'cervidé',
+                            'descriptionFamille' => 'description',
+                            'categorie' => $category,
+                        ],
+
+                        [
+                            'nomFamille' => 'cebidé',
+                            'descriptionFamille' => 'description',
+                            'categorie' => $category,
+                        ],
+                    ]
+                );
+                $I->amOnPage('/families/?search=ce');
+                $I->seeResponseCodeIs(200);
+                $I->assertEquals(['cebidé description', 'cervidé description'], $I->grabMultiple('.famillesAnimal li'));
+            }
+        */
     public function listOfFamilyAccordingCategory(ControllerTester $I): void
     {
         $category1 = CategorieAnimalFactory::createOne(['nom_categorie' => 'mammifère',
