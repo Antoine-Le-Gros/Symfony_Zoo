@@ -23,6 +23,7 @@ class CreateCest
         // $I->amLoggedInAs($adminUser);
 
         $I->amOnPage('/animal/create');
+
         $I->seeInTitle("Création d'un nouvel animal");
         $I->see("Création d'un nouvel animal", 'h1');
     }
@@ -33,8 +34,9 @@ class CreateCest
         // $I->amLoggedInAs($adminUser);
 
         $I->amOnPage('/animal/create');
-        $I->submitForm('form', [], 'Créer');
-        $I->seeCurrentRouteIs('app_animal_create');
+
+        $I->click('Créer');
+        $I->seeCurrentUrlEquals('/animal/create');
     }
 
     // Activate "extension=fileinfo" in PHP.ini
@@ -52,10 +54,10 @@ class CreateCest
         $I->fillField('Description de l\'animal', 'Pierre est un cailloux');
         $I->selectOption('Espèce de l\'animal', 'stone');
         $I->selectOption('Enclos de l\'animal', 'Le cirque');
-        $I->attachFile('animal[image]', './Animal-formWithDataIsOk-image.jpg');
+        $I->attachFile('Image de l\'animal', './Animal-formWithDataIsOk-image.jpg');
         $I->click('Créer');
 
-        $I->seeCurrentRouteIs('app_animal_show', ['id' => 1]);
+        $I->seeCurrentUrlEquals('/animal/1');
         $I->SeeInRepository(Animal::class, [
             'nomAnimal' => 'Pierre',
             'descriptionAnimal' => 'Pierre est un cailloux',
