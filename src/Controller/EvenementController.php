@@ -26,7 +26,6 @@ class EvenementController extends AbstractController
             'search' => $search,
         ]);
     }
-
     #[Route('/evenement/', name: 'app_evenement_showall')]
     public function showAll(EvenementRepository $evenementRepository, Request $request): Response
     {
@@ -36,6 +35,34 @@ class EvenementController extends AbstractController
             'events' => $evenementRepository->getAll($search),
             'enclos' => false,
             'search' => $search,
+        ]);
+    }
+    #[Route('/evenement/{id}/delete', requirements: ['id' => '\d+'])]
+    public function delete(Evenement $evenement,
+        EntityManagerInterface $entityManager,
+        Request $request): Response
+    {
+        $form = $this->createFormBuilder()
+            ->add('delete', SubmitType::class)
+            ->add('cancel', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->get('delete')->isClicked()) {
+                $entityManager->remove($evenement);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_evenement_showall');
+            }
+
+            return $this->redirectToRoute('app_evenement_showall', [
+                'id' => $evenement->getId(),
+            ]);
+        }
+
+        return $this->render('evenement/delete.html.twig', [
+            'evenement' => $evenement,
+            'form' => $form,
         ]);
     }
 }
