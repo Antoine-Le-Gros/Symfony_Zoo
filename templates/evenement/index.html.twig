@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des évènements {% if enclos %} pour l'enclos {{ EnclosName }} {% endif %} {% endblock %}
+
+{% block body %}
+    <h1>Liste des évènements {% if enclos %} pour l'enclos {{ EnclosName }} {% endif %}</h1>
+    <ul class="Evenements">
+        {% for event in events %}
+            {% for ev in event %}
+            <li>
+                <span class="evenement">
+                    {{ ev.nomEvenement }}
+                    {{ ev.descriptionEvenement }}
+                </span>
+                <span class="badge bg-secondary">
+                    {{ event.enclos.nomEnclos }}
+                </span>
+            </li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+
+{% endblock %}
