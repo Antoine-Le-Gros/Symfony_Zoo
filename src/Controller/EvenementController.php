@@ -26,4 +26,16 @@ class EvenementController extends AbstractController
             'search' => $search,
         ]);
     }
+
+    #[Route('/evenement/', name: 'app_evenement_showall')]
+    public function showAll(EvenementRepository $evenementRepository, Request $request): Response
+    {
+        $search = $request->query->get('search', '');
+
+        return $this->render('evenement/index.html.twig', [
+            'events' => $evenementRepository->getAll($search),
+            'enclos' => false,
+            'search' => $search,
+        ]);
+    }
 }
