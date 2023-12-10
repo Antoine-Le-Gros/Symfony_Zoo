@@ -82,4 +82,8 @@ class EvenementController extends AbstractController
             'event' => $event,
         ]);
     }
+    #[Route('/evenement/create')]
+    public function create():Response {
+        return $this->render('evenement/create.html.twig');
+    }
 }
