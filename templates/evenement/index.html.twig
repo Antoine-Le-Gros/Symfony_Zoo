@@ -9,6 +9,7 @@
             {% for ev in event %}
             <li>
                 <span class="evenement">
+                    <a href="{{ path('app_evenement_delete', {id:event.id}) }}"><span class="material-symbols-outlined text-danger">delete</span></a>
                     {{ ev.nomEvenement }}
                     {{ ev.descriptionEvenement }}
                 </span>
