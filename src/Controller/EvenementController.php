@@ -75,4 +75,11 @@ class EvenementController extends AbstractController
             'form' => $form,
         ]);
     }
+    #[Route('/evenement/{id}/update', requirements: ['id' => '\id'])]
+    public function update(Evenement $event): Response
+    {
+        return $this->render('evenement/update.html.twig', [
+            'event' => $event,
+        ]);
+    }
 }
