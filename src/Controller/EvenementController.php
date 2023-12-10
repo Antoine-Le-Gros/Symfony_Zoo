@@ -75,15 +75,20 @@ class EvenementController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/evenement/{id}/update', requirements: ['id' => '\id'])]
+    #[Route('/evenement/{id}/update', requirements: ['id' => '\d+'])]
     public function update(Evenement $event): Response
     {
+        $form = $this->createForm(EvenementType::class, $event);
+
         return $this->render('evenement/update.html.twig', [
             'event' => $event,
+            'form' => $form,
         ]);
     }
+
     #[Route('/evenement/create')]
-    public function create():Response {
+    public function create(): Response
+    {
         return $this->render('evenement/create.html.twig');
     }
 }
