@@ -84,7 +84,7 @@ class EvenementController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('');
+            return $this->redirectToRoute('app_animal');
         }
 
         return $this->render('evenement/update.html.twig', [
@@ -94,8 +94,20 @@ class EvenementController extends AbstractController
     }
 
     #[Route('/evenement/create')]
-    public function create(): Response
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('evenement/create.html.twig');
+        $event = new Evenement();
+        $form = $this->createForm(EvenementType::class, $event);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($event);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_animal');
+        }
+
+        return $this->render('evenement/create.html.twig', [
+            'form' => $form,
+        ]);
     }
 }
