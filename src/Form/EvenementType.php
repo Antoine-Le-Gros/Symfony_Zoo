@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Enclos;
 use App\Entity\Evenement;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +20,14 @@ class EvenementType extends AbstractType
             ->add('dateEvenement')
             ->add('dureeEvenement')
             ->add('quotaVisiteurs')
-            ->add('enclos')
+            ->add('enclos', EntityType::class, [
+                'class' => Enclos::class,
+                'choice_label' => 'nomEnclos',
+                'query_builder' => function (EntityRepository $entityRepository) {
+                    return $entityRepository->createQueryBuilder('e')
+                        ->orderBy('e.nomEnclos', 'ASC');
+                },
+            ])
         ;
     }
 
