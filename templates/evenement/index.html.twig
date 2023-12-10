@@ -6,18 +6,31 @@
     <h1>Liste des évènements {% if enclos %} pour l'enclos {{ EnclosName }} {% endif %}</h1>
     <ul class="Evenements">
         {% for event in events %}
-            {% for ev in event %}
-            <li>
+            {% if enclos %}
+                {% for ev in event %}
+                    <li>
+                    <span class="evenement">
+                        <a href="{{ path('app_evenement_delete', {id:event.id}) }}"><span class="material-symbols-outlined text-danger">delete</span></a>
+                        {{ ev.nomEvenement }}
+                        {{ ev.descriptionEvenement }}
+                    </span>
+                    <span class="badge bg-secondary">
+                        {{ event.enclos.nomEnclos }}
+                    </span>
+                </li>
+                {% endfor %}
+            {% else %}
+                <li>
                 <span class="evenement">
                     <a href="{{ path('app_evenement_delete', {id:event.id}) }}"><span class="material-symbols-outlined text-danger">delete</span></a>
-                    {{ ev.nomEvenement }}
-                    {{ ev.descriptionEvenement }}
+                    {{ event.nomEvenement }}
+                    {{ event.descriptionEvenement }}
                 </span>
-                <span class="badge bg-secondary">
+                    <span class="badge bg-secondary">
                     {{ event.enclos.nomEnclos }}
                 </span>
-            </li>
-            {% endfor %}
+                </li>
+            {% endif %}
         {% endfor %}
     </ul>
 
