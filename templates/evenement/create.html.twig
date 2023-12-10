@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-
-{% endblock %}
-
+{% set title = "Création du'un nouveau évènement" %}
 {% block title %}
-
+    {{ title }}
 {% endblock %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+    {{ include('evenement/_form.html.twig',{form: form ,submit_label : 'Créer'},with_context = false) }}
+{% endblock %}
+
+
 
