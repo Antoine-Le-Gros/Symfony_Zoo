@@ -43,8 +43,8 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
         $espece = EspeceFactory::all();
         $enclos = EnclosFactory::all();
         for ($i = 0; $i < count($file_j); ++$i) {
-            $file_j['espece'] = $espece[$i];
-            $file_j['enclos'] = $enclos[$i];
+            $file_j[$i]['espece'] = $espece[$i];
+            $file_j[$i]['enclos'] = $enclos[$i];
         }
         AnimalFactory::createSequence($file_j);
     }
