@@ -1,18 +1,18 @@
 [
     {
         "nom_categorie": "mammifere",
-        "descriptionCategorie" : "test amphi"
+        "descriptionCategorie" : "Animaux vertébrés, possèdent des glandes mammaires et nourrissent leur petits avec du lait"
     },
     {
         "nom_categorie": "oiseau",
-        "descriptionCategorie" : "test oiseau"
+        "descriptionCategorie" : "Animal vertébré ovipare, couvert de plumes, muni d'un bec sans dents, de deux pattes et de deux ailes"
     },
     {
         "nom_categorie": "reptile",
-        "descriptionCategorie" : "test reprt"
+        "descriptionCategorie" : "Vertébré à respiration pulmonaire, à tégument recouvert d'écailles kératinisées et à température variable"
     },
     {
         "nom_categorie": "amphibien",
-        "descriptionCategorie": "test mammi"
+        "descriptionCategorie": "Vertébré anamniote à peau nue, aux membres conformés en pattes, généralement capable de respirer hors de l'eau "
     }
 ]
