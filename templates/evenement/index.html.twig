@@ -4,18 +4,21 @@
 
 {% block body %}
     <h1>Liste des évènements {% if enclos %} pour l'enclos {{ EnclosName }} {% endif %}</h1>
-    <ul class="Evenements">
+    <ul class="Events">
         {% for event in events %}
             {% if enclos %}
                 {% for ev in event %}
+                    {% set date = ev.dureeEvenementformat(COOKIE) %}
                     <li>
-                    <span class="evenement">
-                        <a href="{{ path('app_evenement_delete', {id:event.id}) }}"><span class="material-symbols-outlined text-danger">delete</span></a>
-                        {{ ev.nomEvenement }}
-                        {{ ev.descriptionEvenement }}
+                    <span class="event">
+                        <a href="{{ path('app_evenement_delete', {id:ev.id}) }}"><span class="material-symbols-outlined text-danger">delete</span></a>
+                        <a href="{{ path('app_evenement_show', {id:ev.id}) }}">
+                            {{ ev.nomEvenement }},
+                            {{ ev.descriptionEvenement }}
+                        </a>
                     </span>
                     <span class="badge bg-secondary">
-                        {{ event.enclos.nomEnclos }}
+                        {{ ev.enclos.nomEnclos }}
                     </span>
                 </li>
                 {% endfor %}
@@ -23,8 +26,10 @@
                 <li>
                 <span class="evenement">
                     <a href="{{ path('app_evenement_delete', {id:event.id}) }}"><span class="material-symbols-outlined text-danger">delete</span></a>
-                    {{ event.nomEvenement }}
-                    {{ event.descriptionEvenement }}
+                    <a href="{{ path('app_evenement_show', {id:event.id}) }}">
+                        {{ event.nomEvenement }},
+                        {{ event.descriptionEvenement }}
+                    </a>
                 </span>
                     <span class="badge bg-secondary">
                     {{ event.enclos.nomEnclos }}
