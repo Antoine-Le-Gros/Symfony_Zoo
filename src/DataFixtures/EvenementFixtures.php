@@ -17,13 +17,11 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
         $file_j = json_decode($files, true);
         $enclos = EnclosFactory::all();
         $animal = AnimalFactory::all();
-        for ($i = 0; $i < 7; ++$i) {
-            $file_j[$i]['enclos'] = null;
-            $file_j[$i]['animal'] = $animal[$i];
-        }
-        for ($i = 7; $i < count($file_j); ++$i) {
+
+        for ($i = 0; $i < count($file_j); ++$i) {
             $file_j[$i]['enclos'] = $enclos[$i];
-            $file_j[$i]['animal'] = null;
+            $file_j[$i]['dateEvenement']=\DateTime::createFromFormat('Y-m-d', '2024-11-24');
+
         }
         EvenementFactory::createSequence($file_j);
     }
@@ -32,6 +30,7 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             EnclosFixtures::class,
+            AnimalFixtures::class,
         ];
     }
 }
