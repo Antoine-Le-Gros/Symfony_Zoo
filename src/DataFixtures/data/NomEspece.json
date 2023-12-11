@@ -1,62 +1,82 @@
 [
     {
-        "libEspece": "ours brun"
+        "libEspece": "ours brun",
+        "descriptionEspece": "Animal solitaire et omnivore qui vivait dans les forêts d'Eurasie et d'Amérique du Nord,disparu en Europe"
     },
     {
-        "libEspece": "ours polaire"
+        "libEspece": "ours polaire",
+        "descriptionEspece": "Grand mammifère omnivore originaire de l'Arctique"
     },
     {
-        "libEspece": "gorille"
+        "libEspece": "gorille",
+        "descriptionEspece": "Grand singe anthropoïde d'Afrique"
     },
     {
-        "libEspece": "chimpanzé"
+        "libEspece": "chimpanzé",
+        "descriptionEspece": "Genre de Simiformes"
     },
     {
-        "libEspece": "panda"
+        "libEspece": "panda",
+        "descriptionEspece": "De fourrure noire et blanche, le panda est un carnivore végétarien"
     },
     {
-        "libEspece" : "tigre"
+        "libEspece" : "tigre",
+        "descriptionEspece": "Grand félin sauvage reconnaissable à sa fourrure rousse rayée de noir"
     },
     {
-        "libEspece": "lion"
+        "libEspece": "lion",
+        "descriptionEspece": "Grand mammifère carnivore, à pelage fauve et à crinière"
     },
     {
-        "libEspece":"panthère noir"
+        "libEspece":"panthère noir",
+        "descriptionEspece": "Grand mammifère carnassier d'Afrique et d'Asie, au pelage noir"
     },
     {
-        "libEspece": "girafe"
+        "libEspece": "girafe",
+        "descriptionEspece": "Grand mammifère d'Afrique, à cou très long et rigide, dont le pelage roux présente des dessins polygonaux."
     },
     {
-        "libEspece": "rhinocéros"
+        "libEspece": "rhinocéros",
+        "descriptionEspece": "Mammifère de grande taille, à la peau épaisse et rugueuse, qui porte une ou deux cornes sur le nez."
     },
     {
-        "libEspece": "hippopotames"
+        "libEspece": "hippopotames",
+        "descriptionEspece": "Gros mammifère herbivore amphibie, aux membres trapus"
     },
     {
-        "libEspece": "aigle"
+        "libEspece": "aigle",
+        "descriptionEspece": "Grand oiseau de proie diurne, au bec crochu et aux serres puissantes"
     },
     {
-        "libEspece": "antilope"
+        "libEspece": "antilope",
+        "descriptionEspece": "Mammifère ruminant d'Afrique et d'Asie, au corps svelte, aux hautes pattes grêles, à cornes en spirale"
     },
     {
-        "libEspece": "chouette"
+        "libEspece": "chouette",
+        "descriptionEspece": "Oiseau rapace nocturne"
     },
     {
-        "libEspece": "éléphant"
+        "libEspece": "éléphant",
+        "descriptionEspece": "Très grand mammifère herbivore, à corps massif, à peau rugueuse, à grandes oreilles plates, au nez allongé en trompe et à défenses d'ivoire"
     },
     {
-        "libEspece": "lémur"
+        "libEspece": "lémur",
+        "descriptionEspece": "Aussi appelé makis, est exclusivement malgaches"
     },
     {
-        "libEspece": "loup"
+        "libEspece": "loup",
+        "descriptionEspece": "Mammifère carnivore sauvage, ressemblant à un grand chien"
     },
     {
-        "libEspece": "vautour"
+        "libEspece": "vautour",
+        "descriptionEspece": "Oiseau rapace de grande taille, au bec crochu, à la tête et au cou dénudés"
     },
     {
-        "libEspece": "crocodile"
+        "libEspece": "crocodile",
+        "descriptionEspece": "Grand reptile à fortes mâchoires, à quatre courtes pattes, qui vit dans les fleuves des régions chaudes"
     },
     {
-        "libEspece": "iguane"
+        "libEspece": "iguane",
+        "descriptionEspece": "Reptile saurien de l'Amérique tropicale, qui a l'aspect d'un grand lézard"
     }
 ]
