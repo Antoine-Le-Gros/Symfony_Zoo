@@ -37,6 +37,16 @@ class EvenementController extends AbstractController
             'search' => $search,
         ]);
     }
+    #[Route('/evenement/{id}/show', name: 'app_evenement_show', requirements: ['id' => '\d+'])]
+    public function show(
+        ?Evenement $evenement
+    ): Response {
+        if (null === $evenement) {
+            throw $this->createNotFoundException("l'évènement n'existe pas ");
+        }
+
+        return $this->render('evenement/show.html.twig', ['evenement' => $evenement]);
+    }
     #[Route('/evenement/{id}/delete', requirements: ['id' => '\d+'])]
     public function delete(Evenement $evenement,
         EntityManagerInterface $entityManager,
