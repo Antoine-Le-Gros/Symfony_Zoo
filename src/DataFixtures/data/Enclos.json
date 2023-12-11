@@ -1,85 +1,65 @@
 [
   {
-    "nomEnclos" : "forêt des ours",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos" : "forêt des ours"
   },
   {
-    "nomEnclos": "igloo",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos": "igloo"
 
   },
   {
-    "nomEnclos": "jungle",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos": "jungle"
 
   },
   {
-    "nomEnclos": "fôret tropicale",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos": "fôret tropicale"
   },
   {
-    "nomEnclos": "qg des pandas",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos": "qg des pandas"
   },
   {
-    "nomEnclos": "havre sauvage",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos": "havre sauvage"
 
   },
   {
-    "nomEnclos" : "savane royale",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos" : "savane royale"
   },
   {
-    "nomEnclos" : "wakanda",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos" : "wakanda"
   },
   {
-    "nomEnclos" : "himilaya",
-    "description" : "description à définir"
+    "nomEnclos" : "himilaya"
   },
   {
-    "nomEnclos" : "rivage Cornu",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos" : "rivage Cornu"
   },
   {
-    "nomEnclos" : "marécage",
-    "descriptionEnclos": "description à définir"
+    "nomEnclos" : "marécage"
   },
   {
-    "nomEnclos" : "hautes voltige",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos" : "hautes voltige"
   },
   {
-    "nomEnclos" : "sprint Sauvage",
-    "descriptionEnclos" : "descriptio à définir"
+    "nomEnclos" : "sprint Sauvage"
   },
   {
-    "nomEnclos" : "coin des P=plumes sages",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos" : "coin des P=plumes sages"
   },
   {
-    "nomEnclos" : "palais des Trompes",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos" : "palais des Trompes"
   },
   {
-    "nomEnclos" : "Cœur Lémurien",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos" : "Cœur Lémurien"
   },
   {
-    "nomEnclos" : "les stark",
-    "descriptionEnclos" : "descriptio à définir"
+    "nomEnclos" : "les stark"
   },
   {
-    "nomEnclos" : "cimitières",
-    "descriptionEnclos" : "description à définir"
+    "nomEnclos" : "cimitières"
   },
   {
-    "nomEnclos" : "rivière croco",
-    "descriptionEnclos": "description à définir"
+    "nomEnclos" : "rivière croco"
   },
   {
-    "nomEnclos" : "promenade des reptiles",
-    "descriptionAnimal" : "description à définir"
+    "nomEnclos" : "promenade des reptiles"
   }
 ]

@@ -38,7 +38,7 @@
   },
   {
     "nomAnimal" : "sudan",
-    "descriptionAnimal" : "sudan était un rhinocéros blanc du Nord, une sous-espèce du rhinocéros blanc, caractérisée par sa bouche large et carrée adaptée pour brouter de l'herbe. les rhinocéros blancs ont un corps massif et sont généralement de couleur gris clair à brun, avec des plis caractéristiques de la peau formant des plis sur leur cou et leurs épaules.sudan était particulièrement connu pour sa vieille et imposante stature. Il avait Sudan était un rhinocéros blanc du Nord, une sous-espèce du rhinocéros blanc, caractérisée par sa bouche large et carrée adaptée pour brouter de l'herbe. Les rhinocéros blancs ont un corps massif et sont généralement de couleur gris clair à brun, avec des plis caractéristiques de la peau formant des plis sur leur cou et leurs épaules.sudan était particulièrement connu pour sa vieille et imposante stature. Il avait Sudan était un rhinocéros blanc du Nord, une sous-espèce du rhinocéros blanc, caractérisée par sa bouche large et carrée adaptée pour brouter de l'herbe. Les rhinocéros blancs ont un corps massif et sont généralement de couleur gris clair à brun, avec des plis caractéristiques de la peau formant des plis sur leur cou et leurs épaules.\n\nSudan était particulièrement connu pour sa vieille et imposante stature. Il avait des cornes courtes, souvent coupées pour dissuader les braconniers "
+    "descriptionAnimal" : "sudan était un rhinocéros blanc du Nord, une sous-espèce du rhinocéros blanc, caractérisée par sa bouche large et carrée adaptée pour brouter de l'herbe"
   },
   {
     "nomAnimal" : "motomoto",
@@ -78,7 +78,7 @@
     "descriptionAnimal": "Le crocodile Tic-Tac est un grand crocodile vert avec un corps long et effilé. Son nom est dérivé du son régulier de la tic-tac d'une horloge mécanique, ce qui est du au claquement de ses crocs"
   },
   {
-    "iguane": "rango",
+    "nomAnimal": "rango",
     "descriptionAnimal" : "description "
   }
 
