@@ -9,7 +9,6 @@ use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
 
-
 /**
  * @extends ModelFactory<Utilisateur>
  *
@@ -53,6 +52,16 @@ final class UtilisateurFactory extends ModelFactory
     protected function getDefaults(): array
     {
 
+
+        return [
+            'dateNaisUser' => self::faker()->datetime(),
+            'email' => self::faker()->unique()->numerify('user-###').'@example.com',
+            'nomUser' => self::faker()->lastName(),
+            'password' => 'test',
+            'dateVisiteur'=>self::faker()->datetime(),
+            'pnomUser' => self::faker()->firstName(),
+            'roles' => [],
+        ];
     }
 
     /**
