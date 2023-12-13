@@ -109,3 +109,21 @@ ul.animals li{
     align-items: center;
     width: 100%;
 } */
+
+.famillesAnimal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style-type: none;
+}
+
+.famillesAnimal > li > a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    width: 85vh; /* Ajoutez une largeur fixe si nécessaire */
+    border: 1px solid white; /* Ajoutez une bordure pour visualiser la zone de chaque élément */
+    border-radius: 10px;
+    padding: 10px; /* Ajoutez un remplissage pour un meilleur aspect */
+}
