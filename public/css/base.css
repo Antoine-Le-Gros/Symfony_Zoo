@@ -30,19 +30,19 @@ body{
     width: 80%;
     margin: 0 auto;
 }
+.navbar.navbar-expand-lg {
 
-.navbar.navbar-expand-lg.bg-danger {
     margin-top : 5px;
-    border: 1mm inset rgb(255,255,0);
+    border: 1mm inset white;
     border-radius: 8px;
 }
-.navbar.navbar-expand-lg.bg-light {
-    background-color: red !important;
-    border: solid 1px yellow;
+
+.navbar.navbar-expand-lg {
+    border: solid 1px white;
     border-radius: 5px;
     margin-top: 10px;
 }
-.btn.btn-outline-success{
+.btn.btn-outline-success{ /* bouton connexion */
     background-color: white;
     color: grey ;
 }
@@ -103,7 +103,6 @@ ul.animals{
 ul.animals li{
     display: flex;
     flex-direction: row-reverse;
-    justify-content:center;
     align-items: center;
     justify-content: space-between;
 }
