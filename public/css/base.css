@@ -47,10 +47,6 @@ body{
     color: grey ;
 }
 
-h1{
-    background-color: yellow;
-    border-radius: 10px;
-    border: solid 5px;
 .mainTitle{
     text-align: center;
     color: white;
@@ -58,6 +54,12 @@ h1{
     margin-top: 250px;
     margin-bottom: 50px;
 }
+.subsectionTitle{
+    margin-top: 100px;
+}
+h2{
+    margin-top: 120px;
+    color: white;
     text-align: center;
 }
 hr{
@@ -89,7 +91,13 @@ li a.nav-link p{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+}
+
+ul.animals{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    flex-wrap: wrap;
 }
 
 ul.animals li{
@@ -97,9 +105,9 @@ ul.animals li{
     flex-direction: row-reverse;
     justify-content:center;
     align-items: center;
-    gap: 5%;
+    justify-content: space-between;
 }
-ul.animals li p{
+/* ul.animals li p{
     background-color: #ffb53f;
     padding: 2%;
     border-radius: 10px;
@@ -107,4 +115,4 @@ ul.animals li p{
     flex-direction: column;
     align-items: center;
     width: 100%;
-}
+} */
