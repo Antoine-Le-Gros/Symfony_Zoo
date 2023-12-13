@@ -4,7 +4,8 @@
 {% block route %} {{ path('app_categories') }} {% endblock %}
 {% block stylesheets %} <link href="{{ asset('css/categorie.css') }}" rel="stylesheet"> {% endblock %}
 {% block body  %}
-    <h1 class="category">Liste des catégories présentes au sein du zoo</h1>
+    <h1 class="subsectionTitle text-center">Liste des catégories présentes au sein du zoo</h1>
+    <hr>
     <ul class="categoriesAnimal">
         {% for categorie in categories %}
             {% set image = categorie.image.image|default('') %}
