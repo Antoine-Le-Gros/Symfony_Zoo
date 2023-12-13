@@ -3,7 +3,8 @@
 {% else %} {{ path('app_families_showall') }} {% endif %}{% endblock %}
 {% block title %}Liste des familles {% if category %}appartenant à la catégorie {{ categoryName }} {% endif %} {% endblock %}
 {% block body %}
-    <h1>Liste des familles {% if category %}appartenant à la catégorie {{ categoryName }} {% endif %}</h1>
+    <h1 class="subsectionTitle text-center">Liste des familles {% if category %}appartenant à la catégorie {{ categoryName }} {% endif %}</h1>
+    <hr>
     <ul class="famillesAnimal">
         {% for famille in families %}
             {% if category %}
