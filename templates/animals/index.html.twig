@@ -5,8 +5,9 @@
 {% block body %}
     <h1 class="text-center subsectionTitle">Liste des animaux {% if espece %}appartenant à l'espèce {{ especeName }}{% endif %}</h1>
     <hr>
-    <form class="d-flex mt-3 mb-5" role="search" action=""> {# Définir la route de la barre de recherche #}
-        <input class="form-control me-2" type="search" placeholder="Rechercher un animal" aria-label="Search" name="search" value="{{ search |default('') }}">
+    <form class="d-flex mt-3 mb-5" role="search" action="{% if espece %}{{ path('app_animals',{idEspece : idEspece })}}
+                                                            {% else %} {{ path('app_animals_showall') }} {% endif %}">
+        <input class="form-control me-2" type="search" placeholder="Rechercher un animal parmis cette liste" aria-label="Search" name="search" value="{{ search |default('') }}">
         <button class="btn btn-outline-success" type="submit">Rechercher</button>
     </form>
     <ul class="animals">

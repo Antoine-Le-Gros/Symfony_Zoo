@@ -66,16 +66,7 @@ hr{
     color: white;
 }
 
-ul.famillesAnimal, ul.animals{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    list-style-type: none;
-}
-ul.famillesAnimal li, ul.animals li{
-    width: 100%;
-    margin-bottom: 10px;
-}
+
 li a.nav-link{
     display: flex;
     flex-direction: row-reverse;
@@ -96,15 +87,18 @@ li a.nav-link p{
 ul.animals{
     display: flex;
     flex-direction: row;
-    align-self: center;
+    align-items: flex-start;
+    list-style-type: none;
     flex-wrap: wrap;
 }
 
 ul.animals li{
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: space-between;
+    flex: 1;
+    margin-bottom: 30px;
 }
 /* ul.animals li p{
     background-color: #ffb53f;
