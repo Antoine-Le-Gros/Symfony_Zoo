@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{ animal.nomAnimal }}</h1>
+    <h1 class="subsectionTitle">Fiche de l'animal {{ animal.nomAnimal }} ({{ animal.espece.libEspece }})</h1>
     <dl>
         <dt>Nom :</dt>
         <dd>{{ animal.nomAnimal }}</dd>
@@ -12,12 +12,7 @@
         <dt>Enclos :</dt>
         <dd>{{ animal.enclos.nomEnclos }}</dd>
         <dt>Image :</dt>
-        {% if (animal.image is not null) %}
-            <dd><img src="{{ animal.image.image }}" width="300" height="200" alt="Image animal"></dd>
-        {% else %}
-            <dd><img src="{{ asset('img/default-placeholder.png') }}" width="300" height="200" alt="Image animal"></dd>
-        {% endif %}
-
+            <dd><img src="{{ animal.image.image ?? asset('img/default.png') }}" width="256" height="256" alt="Image animal"></dd>
         {#  A implémenter lorque les entités auront été liées
         {% if (animal.parent1 is not null) %}
             <dt>Parent(s) :</dt>
