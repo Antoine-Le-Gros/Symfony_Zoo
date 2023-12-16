@@ -84,22 +84,39 @@ li a.nav-link p{
     align-items: flex-start;
 }
 
-ul.animals{
+.card
+{
+    color: black;
+}
+
+.card img{
+    width: initial;
+}
+
+@media  (min-width: 500px){
+    .left-card
+    {
+        flex-direction: row;
+    }
+}
+
+
+/*ul.animals{
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     list-style-type: none;
     flex-wrap: wrap;
-}
+}/*
 
-ul.animals li{
+/* ul.animals li{
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
     justify-content: space-between;
     flex: 1;
     margin-bottom: 30px;
-}
+} */
 /* ul.animals li p{
     background-color: #ffb53f;
     padding: 2%;
@@ -109,21 +126,22 @@ ul.animals li{
     align-items: center;
     width: 100%;
 } */
-
+/*
 .famillesAnimal {
     display: flex;
     flex-direction: column;
     align-items: center;
     list-style-type: none;
-}
-
+}*/
+/*
 .famillesAnimal > li > a {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
-    width: 85vh; /* Ajoutez une largeur fixe si nécessaire */
-    border: 1px solid white; /* Ajoutez une bordure pour visualiser la zone de chaque élément */
+    width: 85vh; /* Ajoutez une largeur fixe si nécessaire
+    border: 1px solid white; /* Ajoutez une bordure pour visualiser la zone de chaque élément
     border-radius: 10px;
-    padding: 10px; /* Ajoutez un remplissage pour un meilleur aspect */
+    padding: 10px; /* Ajoutez un remplissage pour un meilleur aspect
 }
+*/
