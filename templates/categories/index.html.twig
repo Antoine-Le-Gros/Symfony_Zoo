@@ -6,16 +6,23 @@
 {% block body  %}
     <h1 class="subsectionTitle text-center">Liste des catégories présentes au sein du zoo</h1>
     <hr>
-    <ul class="categoriesAnimal">
+    <ul class="container d-flex flex-wrap justify-content-center">
         {% for categorie in categories %}
-            {% set image = categorie.image.image|default('') %}
-            <li class="category-familly">
-                {% if image != '' %}
-                    <img class="category-img" src="{{ image }}" alt="Image inconnue" >
-                {% endif%}
-                <a class="nav-link category"  href="{{ path('app_families', {idCategory: categorie.id}) }}"><span class="badge bg-secondary category">{{ categorie.nomCategorie }} </span>{{ categorie.descriptionCategorie }}</a>
-            </li>
-
+            <a class="nav-link m-3"  href="{{ path('app_families', {idCategory: categorie.id}) }}">
+                <li class="card left-card" style="width: 75vh">
+                    <img class="card-img-top" src="{{ categorie.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <span class="badge bg-secondary category">
+                                {{ categorie.nomCategorie}}
+                            </span>
+                        </h5>
+                        <p class="card-text">
+                            {{ categorie.descriptionCategorie}}
+                        </p>
+                    </div>
+                </li>
+            </a>
         {% endfor %}
     </ul>
 
