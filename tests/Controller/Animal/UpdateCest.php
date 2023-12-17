@@ -10,19 +10,8 @@ use App\Tests\Support\ControllerTester;
 
 class UpdateCest
 {
-    /*
-    public function accessIsRestrictedForNoAdmin(ControllerTester $I): void
-    {
-        $I->amOnPage('/animal/create');
-        $I->amOnRoute('app_login');
-    }
- */
-
     public function formUpdateAnimal(ControllerTester $I): void
     {
-        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
-        // $I->amLoggedInAs($adminUser);
-
         AnimalFactory::createOne([
             'nomAnimal' => 'Pierre',
             'descriptionAnimal' => 'Pierre est un cailloux',
@@ -42,9 +31,6 @@ class UpdateCest
 
     public function FormUpdateAnimalSend(ControllerTester $I): void
     {
-        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
-        // $I->amLoggedInAs($adminUser);
-
         AnimalFactory::createOne([
             'nomAnimal' => 'Pierre',
             'descriptionAnimal' => 'Pierre est un cailloux',

@@ -9,19 +9,8 @@ use App\Tests\Support\ControllerTester;
 
 class CreateCest
 {
-    /*
-    public function accessIsRestrictedForNoAdmin(ControllerTester $I): void
-    {
-        $I->amOnPage('/animal/create');
-        $I->amOnRoute('app_login');
-    }
-     */
-
     public function formCreateAnimal(ControllerTester $I): void
     {
-        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
-        // $I->amLoggedInAs($adminUser);
-
         $I->amOnPage('/animal/create');
 
         $I->seeInTitle("Création d'un nouvel animal");
@@ -30,9 +19,6 @@ class CreateCest
 
     public function formErrorWithNoData(ControllerTester $I): void
     {
-        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
-        // $I->amLoggedInAs($adminUser);
-
         $I->amOnPage('/animal/create');
 
         $I->click('Créer');
@@ -42,9 +28,6 @@ class CreateCest
     // Activate "extension=fileinfo" in PHP.ini
     public function formWithDataIsOk(ControllerTester $I): void
     {
-        // $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
-        // $I->amLoggedInAs($adminUser);
-
         EnclosFactory::createOne(['nomEnclos' => 'Le cirque']);
         EspeceFactory::createOne(['libEspece' => 'stone']);
 
