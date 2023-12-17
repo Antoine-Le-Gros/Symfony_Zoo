@@ -19,15 +19,8 @@
         <dt>Enclos :</dt>
         <dd>{{ animal.enclos.nomEnclos }}</dd>
         <dt>Image :</dt>
-            <dd><img src="{{ animal.image.image ?? asset('img/default.png') }}" width="256" height="256" alt="Image animal"></dd>
-
-        {% if (animal.parent1 is not null) %}
-            <dt>Parent(s) :</dt>
-            <dd>{{ animal.parent1 }}</dd>
-            {% if (animal.parent2 is not null) %}
-                <dd>{{ animal.parent2 }}</dd>
-                {% endif %}
-        <dd><span class="badge bg-secondary">{{ animal.enclos.nomEnclos }}</span></dd>
+        <dd><img src="{{ animal.image.image ?? asset('img/default.png') }}" width="256" height="256" alt="Image animal">
+        </dd>
 
         {% if animal.parent1 is not null %}
             <dt>Parent(s) :
