@@ -39,7 +39,6 @@ class AnimalController extends AbstractController
     #[Route('/animal/{id}/update', requirements: ['id' => '\d+'])]
     public function update(EntityManagerInterface $entityManager, Animal $animal, Request $request): RedirectResponse|Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createForm(AnimalType::class, $animal);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -66,7 +65,6 @@ class AnimalController extends AbstractController
     #[Route('/animal/create')]
     public function create(EntityManagerInterface $entityManager, Request $request): Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $animal = new Animal();
         $form = $this->createForm(AnimalType::class, $animal);
         $form->handleRequest($request);
@@ -93,7 +91,6 @@ class AnimalController extends AbstractController
         EntityManagerInterface $entityManager,
         Request $request): Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createFormBuilder()
             ->add('delete', SubmitType::class)
             ->add('cancel', SubmitType::class)
