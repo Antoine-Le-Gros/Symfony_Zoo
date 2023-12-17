@@ -17,7 +17,8 @@
         </dd>
 
         <dt>Enclos :</dt>
-        <dd>{{ animal.enclos.nomEnclos }}</dd>
+        <dd><span class="badge bg-secondary">{{ animal.enclos.nomEnclos }}</span></dd>
+
         <dt>Image :</dt>
         <dd><img src="{{ animal.image.image ?? asset('img/default.png') }}" width="256" height="256" alt="Image animal">
         </dd>
