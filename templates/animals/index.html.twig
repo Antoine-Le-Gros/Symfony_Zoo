@@ -3,20 +3,36 @@
 {% else %} {{ path('app_animals_showall') }} {% endif %}{% endblock %}
 {% block title %}Liste des animaux {% if espece %}appartenant à l'espèce {{ especeName }}{% endif %} {% endblock %}
 {% block body %}
-    <h1>Liste des animaux {% if espece %}appartenant à l'espèce {{ especeName }}{% endif %}</h1>
-    <ul class="animals">
-
+    <h1 class="text-center subsectionTitle">Liste des animaux {% if espece %}appartenant à l'espèce {{ especeName }}{% endif %}</h1>
+    <hr>
+    <form class="d-flex mt-3 mb-5" role="search" action="{% if espece %}{{ path('app_animals',{idEspece : idEspece })}}{% else %} {{ path('app_animals_showall') }} {% endif %}">
+        <input class="form-control me-2" type="search" placeholder="Rechercher un animal parmis cette liste" aria-label="Search" name="search" value="{{ search |default('') }}">
+        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+    </form>
+    <ul class="container d-flex flex-wrap justify-content-center">
         {% for animal in animaux %}
             {% if espece %}
                 {% for an in animal.animals %}
                     {% set image = an.image.image|default('') %}
-                    <li>{{ an.nomAnimal  }} <span class="badge bg-secondary">{{ an.descriptionAnimal }} </span>
-                        <img src="{{ an.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256"> </li>
+                    <li class="card m-3" style="width: min-content">
+                        <img class="card-img-top" src="{{ an.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ an.nomAnimal}} ({{ an.espece.libEspece }})</h5>
+                            <p class="card-text">{{ an.descriptionAnimal }} </p>
+                            <a href="{{ path('app_animal_show', {'id': an.id}) }}" class="btn btn-primary">Afficher les détails à propos de {{ an.nomAnimal }}</a>
+                        </div>
+                    </li>
                 {% endfor %}
             {% else %}
                 {% set image = animal.image.image|default('') %}
-                <li>{{ animal.nomAnimal  }} <span class="badge bg-secondary">{{ animal.descriptionAnimal }} </span>
-                    <img src="{{ animal.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256"> </li>
+                <li class="card m-3" style="width: min-content">
+                    <img src="{{ animal.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256">
+                    <div class="card-body">
+                        <h5 class="cardtitle" style="color: black">{{ animal.nomAnimal}} ({{ animal.espece.libEspece }})</h5>
+                        <p class="card-text" style="color: black">{{ animal.descriptionAnimal }} </p>
+                        <a href="{{ path('app_animal_show', {'id': animal.id}) }}" class="btn btn-primary">Afficher les détails à propos de {{ animal.nomAnimal }}</a>
+                    </div>
+                </li>
             {% endif %}
         {% endfor %}
     </ul>

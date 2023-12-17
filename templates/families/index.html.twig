@@ -3,32 +3,35 @@
 {% else %} {{ path('app_families_showall') }} {% endif %}{% endblock %}
 {% block title %}Liste des familles {% if category %}appartenant à la catégorie {{ categoryName }} {% endif %} {% endblock %}
 {% block body %}
-    <h1>Liste des familles {% if category %}appartenant à la catégorie {{ categoryName }} {% endif %}</h1>
-    <ul class="famillesAnimal">
+    <h1 class="subsectionTitle text-center">Liste des familles {% if category %}appartenant à la catégorie {{ categoryName }} {% endif %}</h1>
+    <hr>
+    <ul class="container d-flex flex-wrap justify-content-center">
         {% for famille in families %}
             {% if category %}
                 {% for fam in famille.familleAnimals %}
                     {% set image = fam.image.image|default(asset('/img/default.png')) %}
-                    <li>
-                        <a class="nav-link" href="{{ path('app_especes', {'idFamily': fam.id}) }}">
-                            {{ fam.nomFamille }}
-                            <span class="badge bg-secondary">
+                    <li class="card left-card m-3" style="width: 80vh;">
+                        <img class="card-img-top" src="{{ image }}" alt="Image inconnue" width="256" height="256">
+                        <div class="card-body">
+                            <h5 class="card-title">La famille des {{ fam.nomFamille }}.(s)</h5>
+                            <p class="card-text">
                                 {{ fam.descriptionFamille }}
-                            </span>
-                            <img src="{{ image }}" alt="Image inconnue" width="256" height="256">
-                        </a>
+                            </p>
+                            <a class="btn btn-primary" href="{{ path('app_especes', {'idFamily': fam.id}) }}">Afficher détails</a>
+                        </div>
                     </li>
                 {% endfor %}
             {% else %}
                 {% set image = famille.image.image|default(asset('/img/default.png')) %}
-                <li>
-                    <a class="nav-link" href="{{ path('app_especes', {'idFamily': famille.id}) }}">
-                        {{ famille.nomFamille }}
-                        <span class="badge bg-secondary">
+                <li class="card left-card m-3" style="width: 80vh;">
+                    <img class="card-img-top" src="{{ image }}" alt="Image inconnue" width="256" height="256">
+                    <div class="card-body">
+                        <h5 class="card-title">La famille des {{ famille.nomFamille }}.(s)</h5>
+                        <p class="card-text">
                             {{ famille.descriptionFamille }}
-                        </span>
-                        <img src="{{ image }}" alt="Image inconnue" width="256" height="256">
-                    </a>
+                        </p>
+                        <a class="btn btn-primary" href="{{ path('app_especes', {'idFamily': famille.id}) }}">Voir les animaux appartenant à cette famille</a>
+                    </div>
                 </li>
             {% endif %}
         {% endfor %}
