@@ -48,7 +48,7 @@ final class EvenementFactory extends ModelFactory
             'dateEvenement' => self::faker()->dateTime(),
             'descriptionEvenement' => self::faker()->text(50),
             'dureeEvenement' => self::faker()->randomNumber(),
-            'enclos' => EnclosFactory::random(),
+            'enclos' => EnclosFactory::new(),
             'nomEvenement' => self::faker()->sentence(1),
             'quotaVisiteurs' => self::faker()->randomNumber(),
         ];

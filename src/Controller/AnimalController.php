@@ -25,8 +25,12 @@ class AnimalController extends AbstractController
     }
 
     #[Route('/animal/{id}', name: 'app_animal_show', requirements: ['id' => '\d+'])]
-    public function show(Animal $animal): Response
+    public function show(Animal $animal = null): Response
     {
+        if (!$animal) {
+            return $this->redirectToRoute('app_animals_showall');
+        }
+
         return $this->render('animal/show.html.twig', [
             'animal' => $animal,
         ]);
@@ -101,7 +105,7 @@ class AnimalController extends AbstractController
                 }
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_animal');
+                return $this->redirectToRoute('app_animals_showall');
             }
 
             return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], 301);

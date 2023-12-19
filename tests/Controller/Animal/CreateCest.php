@@ -2,11 +2,9 @@
 
 namespace App\Tests\Controller\Animal;
 
-use App\Factory\CategorieAnimalFactory;
+use App\Entity\Animal;
 use App\Factory\EnclosFactory;
 use App\Factory\EspeceFactory;
-use App\Factory\FamilleAnimalFactory;
-use App\Factory\RegimeFactory;
 use App\Tests\Support\ControllerTester;
 
 class CreateCest
@@ -14,6 +12,7 @@ class CreateCest
     public function formCreateAnimal(ControllerTester $I): void
     {
         $I->amOnPage('/animal/create');
+
         $I->seeInTitle("Création d'un nouvel animal");
         $I->see("Création d'un nouvel animal", 'h1');
     }
@@ -21,27 +20,36 @@ class CreateCest
     public function formErrorWithNoData(ControllerTester $I): void
     {
         $I->amOnPage('/animal/create');
-        $I->submitForm('form', [], 'Créer');
-        $I->seeCurrentRouteIs('app_animal_create');
+
+        $I->click('Créer');
+        $I->seeCurrentUrlEquals('/animal/create');
     }
 
     // Activate "extension=fileinfo" in PHP.ini
     public function formWithDataIsOk(ControllerTester $I): void
     {
-        RegimeFactory::createOne();
-        CategorieAnimalFactory::createOne();
-        FamilleAnimalFactory::createOne();
-        $enclos = EnclosFactory::createOne(['nomEnclos' => 'Le cirque']);
-        $espece = EspeceFactory::createOne(['libEspece' => 'stone']);
+        EnclosFactory::createOne(['nomEnclos' => 'Le cirque']);
+        EspeceFactory::createOne(['libEspece' => 'stone']);
 
         $I->amOnPage('/animal/create');
-        $I->attachFile('animal[image]', './Animal-formWithDataIsOk-image.jpg');
-        $I->submitForm('form', [
-            'animal[nomAnimal]' => 'Pierre',
-            'animal[descriptionAnimal]' => 'Pierre est un cailloux',
-            'animal[espece]' => $espece->getId(),
-            'animal[enclos]' => $enclos->getId(),
-        ], 'Créer');
-        $I->seeCurrentRouteIs('app_animal_show', ['id' => 1]);
+
+        $I->fillField('Nom de l\'animal', 'Pierre');
+        $I->fillField('Description de l\'animal', 'Pierre est un cailloux');
+        $I->selectOption('Espèce de l\'animal', 'stone');
+        $I->selectOption('Enclos de l\'animal', 'Le cirque');
+        $I->attachFile('Image de l\'animal', './Animal-formWithDataIsOk-image.jpg');
+        $I->click('Créer');
+
+        $I->seeCurrentUrlEquals('/animal/1');
+        $I->SeeInRepository(Animal::class, [
+            'nomAnimal' => 'Pierre',
+            'descriptionAnimal' => 'Pierre est un cailloux',
+            'espece' => [
+                'libEspece' => 'stone',
+            ],
+            'enclos' => [
+                'nomEnclos' => 'Le cirque',
+            ],
+        ]);
     }
 }

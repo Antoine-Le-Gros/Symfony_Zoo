@@ -25,15 +25,29 @@ class ShowCest
         return AnimalFactory::createOne();
     }
 
+    public function RedirectIfAnimalNotFound(ControllerTester $I): void
+    {
+        $I->amOnPage('/animal/1');
+
+        $I->seeCurrentUrlEquals('/animals');
+    }
+
     public function ShowPageIsOk(ControllerTester $I): void
     {
-        $animal = $this->generateAnimalDB();
-        $I->amOnRoute('app_animal_show', ['id' => $animal->getId()]);
-        $I->seeInTitle($animal->getNomAnimal());
-        $I->see($animal->getNomAnimal(), 'h1');
-        $I->see($animal->getNomAnimal(), 'dl dt:nth-child(1) + dd');
-        $I->see($animal->getDescriptionAnimal(), 'dl dt:nth-child(3) + dd');
-        $I->see($animal->getEspece()->getLibEspece(), 'dl dt:nth-child(5) + dd');
-        $I->see($animal->getEnclos()->getNomEnclos(), 'dl dt:nth-child(7) + dd');
+        AnimalFactory::createOne([
+            'nomAnimal' => 'Pierre',
+            'descriptionAnimal' => 'Pierre est un cailloux',
+            'enclos' => EnclosFactory::createOne(['nomEnclos' => 'Le cirque']),
+            'espece' => EspeceFactory::createOne(['libEspece' => 'stone']),
+        ]);
+
+        $I->amOnPage('/animal/1');
+
+        $I->seeInTitle('Pierre');
+        $I->see('Pierre', 'h1');
+        $I->see('Pierre', 'dt:contains("Nom :") + dd');
+        $I->see('Pierre est un cailloux', 'dt:contains("Description :") + dd');
+        $I->see('stone', 'dt:contains("Espèce :") + dd');
+        $I->see('Le cirque', 'dt:contains("Enclos :") + dd');
     }
 }

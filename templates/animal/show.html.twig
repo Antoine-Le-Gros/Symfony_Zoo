@@ -5,23 +5,43 @@
     <dl>
         <dt>Nom :</dt>
         <dd>{{ animal.nomAnimal }}</dd>
+
         <dt>Description :</dt>
         <dd>{{ animal.descriptionAnimal }}</dd>
+
         <dt>Espèce :</dt>
-        <dd>{{ animal.espece.libEspece }}</dd>
+        <dd><span class="badge bg-secondary">
+                <a class="nav-link"
+                   href="{{ path("app_animals", {idEspece: animal.espece.id}) }}">{{ animal.espece.libEspece }}</a>
+            </span>
+        </dd>
+
         <dt>Enclos :</dt>
-        <dd>{{ animal.enclos.nomEnclos }}</dd>
+        <dd><span class="badge bg-secondary">{{ animal.enclos.nomEnclos }}</span></dd>
+
         <dt>Image :</dt>
-            <dd><img src="{{ animal.image.image ?? asset('img/default.png') }}" width="256" height="256" alt="Image animal"></dd>
-        {#  A implémenter lorque les entités auront été liées
-        {% if (animal.parent1 is not null) %}
-            <dt>Parent(s) :</dt>
-            <dd>{{ animal.parent1 }}</dd>
-            {% if (animal.parent2 is not null) %}
-                <dd>{{ animal.parent2 }}</dd>
-                {% endif %}
+        <dd><img src="{{ animal.image.image ?? asset('img/default.png') }}" width="256" height="256" alt="Image animal">
+        </dd>
+
+        {% if animal.parent1 is not null %}
+            <dt>Parent(s) :
+                <ul>
+                    <li><span class="badge bg-secondary">
+                            <a class="nav-link"
+                               href="{{ path("app_animal_show", {id: animal.parent1.id}) }}">{{ animal.parent1.nomAnimal }}</a>
+                        </span>
+                    </li>
+                    {% if animal.parent2 is not null %}
+                        <li><span class="badge bg-secondary">
+                            <a class="nav-link"
+                               href="{{ path("app_animal_show", {id: animal.parent2.id}) }}">{{ animal.parent2.nomAnimal }}</a>
+                        </span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </dt>
         {% endif %}
-        #}
+
     </dl>
 {% endblock %}
 
