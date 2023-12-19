@@ -21,6 +21,18 @@ class EnclosRepository extends ServiceEntityRepository
         parent::__construct($registry, Enclos::class);
     }
 
+    public function getAllEvents(int $idEnclos, string $search): array
+    {
+        return $this->createQueryBuilder('e')
+            ->leftJoin('e.evenements', 'evenements')
+            ->addSelect('evenements')
+            ->where('e.id = :id')
+            ->andWhere('evenements.nomEvenement LIKE :search')
+            ->setParameter('id', $idEnclos)
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery()
+            ->execute();
+    }
     //    /**
     //     * @return Enclos[] Returns an array of Enclos objects
     //     */
