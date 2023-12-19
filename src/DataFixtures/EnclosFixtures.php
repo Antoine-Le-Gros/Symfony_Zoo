@@ -10,6 +10,8 @@ class EnclosFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        EnclosFactory::createMany(5);
+        $file = file_get_contents(__DIR__.'/data/Enclos.json');
+        $file_j = json_decode($file, true);
+        EnclosFactory::createSequence($file_j);
     }
 }
