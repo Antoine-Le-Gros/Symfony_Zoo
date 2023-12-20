@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% set title = "Édition de l'évènement #{event.nomEvenement}"%}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+    {{ include('evenement/_form.html.twig',{form : form ,submit_label:'Modifier'},with_context = false) }}
+
+{% endblock %}
+
