@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Tests\Controller\CategorieAnimal;
+namespace Controller\AnimalCategory;
 
-use App\Factory\CategorieAnimalFactory;
+use App\Factory\AnimalCategoryFactory;
 use App\Tests\Support\ControllerTester;
 
 class IndexCest
 {
-    public function defaultNumberOfCategorieAnimalIs10(ControllerTester $I): void
+    public function defaultNumberOfAnimalCategory10(ControllerTester $I): void
     {
-        CategorieAnimalFactory::createMany(10);
+        AnimalCategoryFactory::createMany(10);
 
         $I->amOnPage('/categories');
         $I->seeResponseCodeIs(200);
@@ -21,9 +21,9 @@ class IndexCest
 
     public function clickOnFirstElementOfCategoryList(ControllerTester $I): void
     {
-        CategorieAnimalFactory::createOne([
-            'nom_categorie' => 'reptile',
-            'descriptionCategorie' => 'description',
+        AnimalCategoryFactory::createOne([
+            'name' => 'reptile',
+            'description' => 'description',
         ]);
 
         $I->amOnPage('/categories');
@@ -36,23 +36,23 @@ class IndexCest
 
     public function isCategoryListSorted(ControllerTester $I): void
     {
-        CategorieAnimalFactory::createSequence(
+        AnimalCategoryFactory::createSequence(
             [
                 [
-                    'nom_categorie' => 'amphibien',
-                    'descriptionCategorie' => 'description',
+                    'name' => 'amphibien',
+                    'description' => 'description',
                 ],
                 [
-                    'nom_categorie' => 'reptile',
-                    'descriptionCategorie' => 'description',
+                    'name' => 'reptile',
+                    'description' => 'description',
                 ],
                 [
-                    'nom_categorie' => 'mammifère',
-                    'descriptionCategorie' => 'description',
+                    'name' => 'mammifère',
+                    'description' => 'description',
                 ],
                 [
-                    'nom_categorie' => 'oiseau',
-                    'descriptionCategorie' => 'description',
+                    'name' => 'oiseau',
+                    'description' => 'description',
                 ],
             ]
         );
@@ -72,23 +72,23 @@ class IndexCest
 
     public function testSearchCategory(ControllerTester $I): void
     {
-        CategorieAnimalFactory::createSequence(
+        AnimalCategoryFactory::createSequence(
             [
                 [
-                    'nom_categorie' => 'amphibien',
-                    'descriptionCategorie' => 'description',
+                    'name' => 'amphibien',
+                    'description' => 'description',
                 ],
                 [
-                    'nom_categorie' => 'reptile',
-                    'descriptionCategorie' => 'description',
+                    'name' => 'reptile',
+                    'description' => 'description',
                 ],
                 [
-                    'nom_categorie' => 'mammifère',
-                    'descriptionCategorie' => 'description',
+                    'name' => 'mammifère',
+                    'description' => 'description',
                 ],
                 [
-                    'nom_categorie' => 'oiseau',
-                    'descriptionCategorie' => 'description',
+                    'name' => 'oiseau',
+                    'description' => 'description',
                 ],
             ]
         );

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\Controller\Animal;
+namespace Controller\Animal;
 
 use App\Entity\Animal;
 use App\Factory\AnimalFactory;
-use App\Factory\CategorieAnimalFactory;
-use App\Factory\EnclosFactory;
-use App\Factory\EspeceFactory;
-use App\Factory\FamilleAnimalFactory;
-use App\Factory\RegimeFactory;
+use App\Factory\AnimalCategoryFactory;
+use App\Factory\EnclosureFactory;
+use App\Factory\SpeciesFactory;
+use App\Factory\AnimalFamilyFactory;
+use App\Factory\DietFactory;
 use App\Tests\Support\ControllerTester;
 use Zenstruck\Foundry\Proxy;
 
@@ -16,11 +16,11 @@ class ShowCest
 {
     private function generateAnimalDB(): Proxy|Animal
     {
-        RegimeFactory::createOne();
-        CategorieAnimalFactory::createOne();
-        FamilleAnimalFactory::createOne();
-        EnclosFactory::createOne();
-        EspeceFactory::createOne();
+        DietFactory::createOne();
+        AnimalCategoryFactory::createOne();
+        AnimalFamilyFactory::createOne();
+        EnclosureFactory::createOne();
+        SpeciesFactory::createOne();
 
         return AnimalFactory::createOne();
     }
@@ -35,10 +35,10 @@ class ShowCest
     public function ShowPageIsOk(ControllerTester $I): void
     {
         AnimalFactory::createOne([
-            'nomAnimal' => 'Pierre',
-            'descriptionAnimal' => 'Pierre est un cailloux',
-            'enclos' => EnclosFactory::createOne(['nomEnclos' => 'Le cirque']),
-            'espece' => EspeceFactory::createOne(['libEspece' => 'stone']),
+            'name' => 'Pierre',
+            'description' => 'Pierre est un cailloux',
+            'enclosure' => EnclosureFactory::createOne(['name' => 'Le cirque']),
+            'species' => SpeciesFactory::createOne(['name' => 'stone']),
         ]);
 
         $I->amOnPage('/animal/1');
@@ -48,6 +48,6 @@ class ShowCest
         $I->see('Pierre', 'dt:contains("Nom :") + dd');
         $I->see('Pierre est un cailloux', 'dt:contains("Description :") + dd');
         $I->see('stone', 'dt:contains("Espèce :") + dd');
-        $I->see('Le cirque', 'dt:contains("Enclos :") + dd');
+        $I->see('Le cirque', 'dt:contains("Enclosure :") + dd');
     }
 }

@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Tests\Controller\FamilleAnimal;
+namespace Controller\AnimalFamily;
 
-use App\Factory\CategorieAnimalFactory;
-use App\Factory\FamilleAnimalFactory;
+use App\Factory\AnimalCategoryFactory;
+use App\Factory\AnimalFamilyFactory;
 use App\Tests\Support\ControllerTester;
 
 class IndexCest
 {
     public function DefaultNumberOfFamilyIs10(ControllerTester $I): void
     {
-        FamilleAnimalFactory::createMany(10);
+        AnimalFamilyFactory::createMany(10);
 
         $I->amOnPage('/families');
         $I->seeResponseCodeIs(200);
@@ -22,27 +22,27 @@ class IndexCest
 
     public function clickOnFirstElementOfFamilyList(ControllerTester $I): void
     {
-        FamilleAnimalFactory::createOne(
+        AnimalFamilyFactory::createOne(
             [
-                'nomFamille' => 'canidé',
-                'descriptionFamille' => 'description',
+                'name' => 'canidé',
+                'description' => 'description',
             ]);
 
         $I->amOnPage('/families');
         $I->seeResponseCodeIs(200);
 
         $I->click('canidé description');
-        $I->seeCurrentUrlEquals('/especes/1');
+        $I->seeCurrentUrlEquals('/species/1');
     }
 
     public function isListofFamilySorted(ControllerTester $I): void
     {
-        FamilleAnimalFactory::createSequence(
+        AnimalFamilyFactory::createSequence(
             [
-                ['nomFamille' => 'homnidé'],
-                ['nomFamille' => 'bovidé'],
-                ['nomFamille' => 'félidé'],
-                ['nomFamille' => 'cerbidé'],
+                ['name' => 'homnidé'],
+                ['name' => 'bovidé'],
+                ['name' => 'félidé'],
+                ['name' => 'cerbidé'],
             ]
         );
 
@@ -60,13 +60,13 @@ class IndexCest
 
     public function testSearchForFamilyList(ControllerTester $I): void
     {
-        FamilleAnimalFactory::createSequence(
+        AnimalFamilyFactory::createSequence(
             [
-                ['nomFamille' => 'homnidé'],
-                ['nomFamille' => 'bovidé'],
-                ['nomFamille' => 'félidé'],
-                ['nomFamille' => 'cervidé'],
-                ['nomFamille' => 'cebidé'],
+                ['name' => 'homnidé'],
+                ['name' => 'bovidé'],
+                ['name' => 'félidé'],
+                ['name' => 'cervidé'],
+                ['name' => 'cebidé'],
             ]
         );
 
@@ -81,9 +81,9 @@ class IndexCest
 
     public function listOfFamilyAccordingCategory(ControllerTester $I): void
     {
-        CategorieAnimalFactory::createOne([
-            'nom_categorie' => 'mammifère',
-            'descriptionCategorie' => 'description',
+        AnimalCategoryFactory::createOne([
+            'name' => 'mammifère',
+            'description' => 'description',
         ]);
 
         $I->amOnPage('/categories');
