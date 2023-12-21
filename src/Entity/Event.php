@@ -43,7 +43,7 @@ class Event
     #[ORM\JoinColumn(nullable: false)]
     private ?Enclosure $enclosure = null;
 
-    #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Registration::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Registration::class, orphanRemoval: true)]
     private Collection $registrations;
 
     public function __construct()

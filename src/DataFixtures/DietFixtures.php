@@ -2,16 +2,16 @@
 
 namespace App\DataFixtures;
 
-use App\Factory\RegimeFactory;
+use App\Factory\DietFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class RegimeFixtures extends Fixture
+class DietFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $file = file_get_contents(__DIR__.'/data/Regime.json');
+        $file = file_get_contents(__DIR__.'/data/Diet.json');
         $file_j = json_decode($file, true);
-        RegimeFactory::createSequence($file_j);
+        DietFactory::createSequence($file_j);
     }
 }

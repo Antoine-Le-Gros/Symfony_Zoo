@@ -2,31 +2,31 @@
 
 namespace App\DataFixtures;
 
-use App\Factory\CategorieAnimalFactory;
-use App\Factory\FamilleAnimalFactory;
+use App\Factory\AnimalCategoryFactory;
+use App\Factory\AnimalFamilyFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class FamilleAnimalFixtures extends Fixture implements DependentFixtureInterface
+class AnimalFamilyFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $file = file_get_contents(__DIR__.'/data/Famille.json');
+        $file = file_get_contents(__DIR__.'/data/Family.json');
         $file_j = json_decode($file, true);
-        $cat = CategorieAnimalFactory::all();
+        $cat = AnimalCategoryFactory::all();
         $catFamilly = [$cat[0], $cat[0], $cat[0], $cat[0], $cat[0], $cat[0], $cat[0], $cat[0], $cat[1], $cat[2], $cat[3], $cat[0], $cat[0], $cat[0],
             $cat[1], $cat[1], $cat[0], $cat[0], $cat[1], $cat[2], $cat[2]];
         for ($i = 0; $i < count($file_j); ++$i) {
-            $file_j[$i]['categorie'] = $catFamilly[$i];
+            $file_j[$i]['category'] = $catFamilly[$i];
         }
-        FamilleAnimalFactory::createSequence($file_j);
+        AnimalFamilyFactory::createSequence($file_j);
     }
 
     public function getDependencies(): array
     {
         return [
-            CategorieAnimalFixtures::class,
+            AnimalCategoryFixtures::class,
         ];
     }
 }

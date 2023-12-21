@@ -3,8 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Factory\AnimalFactory;
-use App\Factory\EnclosFactory;
-use App\Factory\EspeceFactory;
+use App\Factory\EnclosureFactory;
+use App\Factory\SpeciesFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -15,8 +15,8 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
        {
            AnimalFactory::createMany(20, function () {
                if (AnimalFactory::faker()->boolean(30)) {
-                   $espece = EspeceFactory::random();
-                   $enclos = EnclosFactory::random();
+                   $espece = SpeciesFactory::random();
+                   $enclos = EnclosureFactory::random();
 
                    return [
                        'espece' => $espece,
@@ -40,11 +40,11 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
     {
         $file = file_get_contents(__DIR__.'/data/Animals.json');
         $file_j = json_decode($file, true);
-        $espece = EspeceFactory::all();
-        $enclos = EnclosFactory::all();
+        $species = SpeciesFactory::all();
+        $enclosures = EnclosureFactory::all();
         for ($i = 0; $i < count($file_j); ++$i) {
-            $file_j[$i]['espece'] = $espece[$i];
-            $file_j[$i]['enclos'] = $enclos[$i];
+            $file_j[$i]['species'] = $species[$i];
+            $file_j[$i]['enclosure'] = $enclosures[$i];
         }
         AnimalFactory::createSequence($file_j);
     }
@@ -52,8 +52,8 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [
-            EspeceFixtures::class,
-            EnclosFixtures::class,
+            SpeciesFixtures::class,
+            EnclosureFixtures::class,
         ];
     }
 }
