@@ -2,40 +2,40 @@
 
 namespace App\Repository;
 
-use App\Entity\CategorieAnimal;
+use App\Entity\AnimalCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<CategorieAnimal>
+ * @extends ServiceEntityRepository<AnimalCategory>
  *
- * @method CategorieAnimal|null find($id, $lockMode = null, $lockVersion = null)
- * @method CategorieAnimal|null findOneBy(array $criteria, array $orderBy = null)
- * @method CategorieAnimal[]    findAll()
- * @method CategorieAnimal[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method AnimalCategory|null find($id, $lockMode = null, $lockVersion = null)
+ * @method AnimalCategory|null findOneBy(array $criteria, array $orderBy = null)
+ * @method AnimalCategory[]    findAll()
+ * @method AnimalCategory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CategorieAnimalRepository extends ServiceEntityRepository
+class AnimalCategoryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CategorieAnimal::class);
+        parent::__construct($registry, AnimalCategory::class);
     }
 
     /**
      * Listage des catégories avec leurs familles.
      *
-     * @return CategorieAnimal[]
+     * @return AnimalCategory[]
      */
     public function getAllCategories(string $search): array
     {
         $qb = $this->createQueryBuilder('c');
-        $qb->leftJoin('c.familleAnimals', 'familles')
+        $qb->leftJoin('c.animalFamilies', 'families')
             ->leftJoin('c.image', 'image')
-            ->addSelect('familles')
+            ->addSelect('families')
             ->addSelect('image')
-            ->where('c.nomCategorie LIKE :search')
+            ->where('c.name LIKE :search')
             ->setParameter('search', '%'.$search.'%')
-            ->orderBy('c.nomCategorie')
+            ->orderBy('c.name')
             ->groupBy('c.id');
 
         return $qb->getQuery()->execute();
@@ -44,12 +44,12 @@ class CategorieAnimalRepository extends ServiceEntityRepository
     public function getAllFamilies(int $idCategory, string $search): array
     {
         $qb = $this->createQueryBuilder('c');
-        $qb->leftJoin('c.familleAnimals', 'familles')
-            ->leftJoin('familles.image', 'images')
+        $qb->leftJoin('c.animalsFamily', 'families')
+            ->leftJoin('families.image', 'images')
             ->addSelect('images')
-            ->addSelect('familles')
+            ->addSelect('families')
             ->where('c.id = :id')
-            ->andWhere('familles.nomFamille LIKE :search')
+            ->andWhere('families.name LIKE :search')
             ->setParameter('id', $idCategory)
             ->setParameter('search', '%'.$search.'%');
 
@@ -57,7 +57,7 @@ class CategorieAnimalRepository extends ServiceEntityRepository
     }
 
     //    /**
-    //     * @return CategorieAnimal[] Returns an array of CategorieAnimal objects
+    //     * @return AnimalCategory[] Returns an array of AnimalCategory objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -71,7 +71,7 @@ class CategorieAnimalRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?CategorieAnimal
+    //    public function findOneBySomeField($value): ?AnimalCategory
     //    {
     //        return $this->createQueryBuilder('c')
     //            ->andWhere('c.exampleField = :val')

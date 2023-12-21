@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Espece;
+use App\Entity\Species;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Espece>
+ * @extends ServiceEntityRepository<Species>
  *
- * @method Espece|null find($id, $lockMode = null, $lockVersion = null)
- * @method Espece|null findOneBy(array $criteria, array $orderBy = null)
- * @method Espece[]    findAll()
- * @method Espece[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Species|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Species|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Species[]    findAll()
+ * @method Species[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EspeceRepository extends ServiceEntityRepository
+class SpeciesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Espece::class);
+        parent::__construct($registry, Species::class);
     }
 
-    public function getAllAnimals(int $idEspece, string $search): array
+    public function getAllAnimals(int $idSpecies, string $search): array
     {
         $qb = $this->createQueryBuilder('e');
         $qb->leftJoin('e.animals', 'animals')
@@ -29,30 +29,30 @@ class EspeceRepository extends ServiceEntityRepository
             ->addSelect('image')
             ->addSelect('animals')
             ->where('e.id = :id')
-            ->andWhere('animals.nomAnimal LIKE :search')
-            ->setParameter('id', $idEspece)
+            ->andWhere('animals.name LIKE :search')
+            ->setParameter('id', $idSpecies)
             ->setParameter('search', '%'.$search.'%');
 
         return $qb->getQuery()->execute();
     }
 
     /**
-     * @return Espece[]
+     * @return Species[]
      */
     public function getAllSpeciesWithPicture(string $search): array
     {
         $qb = $this->createQueryBuilder('e');
         $qb->leftJoin('e.image', 'image')
             ->addSelect('image')
-            ->Where('e.libEspece LIKE :search')
+            ->Where('e.name LIKE :search')
             ->setParameter('search', '%'.$search.'%')
-            ->orderBy('e.libEspece');
+            ->orderBy('e.name');
 
         return $qb->getQuery()->execute();
     }
 
     //    /**
-    //     * @return Espece[] Returns an array of Espece objects
+    //     * @return Species[] Returns an array of Species objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -66,7 +66,7 @@ class EspeceRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Espece
+    //    public function findOneBySomeField($value): ?Species
     //    {
     //        return $this->createQueryBuilder('e')
     //            ->andWhere('e.exampleField = :val')

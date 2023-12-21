@@ -2,36 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\Evenement;
+use App\Entity\Enclosure;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Evenement>
+ * @extends ServiceEntityRepository<Enclosure>
  *
- * @method Evenement|null find($id, $lockMode = null, $lockVersion = null)
- * @method Evenement|null findOneBy(array $criteria, array $orderBy = null)
- * @method Evenement[]    findAll()
- * @method Evenement[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Enclosure|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Enclosure|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Enclosure[]    findAll()
+ * @method Enclosure[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EvenementRepository extends ServiceEntityRepository
+class EnclosureRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Evenement::class);
+        parent::__construct($registry, Enclosure::class);
     }
 
-    public function getAll(string $search): array
+    public function getAllEvents(int $idEnclosure, string $search): array
     {
         return $this->createQueryBuilder('e')
-            ->Where('e.nomEvenement LIKE :search')
+            ->leftJoin('e.events', 'events')
+            ->addSelect('events')
+            ->where('e.id = :id')
+            ->andWhere('events.name LIKE :search')
+            ->setParameter('id', $idEnclosure)
             ->setParameter('search', '%'.$search.'%')
-            ->orderBy('e.nomEvenement')
             ->getQuery()
             ->execute();
     }
     //    /**
-    //     * @return Evenement[] Returns an array of Evenement objects
+    //     * @return Enclosure[] Returns an array of Enclosure objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -45,7 +48,7 @@ class EvenementRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Evenement
+    //    public function findOneBySomeField($value): ?Enclosure
     //    {
     //        return $this->createQueryBuilder('e')
     //            ->andWhere('e.exampleField = :val')
