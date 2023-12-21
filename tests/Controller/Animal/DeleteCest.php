@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Controller\Animal;
+namespace Controller\Animal;
 
 use App\Entity\Animal;
 use App\Factory\AnimalFactory;
@@ -11,8 +11,8 @@ class DeleteCest
     public function formDeleteAnimal(ControllerTester $I): void
     {
         AnimalFactory::createOne([
-            'nomAnimal' => 'Pierre',
-            'descriptionAnimal' => 'Pierre est un cailloux',
+            'name' => 'Pierre',
+            'description' => 'Pierre est un cailloux',
         ]);
 
         $I->amOnPage('/animal/1/delete');
@@ -24,8 +24,8 @@ class DeleteCest
     public function formDeleteAnimalDenied(ControllerTester $I): void
     {
         AnimalFactory::createOne([
-            'nomAnimal' => 'Pierre',
-            'descriptionAnimal' => 'Pierre est un cailloux',
+            'name' => 'Pierre',
+            'description' => 'Pierre est un cailloux',
         ]);
 
         $I->amOnPage('/animal/1/delete');
@@ -37,8 +37,8 @@ class DeleteCest
     public function formDeleteAnimalAccepted(ControllerTester $I): void
     {
         AnimalFactory::createOne([
-            'nomAnimal' => 'Pierre',
-            'descriptionAnimal' => 'Pierre est un cailloux',
+            'name' => 'Pierre',
+            'description' => 'Pierre est un cailloux',
         ]);
 
         $I->amOnPage('/animal/1/delete');
@@ -47,8 +47,8 @@ class DeleteCest
 
         $I->seeInCurrentUrl('/animals');
         $I->dontSeeInRepository(Animal::class, [
-            'nomAnimal' => 'Pierre',
-            'descriptionAnimal' => 'Pierre est un cailloux',
+            'name' => 'Pierre',
+            'description' => 'Pierre est un cailloux',
         ]);
     }
 }
