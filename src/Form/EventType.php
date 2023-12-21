@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\Enclos;
-use App\Entity\Evenement;
+use App\Entity\Enclosure;
+use App\Entity\Event;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -13,23 +13,23 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EvenementType extends AbstractType
+class EventType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nomEvenement', null, ['empty_data' => ''])
-            ->add('descriptionEvenement', TextType::class)
-            ->add('dateEvenement', DateType::class)
-            ->add('dureeEvenement', NumberType::class)
-            ->add('quotaVisiteurs', NumberType::class)
-            ->add('enclos', EntityType::class, [
+            ->add('name', null, ['empty_data' => ''])
+            ->add('description', TextType::class)
+            ->add('date', DateType::class)
+            ->add('duration', NumberType::class)
+            ->add('quota', NumberType::class)
+            ->add('enclosure', EntityType::class, [
                 'required' => false,
-                'class' => Enclos::class,
-                'choice_label' => 'nomEnclos',
+                'class' => Enclosure::class,
+                'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $entityRepository) {
                     return $entityRepository->createQueryBuilder('e')
-                        ->orderBy('e.nomEnclos', 'ASC');
+                        ->orderBy('e.name', 'ASC');
                 },
             ])
         ;
@@ -38,7 +38,7 @@ class EvenementType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Evenement::class,
+            'data_class' => Event::class,
         ]);
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Animal;
-use App\Entity\Enclos;
-use App\Entity\Espece;
+use App\Entity\Enclosure;
+use App\Entity\Species;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -18,23 +18,23 @@ class AnimalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nomAnimal', null, ['empty_data' => ''])
-            ->add('descriptionAnimal', null, ['empty_data' => ''])
-            ->add('enclos', EntityType::class, [
-                'class' => Enclos::class,
-                'choice_label' => 'nomEnclos',
+            ->add('name', null, ['empty_data' => ''])
+            ->add('description', null, ['empty_data' => ''])
+            ->add('enclosure', EntityType::class, [
+                'class' => Enclosure::class,
+                'choice_label' => 'name',
                 'required' => true,
                 'query_builder' => function (EntityRepository $entityRepository) {
                     return $entityRepository->createQueryBuilder('e')
-                        ->orderBy('e.nomEnclos', 'ASC');
+                        ->orderBy('e.name', 'ASC');
                 }])
-            ->add('espece', EntityType::class, [
-                'class' => Espece::class,
-                'choice_label' => 'libEspece',
+            ->add('species', EntityType::class, [
+                'class' => Species::class,
+                'choice_label' => 'name',
                 'required' => true,
                 'query_builder' => function (EntityRepository $entityRepository) {
                     return $entityRepository->createQueryBuilder('e')
-                        ->orderBy('e.libEspece', 'ASC');
+                        ->orderBy('e.name', 'ASC');
                 },
                 ])
             ->add('image', FileType::class, [
