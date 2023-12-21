@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ title }}</h1>
-    {{ include('evenement/_form.html.twig',{form : form ,submit_label:'Modifier'},with_context = false) }}
+    <h1 class="subsectionTitle">{{ title }}</h1>
+    {{ include('event/_form.html.twig',{form : form ,submit_label:'Modifier'},with_context = false) }}
 
 {% endblock %}
 

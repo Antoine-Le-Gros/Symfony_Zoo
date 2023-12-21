@@ -1,23 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="subsectionTitle">Fiche de l'animal {{ animal.nomAnimal }} ({{ animal.espece.libEspece }})</h1>
+    <h1 class="subsectionTitle">Fiche de l'animal {{ animal.name }} ({{ animal.species.name }})</h1>
     <dl>
         <dt>Nom :</dt>
-        <dd>{{ animal.nomAnimal }}</dd>
+        <dd>{{ animal.name }}</dd>
 
         <dt>Description :</dt>
-        <dd>{{ animal.descriptionAnimal }}</dd>
+        <dd>{{ animal.description }}</dd>
 
         <dt>Espèce :</dt>
         <dd><span class="badge bg-secondary">
                 <a class="nav-link"
-                   href="{{ path("app_animals", {idEspece: animal.espece.id}) }}">{{ animal.espece.libEspece }}</a>
+                   href="{{ path("app_animals", {idSpecies: animal.species.id}) }}">{{ animal.species.name }}</a>
             </span>
         </dd>
 
         <dt>Enclos :</dt>
-        <dd><span class="badge bg-secondary">{{ animal.enclos.nomEnclos }}</span></dd>
+        <dd><span class="badge bg-secondary">{{ animal.enclosure.name }}</span></dd>
 
         <dt>Image :</dt>
         <dd><img src="{{ animal.image.image ?? asset('img/default.png') }}" width="256" height="256" alt="Image animal">
@@ -28,13 +28,13 @@
                 <ul>
                     <li><span class="badge bg-secondary">
                             <a class="nav-link"
-                               href="{{ path("app_animal_show", {id: animal.parent1.id}) }}">{{ animal.parent1.nomAnimal }}</a>
+                               href="{{ path("app_animal_show", {id: animal.parent1.id}) }}">{{ animal.parent1.name }}</a>
                         </span>
                     </li>
                     {% if animal.parent2 is not null %}
                         <li><span class="badge bg-secondary">
                             <a class="nav-link"
-                               href="{{ path("app_animal_show", {id: animal.parent2.id}) }}">{{ animal.parent2.nomAnimal }}</a>
+                               href="{{ path("app_animal_show", {id: animal.parent2.id}) }}">{{ animal.parent2.name }}</a>
                         </span>
                         </li>
                     {% endif %}
@@ -46,5 +46,5 @@
 {% endblock %}
 
 {% block title %}
-    {{ animal.nomAnimal }}
+    {{ animal.name }}
 {% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des évènements {% if enclosure %} pour l'enclos {{ name }} {% endif %} {% endblock %}
+
+{% block body %}
+    <h1 class="subsectionTitle">Liste des évènements {% if enclosure %} pour l'enclos {{ name }} {% endif %}</h1>
+    <ul class="Events">
+        {% for event in events %}
+            {% if enclosure %}
+                {% for ev in event %}
+                    {% set date = ev.Durationformat(COOKIE) %}
+                    <li>
+                    <span class="event">
+                        <a href="{{ path('app_event_delete', {id:ev.id}) }}"><span class="material-symbols-outlined text-danger">delete</span></a>
+                        <a href="{{ path('app_event_show', {id:ev.id}) }}">
+                            {{ ev.name }},
+                            {{ ev.description }}
+                        </a>
+                    </span>
+                    <span class="badge bg-secondary">
+                        {{ ev.enclos.nomEnclos }}
+                    </span>
+                </li>
+                {% endfor %}
+            {% else %}
+                <li>
+                <span class="evenement">
+                    <a href="{{ path('app_event_delete', {id:event.id}) }}"><span class="material-symbols-outlined text-danger">delete</span></a>
+                    <a href="{{ path('app_event_show', {id:event.id}) }}">
+                        {{ event.name }},
+                        {{ event.description }}
+                    </a>
+                </span>
+                    <span class="badge bg-secondary">
+                    {{ event.enclosure.name }}
+                </span>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+{% endblock %}

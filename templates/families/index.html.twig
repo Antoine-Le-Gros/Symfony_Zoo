@@ -1,36 +1,36 @@
 {% extends 'base.html.twig' %}
 {% block route %} {% if category %}{{ path('app_families',{idCategory : idCategory })}}
-{% else %} {{ path('app_families_showall') }} {% endif %}{% endblock %}
-{% block title %}Liste des familles {% if category %}appartenant à la catégorie {{ categoryName }} {% endif %} {% endblock %}
+{% else %} {{ path('app_families_showAll') }} {% endif %}{% endblock %}
+{% block title %}Liste des familles {% if category %}appartenant à la catégorie {{ name }} {% endif %} {% endblock %}
 {% block body %}
-    <h1 class="subsectionTitle text-center">Liste des familles {% if category %}appartenant à la catégorie {{ categoryName }} {% endif %}</h1>
+    <h1 class="subsectionTitle text-center">Liste des familles {% if category %}appartenant à la catégorie {{ name }} {% endif %}</h1>
     <hr>
     <ul class="container d-flex flex-wrap justify-content-center">
-        {% for famille in families %}
+        {% for family in families %}
             {% if category %}
-                {% for fam in famille.familleAnimals %}
+                {% for fam in family.AnimalsFamily %}
                     {% set image = fam.image.image|default(asset('/img/default.png')) %}
                     <li class="card left-card m-3" style="width: 80vh;">
                         <img class="card-img-top" src="{{ image }}" alt="Image inconnue" width="256" height="256">
                         <div class="card-body">
-                            <h5 class="card-title">La famille des {{ fam.nomFamille }}.(s)</h5>
+                            <h5 class="card-title">La famille des {{ fam.name }}.(s)</h5>
                             <p class="card-text">
-                                {{ fam.descriptionFamille }}
+                                {{ fam.description }}
                             </p>
-                            <a class="btn btn-primary" href="{{ path('app_especes', {'idFamily': fam.id}) }}">Afficher détails</a>
+                            <a class="btn btn-primary" href="{{ path('app_species_index', {'idFamily': fam.id}) }}">Afficher détails</a>
                         </div>
                     </li>
                 {% endfor %}
             {% else %}
-                {% set image = famille.image.image|default(asset('/img/default.png')) %}
+                {% set image = family.image.image|default(asset('/img/default.png')) %}
                 <li class="card left-card m-3" style="width: 80vh;">
                     <img class="card-img-top" src="{{ image }}" alt="Image inconnue" width="256" height="256">
                     <div class="card-body">
-                        <h5 class="card-title">La famille des {{ famille.nomFamille }}.(s)</h5>
+                        <h5 class="card-title">La famille des {{ family.name }}.(s)</h5>
                         <p class="card-text">
-                            {{ famille.descriptionFamille }}
+                            {{ family.description }}
                         </p>
-                        <a class="btn btn-primary" href="{{ path('app_especes', {'idFamily': famille.id}) }}">Voir les animaux appartenant à cette famille</a>
+                        <a class="btn btn-primary" href="{{ path('app_species_index', {'idFamily': family.id}) }}">Voir les animaux appartenant à cette famille</a>
                     </div>
                 </li>
             {% endif %}

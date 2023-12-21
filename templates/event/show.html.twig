@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ evenement.name }} {% endblock %}
+
+{% block body %}
+
+    <h1 class="subsectionTitle">{{ evenement.name }}</h1>
+    <dl>
+        <dt> Description évènement </dt>
+        <dd> {{ evenement.description }}</dd>
+        <dt> Date</dt>
+        <dd> {{ evenement.date.format('Y-m-d H:i') }}</dd>
+        <dt> Nombre de visiteurs</dt>
+        <dd> {{ evenement.quota }}</dd>
+    </dl>
+{% endblock %}

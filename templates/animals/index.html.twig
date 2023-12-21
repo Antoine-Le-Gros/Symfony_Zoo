@@ -1,25 +1,25 @@
 {% extends 'base.html.twig' %}
-{% block route %} {% if espece %}{{ path('app_animals',{idEspece : idEspece })}}
+{% block route %} {% if species %}{{ path('app_animals',{idEspece : idEspece })}}
 {% else %} {{ path('app_animals_showall') }} {% endif %}{% endblock %}
-{% block title %}Liste des animaux {% if espece %}appartenant à l'espèce {{ especeName }}{% endif %} {% endblock %}
+{% block title %}Liste des animaux {% if species %}appartenant à l'espèce {{ name }}{% endif %} {% endblock %}
 {% block body %}
-    <h1 class="text-center subsectionTitle">Liste des animaux {% if espece %}appartenant à l'espèce {{ especeName }}{% endif %}</h1>
+    <h1 class="text-center subsectionTitle">Liste des animaux {% if species %}appartenant à l'espèce {{ name }}{% endif %}</h1>
     <hr>
-    <form class="d-flex mt-3 mb-5" role="search" action="{% if espece %}{{ path('app_animals',{idEspece : idEspece })}}{% else %} {{ path('app_animals_showall') }} {% endif %}">
+    <form class="d-flex mt-3 mb-5" role="search" action="{% if species %}{{ path('app_animals',{idSpecies : idSpecies })}}{% else %} {{ path('app_animals_showall') }} {% endif %}">
         <input class="form-control me-2" type="search" placeholder="Rechercher un animal parmis cette liste" aria-label="Search" name="search" value="{{ search |default('') }}">
         <button class="btn btn-outline-success" type="submit">Rechercher</button>
     </form>
     <ul class="container d-flex flex-wrap justify-content-center">
-        {% for animal in animaux %}
-            {% if espece %}
+        {% for animal in animals %}
+            {% if species %}
                 {% for an in animal.animals %}
                     {% set image = an.image.image|default('') %}
                     <li class="card m-3" style="width: min-content">
                         <img class="card-img-top" src="{{ an.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256">
                         <div class="card-body">
-                            <h5 class="card-title">{{ an.nomAnimal}} ({{ an.espece.libEspece }})</h5>
-                            <p class="card-text">{{ an.descriptionAnimal }} </p>
-                            <a href="{{ path('app_animal_show', {'id': an.id}) }}" class="btn btn-primary">Afficher les détails à propos de {{ an.nomAnimal }}</a>
+                            <h5 class="card-title">{{ an.name }} ({{ an.species.name }})</h5>
+                            <p class="card-text">{{ an.description }} </p>
+                            <a href="{{ path('app_animal_show', {'id': an.id}) }}" class="btn btn-primary">Afficher les détails à propos de {{ an.name }}</a>
                         </div>
                     </li>
                 {% endfor %}
@@ -28,9 +28,9 @@
                 <li class="card m-3" style="width: min-content">
                     <img src="{{ animal.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256">
                     <div class="card-body">
-                        <h5 class="cardtitle" style="color: black">{{ animal.nomAnimal}} ({{ animal.espece.libEspece }})</h5>
-                        <p class="card-text" style="color: black">{{ animal.descriptionAnimal }} </p>
-                        <a href="{{ path('app_animal_show', {'id': animal.id}) }}" class="btn btn-primary">Afficher les détails à propos de {{ animal.nomAnimal }}</a>
+                        <h5 class="cardtitle" style="color: black">{{ animal.name }} ({{ animal.species.name }})</h5>
+                        <p class="card-text" style="color: black">{{ animal.description }} </p>
+                        <a href="{{ path('app_animal_show', {'id': animal.id}) }}" class="btn btn-primary">Afficher les détails à propos de {{ animal.name }}</a>
                     </div>
                 </li>
             {% endif %}
