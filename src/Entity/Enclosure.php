@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\EnclosRepository;
+use App\Repository\EnclosureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: EnclosRepository::class)]
-class Enclos
+#[ORM\Entity(repositoryClass: EnclosureRepository::class)]
+class Enclosure
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,18 +16,18 @@ class Enclos
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
-    private ?string $nomEnclos = null;
+    private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'enclos', targetEntity: Animal::class)]
     private Collection $animals;
 
-    #[ORM\OneToMany(mappedBy: 'enclos', targetEntity: Evenement::class, orphanRemoval: true)]
-    private Collection $evenements;
+    #[ORM\OneToMany(mappedBy: 'enclos', targetEntity: Event::class, orphanRemoval: true)]
+    private Collection $events;
 
     public function __construct()
     {
         $this->animals = new ArrayCollection();
-        $this->evenements = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -35,14 +35,14 @@ class Enclos
         return $this->id;
     }
 
-    public function getNomEnclos(): ?string
+    public function getName(): ?string
     {
-        return $this->nomEnclos;
+        return $this->name;
     }
 
-    public function setNomEnclos(string $nomEnclos): static
+    public function setName(string $name): static
     {
-        $this->nomEnclos = $nomEnclos;
+        $this->name = $name;
 
         return $this;
     }
@@ -59,7 +59,7 @@ class Enclos
     {
         if (!$this->animals->contains($animal)) {
             $this->animals->add($animal);
-            $animal->setEnclos($this);
+            $animal->setEnclosure($this);
         }
 
         return $this;
@@ -69,8 +69,8 @@ class Enclos
     {
         if ($this->animals->removeElement($animal)) {
             // set the owning side to null (unless already changed)
-            if ($animal->getEnclos() === $this) {
-                $animal->setEnclos(null);
+            if ($animal->getEnclosure() === $this) {
+                $animal->setEnclosure(null);
             }
         }
 
@@ -78,29 +78,29 @@ class Enclos
     }
 
     /**
-     * @return Collection<int, Evenement>
+     * @return Collection<int, Event>
      */
-    public function getEvenements(): Collection
+    public function getEvents(): Collection
     {
-        return $this->evenements;
+        return $this->events;
     }
 
-    public function addEvenement(Evenement $evenement): static
+    public function addEvent(Event $event): static
     {
-        if (!$this->evenements->contains($evenement)) {
-            $this->evenements->add($evenement);
-            $evenement->setEnclos($this);
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setEnclosure($this);
         }
 
         return $this;
     }
 
-    public function removeEvenement(Evenement $evenement): static
+    public function removeEvent(Event $event): static
     {
-        if ($this->evenements->removeElement($evenement)) {
+        if ($this->events->removeElement($event)) {
             // set the owning side to null (unless already changed)
-            if ($evenement->getEnclos() === $this) {
-                $evenement->setEnclos(null);
+            if ($event->getEnclosure() === $this) {
+                $event->setEnclosure(null);
             }
         }
 

@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\EspeceRepository;
+use App\Repository\SpeciesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: EspeceRepository::class)]
-class Espece
+#[ORM\Entity(repositoryClass: SpeciesRepository::class)]
+class Species
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,23 +16,23 @@ class Espece
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
-    private ?string $libEspece = null;
+    private ?string $name = null;
 
     #[ORM\Column(length: 512)]
-    private ?string $descriptionEspece = null;
+    private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'espece', targetEntity: Animal::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'species', targetEntity: Animal::class, orphanRemoval: true)]
     private Collection $animals;
 
-    #[ORM\ManyToOne(inversedBy: 'especes')]
+    #[ORM\ManyToOne(inversedBy: 'species')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?FamilleAnimal $famille = null;
+    private ?AnimalFamily $family = null;
 
-    #[ORM\ManyToOne(inversedBy: 'especes')]
+    #[ORM\ManyToOne(inversedBy: 'species')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Regime $regime = null;
+    private ?AnimalDiet $diet = null;
 
-    #[ORM\ManyToOne(inversedBy: 'especes')]
+    #[ORM\ManyToOne(inversedBy: 'species')]
     private ?Image $image = null;
 
     public function __construct()
@@ -45,26 +45,26 @@ class Espece
         return $this->id;
     }
 
-    public function getLibEspece(): ?string
+    public function getName(): ?string
     {
-        return $this->libEspece;
+        return $this->name;
     }
 
-    public function setLibEspece(string $libEspece): static
+    public function setName(string $name): static
     {
-        $this->libEspece = $libEspece;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getDescriptionEspece(): ?string
+    public function getDescription(): ?string
     {
-        return $this->descriptionEspece;
+        return $this->description;
     }
 
-    public function setDescriptionEspece(string $descriptionEspece): static
+    public function setDescription(string $description): static
     {
-        $this->descriptionEspece = $descriptionEspece;
+        $this->description = $description;
 
         return $this;
     }
@@ -81,7 +81,7 @@ class Espece
     {
         if (!$this->animals->contains($animal)) {
             $this->animals->add($animal);
-            $animal->setEspece($this);
+            $animal->setSpecies($this);
         }
 
         return $this;
@@ -91,34 +91,34 @@ class Espece
     {
         if ($this->animals->removeElement($animal)) {
             // set the owning side to null (unless already changed)
-            if ($animal->getEspece() === $this) {
-                $animal->setEspece(null);
+            if ($animal->getSpecies() === $this) {
+                $animal->setSpecies(null);
             }
         }
 
         return $this;
     }
 
-    public function getFamille(): ?FamilleAnimal
+    public function getFamily(): ?AnimalFamily
     {
-        return $this->famille;
+        return $this->family;
     }
 
-    public function setFamille(?FamilleAnimal $famille): static
+    public function setFamily(?AnimalFamily $family): static
     {
-        $this->famille = $famille;
+        $this->family = $family;
 
         return $this;
     }
 
-    public function getRegime(): ?Regime
+    public function getDiet(): ?AnimalDiet
     {
-        return $this->regime;
+        return $this->diet;
     }
 
-    public function setRegime(?Regime $regime): static
+    public function setDiet(?AnimalDiet $diet): static
     {
-        $this->regime = $regime;
+        $this->diet = $diet;
 
         return $this;
     }

@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\UtilisateurRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,9 +10,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -32,25 +32,25 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 128)]
-    private ?string $nomUser = null;
+    private ?string $lastName = null;
 
     #[ORM\Column(length: 128)]
-    private ?string $pnomUser = null;
+    private ?string $firstName = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateNaisUser = null;
+    private ?\DateTimeInterface $dateOfBirth = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateEmbauche = null;
+    private ?\DateTimeInterface $hiringDate = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $dureeContrat = null;
+    private ?int $contractDuration = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateVisiteur = null;
+    private ?\DateTimeInterface $dateVisitor = null;
 
-    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Inscription::class, orphanRemoval: true)]
-    private Collection $inscriptions;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Registration::class, orphanRemoval: true)]
+    private Collection $registrations;
 
     public function getId(): ?int
     {
@@ -122,99 +122,99 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getNomUser(): ?string
+    public function getLastName(): ?string
     {
-        return $this->nomUser;
+        return $this->lastName;
     }
 
-    public function setNomUser(string $nomUser): static
+    public function setLastName(string $lastName): static
     {
-        $this->nomUser = $nomUser;
+        $this->lastName = $lastName;
 
         return $this;
     }
 
-    public function getPnomUser(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->pnomUser;
+        return $this->firstName;
     }
 
-    public function setPnomUser(string $pnomUser): static
+    public function setFirstName(string $firstName): static
     {
-        $this->pnomUser = $pnomUser;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
-    public function getDateNaisUser(): ?\DateTimeInterface
+    public function getDateOfBirth(): ?\DateTimeInterface
     {
-        return $this->dateNaisUser;
+        return $this->dateOfBirth;
     }
 
-    public function setDateNaisUser(\DateTimeInterface $dateNaisUser): static
+    public function setDateOfBirth(\DateTimeInterface $dateOfBirth): static
     {
-        $this->dateNaisUser = $dateNaisUser;
+        $this->dateOfBirth = $dateOfBirth;
 
         return $this;
     }
 
-    public function getDateEmbauche(): ?\DateTimeInterface
+    public function getHiringDate(): ?\DateTimeInterface
     {
-        return $this->dateEmbauche;
+        return $this->hiringDate;
     }
 
-    public function setDateEmbauche(?\DateTimeInterface $dateEmbauche): static
+    public function setHiringDate(?\DateTimeInterface $hiringDate): static
     {
-        $this->dateEmbauche = $dateEmbauche;
+        $this->hiringDate = $hiringDate;
 
         return $this;
     }
 
-    public function getDureeContrat(): ?int
+    public function getContractDuration(): ?int
     {
-        return $this->dureeContrat;
+        return $this->contractDuration;
     }
 
-    public function setDureeContrat(?int $dureeContrat): static
+    public function setContractDuration(?int $contractDuration): static
     {
-        $this->dureeContrat = $dureeContrat;
+        $this->contractDuration = $contractDuration;
 
         return $this;
     }
 
-    public function getDateVisiteur(): ?\DateTimeInterface
+    public function getDateVisitor(): ?\DateTimeInterface
     {
-        return $this->dateVisiteur;
+        return $this->dateVisitor;
     }
 
-    public function setDateVisiteur(?\DateTimeInterface $dateVisiteur): static
+    public function setDateVisitor(?\DateTimeInterface $dateVisitor): static
     {
-        $this->dateVisiteur = $dateVisiteur;
+        $this->dateVisitor = $dateVisitor;
 
         return $this;
     }
 
-    public function getInscriptions(): Collection
+    public function getRegistrations(): Collection
     {
-        return $this->inscriptions;
+        return $this->registrations;
     }
 
-    public function addInscription(Inscription $inscription): static
+    public function addRegistration(Registration $registration): static
     {
-        if (!$this->inscriptions->contains($inscription)) {
-            $this->inscriptions->add($inscription);
-            $inscription->setUtilisateur($this);
+        if (!$this->registrations->contains($registration)) {
+            $this->registrations->add($registration);
+            $registration->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeInscription(Inscription $inscription): static
+    public function removeRegistration(Registration $registration): static
     {
-        if ($this->inscriptions->removeElement($inscription)) {
+        if ($this->registrations->removeElement($registration)) {
             // set the owning side to null (unless already changed)
-            if ($inscription->getUtilisateur() === $this) {
-                $inscription->setUtilisateur(null);
+            if ($registration->getUser() === $this) {
+                $registration->setUser(null);
             }
         }
 
