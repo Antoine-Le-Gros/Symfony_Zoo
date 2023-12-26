@@ -45,10 +45,10 @@ final class AnimalFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'descriptionAnimal' => self::faker()->text(50),
-            'nomAnimal' => self::faker()->firstName(),
-            'enclos' => EnclosFactory::new(),
-            'espece' => EspeceFactory::new(),
+            'description' => self::faker()->text(50),
+            'name' => self::faker()->firstName(),
+            'enclosure' => EnclosureFactory::new(),
+            'species' => SpeciesFactory::new(),
         ];
     }
 

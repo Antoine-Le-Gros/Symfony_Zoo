@@ -7,6 +7,6 @@
 {% endblock %}
 
 {% block body %}
-    <H1>Création d'un nouvel animal</H1>
+    <H1 class="subsectionTitle">Création d'un nouvel animal</H1>
     {{ include('animal/_form.html.twig', {submit_label: 'Créer', form:form}, with_context = false ) }}
 {% endblock %}

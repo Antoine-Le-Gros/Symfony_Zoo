@@ -1,9 +1,0 @@
-{{ form_start(form) }}
-        {{ form_row(form.nomEvenement,{'label': 'Nom'}) }}
-        {{ form_row(form.descriptionEvenement,{'label':'Description'}) }}
-        {{ form_row(form.dateEvenement,{'label':'Date'}) }}
-        {{ form_row(form.dureeEvenement,{'label':'Durée en minute'}) }}
-        {{ form_row(form.quotaVisiteurs,{'label': 'Nombre de Visiteurs'}) }}
-        {{ form_row(form.enclos,{'label':'Enclos','placeholder' :'Enclos ?' }) }}
-<button type="submit" class="w-100 d-inline-block btn btn-primary">{{ submit_label }}</button>
-{{ form_end(form) }}

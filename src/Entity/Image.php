@@ -22,21 +22,21 @@ class Image
     #[ORM\OneToMany(mappedBy: 'image', targetEntity: Animal::class)]
     private Collection $animals;
 
-    #[ORM\OneToMany(mappedBy: 'image', targetEntity: Espece::class)]
-    private Collection $especes;
+    #[ORM\OneToMany(mappedBy: 'image', targetEntity: Species::class)]
+    private Collection $species;
 
-    #[ORM\OneToMany(mappedBy: 'image', targetEntity: FamilleAnimal::class)]
-    private Collection $familleAnimals;
+    #[ORM\OneToMany(mappedBy: 'image', targetEntity: AnimalFamily::class)]
+    private Collection $AnimalsFamily;
 
-    #[ORM\OneToMany(mappedBy: 'image', targetEntity: CategorieAnimal::class)]
-    private Collection $categorieAnimals;
+    #[ORM\OneToMany(mappedBy: 'image', targetEntity: AnimalCategory::class)]
+    private Collection $AnimalsCategory;
 
     public function __construct()
     {
         $this->animals = new ArrayCollection();
-        $this->especes = new ArrayCollection();
-        $this->familleAnimals = new ArrayCollection();
-        $this->categorieAnimals = new ArrayCollection();
+        $this->species = new ArrayCollection();
+        $this->AnimalsFamily = new ArrayCollection();
+        $this->AnimalsCategory = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -87,89 +87,83 @@ class Image
     }
 
     /**
-     * @return Collection<int, Espece>
+     * @return Collection<int, Species>
      */
-    public function getEspeces(): Collection
+    public function getSpecies(): Collection
     {
-        return $this->especes;
+        return $this->species;
     }
 
-    public function addEspece(Espece $espece): static
+    public function addSpecies(Species $species): static
     {
-        if (!$this->especes->contains($espece)) {
-            $this->especes->add($espece);
-            $espece->setImage($this);
+        if (!$this->species->contains($species)) {
+            $this->species->add($species);
+            $species->setImage($this);
         }
 
         return $this;
     }
 
-    public function removeEspece(Espece $espece): static
+    public function removeSpecies(Species $species): static
     {
-        if ($this->especes->removeElement($espece)) {
+        if ($this->species->removeElement($species)) {
             // set the owning side to null (unless already changed)
-            if ($espece->getImage() === $this) {
-                $espece->setImage(null);
+            if ($species->getImage() === $this) {
+                $species->setImage(null);
             }
         }
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, FamilleAnimal>
-     */
-    public function getFamilleAnimals(): Collection
+    public function getAnimalsFamily(): Collection
     {
-        return $this->familleAnimals;
+        return $this->AnimalsFamily;
     }
 
-    public function addFamilleAnimal(FamilleAnimal $familleAnimal): static
+    public function addAnimalFamily(AnimalFamily $AnimalFamily): static
     {
-        if (!$this->familleAnimals->contains($familleAnimal)) {
-            $this->familleAnimals->add($familleAnimal);
-            $familleAnimal->setImage($this);
+        if (!$this->AnimalsFamily->contains($AnimalFamily)) {
+            $this->AnimalsFamily->add($AnimalFamily);
+            $AnimalFamily->setImage($this);
         }
 
         return $this;
     }
 
-    public function removeFamilleAnimal(FamilleAnimal $familleAnimal): static
+    public function removeAnimalFamily(AnimalFamily $AnimalFamily): static
     {
-        if ($this->familleAnimals->removeElement($familleAnimal)) {
+        if ($this->AnimalsFamily->removeElement($AnimalFamily)) {
             // set the owning side to null (unless already changed)
-            if ($familleAnimal->getImage() === $this) {
-                $familleAnimal->setImage(null);
+            if ($AnimalFamily->getImage() === $this) {
+                $AnimalFamily->setImage(null);
             }
         }
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, CategorieAnimal>
-     */
-    public function getCategorieAnimals(): Collection
+    public function getAnimalsCategory(): Collection
     {
-        return $this->categorieAnimals;
+        return $this->AnimalsCategory;
     }
 
-    public function addCategorieAnimal(CategorieAnimal $categorieAnimal): static
+    public function addAnimalCategory(AnimalCategory $AnimalCategory): static
     {
-        if (!$this->categorieAnimals->contains($categorieAnimal)) {
-            $this->categorieAnimals->add($categorieAnimal);
-            $categorieAnimal->setImage($this);
+        if (!$this->AnimalsCategory->contains($AnimalCategory)) {
+            $this->AnimalsCategory->add($AnimalCategory);
+            $AnimalCategory->setImage($this);
         }
 
         return $this;
     }
 
-    public function removeCategorieAnimal(CategorieAnimal $categorieAnimal): static
+    public function removeAnimalCategory(AnimalCategory $AnimalCategory): static
     {
-        if ($this->categorieAnimals->removeElement($categorieAnimal)) {
+        if ($this->AnimalsCategory->removeElement($AnimalCategory)) {
             // set the owning side to null (unless already changed)
-            if ($categorieAnimal->getImage() === $this) {
-                $categorieAnimal->setImage(null);
+            if ($AnimalCategory->getImage() === $this) {
+                $AnimalCategory->setImage(null);
             }
         }
 

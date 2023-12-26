@@ -7,18 +7,18 @@
     <h1 class="subsectionTitle text-center">Liste des catégories présentes au sein du zoo</h1>
     <hr>
     <ul class="container d-flex flex-wrap justify-content-center">
-        {% for categorie in categories %}
-            <a class="nav-link m-3"  href="{{ path('app_families', {idCategory: categorie.id}) }}">
+        {% for category in categories %}
+            <a class="nav-link m-3"  href="{{ path('app_families', {idCategory: category.id}) }}">
                 <li class="card left-card" style="width: 75vh">
-                    <img class="card-img-top" src="{{ categorie.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256">
+                    <img class="card-img-top" src="{{ category.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256">
                     <div class="card-body">
                         <h5 class="card-title">
                             <span class="badge bg-secondary category">
-                                {{ categorie.nomCategorie}}
+                                {{ category.name }}
                             </span>
                         </h5>
                         <p class="card-text">
-                            {{ categorie.descriptionCategorie}}
+                            {{ category.description }}
                         </p>
                     </div>
                 </li>

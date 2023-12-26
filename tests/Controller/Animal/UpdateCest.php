@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Controller\Animal;
+namespace Controller\Animal;
 
 use App\Entity\Animal;
 use App\Factory\AnimalFactory;
-use App\Factory\EnclosFactory;
-use App\Factory\EspeceFactory;
+use App\Factory\EnclosureFactory;
+use App\Factory\SpeciesFactory;
 use App\Tests\Support\ControllerTester;
 
 class UpdateCest
@@ -13,10 +13,10 @@ class UpdateCest
     public function formUpdateAnimal(ControllerTester $I): void
     {
         AnimalFactory::createOne([
-            'nomAnimal' => 'Pierre',
-            'descriptionAnimal' => 'Pierre est un cailloux',
-            'enclos' => EnclosFactory::createOne(['nomEnclos' => 'Le cirque']),
-            'espece' => EspeceFactory::createOne(['libEspece' => 'stone']),
+            'name' => 'Pierre',
+            'description' => 'Pierre est un cailloux',
+            'enclosure' => EnclosureFactory::createOne(['name' => 'Le cirque']),
+            'species' => SpeciesFactory::createOne(['name' => 'stone']),
         ]);
 
         $I->amOnPage('/animal/1/update');
@@ -26,16 +26,16 @@ class UpdateCest
         $I->seeInField('Nom de l\'animal', 'Pierre');
         $I->seeInField('Description de l\'animal', 'Pierre est un cailloux');
         $I->seeOptionIsSelected('Espèce de l\'animal', 'stone');
-        $I->seeOptionIsSelected('Enclos de l\'animal', 'Le cirque');
+        $I->seeOptionIsSelected('Enclosure de l\'animal', 'Le cirque');
     }
 
     public function FormUpdateAnimalSend(ControllerTester $I): void
     {
         AnimalFactory::createOne([
-            'nomAnimal' => 'Pierre',
-            'descriptionAnimal' => 'Pierre est un cailloux',
-            'enclos' => EnclosFactory::createOne(['nomEnclos' => 'Le cirque']),
-            'espece' => EspeceFactory::createOne(['libEspece' => 'stone']),
+            'name' => 'Pierre',
+            'description' => 'Pierre est un cailloux',
+            'enclosure' => EnclosureFactory::createOne(['name' => 'Le cirque']),
+            'species' => SpeciesFactory::createOne(['name' => 'stone']),
         ]);
 
         $I->amOnPage('/animal/1/update');
@@ -46,13 +46,13 @@ class UpdateCest
 
         $I->seeCurrentUrlEquals('/animal/1');
         $I->SeeInRepository(Animal::class, [
-            'nomAnimal' => 'Antoine',
-            'descriptionAnimal' => 'Antoine le go muscu',
-            'espece' => [
-                'libEspece' => 'stone',
+            'name' => 'Antoine',
+            'description' => 'Antoine le go muscu',
+            'species' => [
+                'name' => 'stone',
             ],
-            'enclos' => [
-                'nomEnclos' => 'Le cirque',
+            'enclosure' => [
+                'name' => 'Le cirque',
             ],
         ]);
     }

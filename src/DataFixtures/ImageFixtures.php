@@ -17,9 +17,9 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [
-            EspeceFixtures::class,
+            SpeciesFixtures::class,
             AnimalFixtures::class,
-            FamilleAnimalFixtures::class,
+            AnimalFamilyFixtures::class,
         ];
     }
 }

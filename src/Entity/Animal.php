@@ -14,18 +14,18 @@ class Animal
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
-    private ?string $nomAnimal = null;
+    private ?string $name = null;
 
     #[ORM\Column(length: 512)]
-    private ?string $descriptionAnimal = null;
+    private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Espece $espece = null;
+    private ?Species $species = null;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Enclos $enclos = null;
+    private ?Enclosure $enclosure = null;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
     private ?Image $image = null;
@@ -41,50 +41,50 @@ class Animal
         return $this->id;
     }
 
-    public function getNomAnimal(): ?string
+    public function getName(): ?string
     {
-        return $this->nomAnimal;
+        return $this->name;
     }
 
-    public function setNomAnimal(string $nomAnimal): static
+    public function setName(string $name): static
     {
-        $this->nomAnimal = $nomAnimal;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getDescriptionAnimal(): ?string
+    public function getDescription(): ?string
     {
-        return $this->descriptionAnimal;
+        return $this->description;
     }
 
-    public function setDescriptionAnimal(string $descriptionAnimal): static
+    public function setDescription(string $description): static
     {
-        $this->descriptionAnimal = $descriptionAnimal;
+        $this->description = $description;
 
         return $this;
     }
 
-    public function getEspece(): ?Espece
+    public function getSpecies(): ?Species
     {
-        return $this->espece;
+        return $this->species;
     }
 
-    public function setEspece(?Espece $espece): static
+    public function setSpecies(?Species $species): static
     {
-        $this->espece = $espece;
+        $this->species = $species;
 
         return $this;
     }
 
-    public function getEnclos(): ?Enclos
+    public function getEnclosure(): ?Enclosure
     {
-        return $this->enclos;
+        return $this->enclosure;
     }
 
-    public function setEnclos(?Enclos $enclos): static
+    public function setEnclosure(?Enclosure $enclosure): static
     {
-        $this->enclos = $enclos;
+        $this->enclosure = $enclosure;
 
         return $this;
     }

@@ -28,17 +28,17 @@
                     <a class="nav-link active" aria-current="page" href="{{ path('app_animals_showall') }}">Nos Animaux</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('app_especes_showall') }}">Nos espèces</a>
+                    <a class="nav-link active" aria-current="page" href="{{ path('app_species_showAll') }}">Nos espèces</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ path('app_categories') }}">Nos catégories d'animaux</a>
                 </li>
                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('app_families_showall') }}">Nos familles d'animaux</a>
+                    <a class="nav-link active" aria-current="page" href="{{ path('app_families_showAll') }}">Nos familles d'animaux</a>
                 </li>
             </ul>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a class="btn btn-outline-danger" href="{{ path('app_logout') }}">Déconnexion de {{ app.user.pnomUser }}</a>
+                <a class="btn btn-outline-danger" href="{{ path('app_logout') }}">Déconnexion de {{ app.user.firstName }}</a>
             {% endif%}
             {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a class="btn btn-outline-success" href="{{ path('app_login') }}">Connexion</a>
