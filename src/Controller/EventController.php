@@ -117,6 +117,7 @@ class EventController extends AbstractController
             'form' => $form,
         ]);
     }
+
     #[Route('/event/{id}/inscription/create', requirements: ['id' => '\d+'])]
     public function InscriptionCreate(User $user, Event $event, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -138,6 +139,26 @@ class EventController extends AbstractController
         return $this->render('inscription/create.html.twig', [
             'form' => $form,
             'event' => $event,
+        ]);
+    }
+
+    #[Route('/event/{id}/inscription/{idRegistration}/update', requirements: ['id' => '\d+', 'idRegistration' => '\d+'])]
+    public function InscriptionUpdate(Event $event, Registration $registration, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(RegistrationType::class, $registration);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_event_show', [
+                'id' => $event->getId(),
+            ]);
+        }
+
+        return $this->render('inscription/update.html.twig', [
+            'event' => $event,
+            'registration' => $registration,
+            'form' => $form,
         ]);
     }
 }
