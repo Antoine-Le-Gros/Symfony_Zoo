@@ -161,7 +161,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/event/{id}/inscription/{idRegistration}/update', requirements: ['id' => '\d+', 'idRegistration' => '\d+'])]
-    public function InscriptionUpdate(Event $event, Registration $registration, Request $request, EntityManagerInterface $entityManager): Response
+    public function InscriptionUpdate(Event $event, Registration $registration, Request $request, EntityManagerInterface $entityManager, EventRepository $eventRepository): Response
     {
         $form = $this->createForm(RegistrationType::class, $registration);
         $form->add('hour', ChoiceType::class, [
