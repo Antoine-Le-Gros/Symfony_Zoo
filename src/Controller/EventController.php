@@ -164,8 +164,25 @@ class EventController extends AbstractController
     public function InscriptionUpdate(Event $event, Registration $registration, Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RegistrationType::class, $registration);
+        $form->add('hour', ChoiceType::class, [
+            'mapped' => false,
+            'choices' => $eventRepository->getHours($event->getName()),
+            'choice_label' => function ($choice): string {
+                return $choice;
+            },
+            'label' => 'Heure',
+        ]);
+        $form->add('minute', ChoiceType::class, [
+            'mapped' => false,
+            'choices' => $eventRepository->getMinutes($event->getName()),
+            'choice_label' => function ($choice): string {
+                return $choice;
+            },
+            'label' => 'Minute',
+        ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $registration->getDate()->setTime($form->get('hour')->getData(), $form->get('minute')->getData());
             $entityManager->flush();
 
             return $this->redirectToRoute('app_event_show', [
