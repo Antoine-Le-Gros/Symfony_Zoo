@@ -11,6 +11,7 @@ use App\Repository\EnclosureRepository;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -119,15 +120,32 @@ class EventController extends AbstractController
     }
 
     #[Route('/event/{id}/inscription/create', requirements: ['id' => '\d+'])]
-    public function InscriptionCreate(User $user, Event $event, Request $request, EntityManagerInterface $entityManager): Response
+    public function InscriptionCreate(User $user, Event $event, Request $request, EntityManagerInterface $entityManager, EventRepository $eventRepository): Response
     {
         $registration = new Registration();
         $form = $this->createForm(RegistrationType::class, $registration);
+        $form->add('hour', ChoiceType::class, [
+            'mapped' => false,
+            'choices' => $eventRepository->getHours($event->getName()),
+            'choice_label' => function ($choice): string {
+                return $choice;
+            },
+            'label' => 'Heure',
+        ]);
+        $form->add('minute', ChoiceType::class, [
+            'mapped' => false,
+            'choices' => $eventRepository->getMinutes($event->getName()),
+            'choice_label' => function ($choice): string {
+                return $choice;
+            },
+            'label' => 'Minute',
+        ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $registration = $form->getData();
             $registration->setEvent($event);
             $registration->setUser($user);
+            $registration->getDate()->setTime($form->get('hour')->getData(), $form->get('minute')->getData());
             $entityManager->persist($registration);
             $entityManager->flush();
 
