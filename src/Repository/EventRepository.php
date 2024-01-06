@@ -30,6 +30,18 @@ class EventRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute();
     }
+
+    public function getHours(string $eventName): array
+    {
+        $events = $this->findBy(['name' => $eventName]);
+        $hoursAvailable = [];
+        foreach ($events as $event) {
+            $hoursAvailable[] = date_parse_from_format('Y-m-d H:i:s', $event->getDate()->format('Y-m-d H:i:s'))['hour'];
+        }
+
+        return $hoursAvailable;
+    }
+
     //    /**
     //     * @return Event[] Returns an array of Event objects
     //     */
