@@ -2,13 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Event;
 use App\Entity\Registration;
-use App\Entity\User;
-use Doctrine\ORM\EntityRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Repository\EventRepository;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,14 +15,16 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date', DateTimeType::class, [
-                'date_widget' => 'choice',
+            ->add('date', DateType::class, [
                 'placeholder' => [
-                    'day' => 'Day', 'month' => 'Month', 'hour' => 'Hour',
+                    'day' => 'Day', 'month' => 'Month', 'year' => 'Year',
                 ],
             ])
             ->add('nbReservedPlaces', IntegerType::class);
+
+
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {
