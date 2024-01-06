@@ -4,11 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Entity\Registration;
-use App\Entity\User;
 use App\Form\EventType;
 use App\Form\RegistrationType;
 use App\Repository\EnclosureRepository;
 use App\Repository\EventRepository;
+use App\Repository\RegistrationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class EventController extends AbstractController
 {
@@ -120,7 +121,12 @@ class EventController extends AbstractController
     }
 
     #[Route('/event/{id}/inscription/create', requirements: ['id' => '\d+'])]
-    public function InscriptionCreate(User $user, Event $event, Request $request, EntityManagerInterface $entityManager, EventRepository $eventRepository): Response
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function InscriptionCreate(
+        Event $event,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        EventRepository $eventRepository): Response
     {
         $registration = new Registration();
         $form = $this->createForm(RegistrationType::class, $registration);
@@ -144,7 +150,7 @@ class EventController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $registration = $form->getData();
             $registration->setEvent($event);
-            $registration->setUser($user);
+            $registration->setUser($this->getUser());
             $registration->getDate()->setTime($form->get('hour')->getData(), $form->get('minute')->getData());
             $entityManager->persist($registration);
             $entityManager->flush();
@@ -161,8 +167,20 @@ class EventController extends AbstractController
     }
 
     #[Route('/event/{id}/inscription/{idRegistration}/update', requirements: ['id' => '\d+', 'idRegistration' => '\d+'])]
-    public function InscriptionUpdate(Event $event, Registration $registration, Request $request, EntityManagerInterface $entityManager, EventRepository $eventRepository): Response
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function InscriptionUpdate(
+        Event $event,
+        int $idRegistration,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        EventRepository $eventRepository,
+        RegistrationRepository $registrationRepository): Response
     {
+        $registration = $registrationRepository->find($idRegistration);
+        $user = $registration->getUser();
+        if ($user !== $this->getUser()) {
+            throw $this->createNotFoundException('Vous ne pouvez pas modifier une inscription ne vous appartenant pas');
+        }
         $form = $this->createForm(RegistrationType::class, $registration);
         $form->add('hour', ChoiceType::class, [
             'mapped' => false,

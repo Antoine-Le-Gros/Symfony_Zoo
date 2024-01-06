@@ -13,7 +13,5 @@
         <dt> Nombre de visiteurs</dt>
         <dd> {{ event.quota }}</dd>
     </dl>
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a class="btn btn-outline-success" href="{{ path('app_event_inscriptioncreate', {id: event.id}) }}"> S'inscrire à l'évènement {{ event.name }}</a>
-    {% endif %}
+    <a class="btn btn-outline-success" href="{{ path('app_event_inscriptioncreate', {id: event.id}) }}"> S'inscrire à l'évènement {{ event.name }}</a>
 {% endblock %}
