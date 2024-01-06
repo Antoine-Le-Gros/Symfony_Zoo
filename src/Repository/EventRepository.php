@@ -42,6 +42,16 @@ class EventRepository extends ServiceEntityRepository
         return $hoursAvailable;
     }
 
+    public function getMinutes(string $eventName): array
+    {
+        $events = $this->findBy(['name' => $eventName]);
+        $minAvailable = [];
+        foreach ($events as $event) {
+            $minAvailable[] = date_parse_from_format('Y-m-d H:i:s', $event->getDate()->format('Y-m-d H:i:s'))['minute'];
+        }
+
+        return $minAvailable;
+    }
     //    /**
     //     * @return Event[] Returns an array of Event objects
     //     */
