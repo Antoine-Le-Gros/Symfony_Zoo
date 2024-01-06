@@ -12,9 +12,9 @@
                 {% for esp in singleSpecies.species %}
                     {% set image = esp.image.image|default(asset('img/default.png')) %}
                     <li class="species-list"><a class="nav-link species-link" href="{{ path('app_animals', {'idSpecies': esp.id}) }}">
-                            <div class="DescriptionEspèce">
+                            <div class="DescriptionEspèce d-flex flex-column">
                                 <span>{{ esp.name |capitalize }}</span>
-                                <span>{{ esp.description |capitalize}}</span>
+                                <span style="width: 15vh>{{ esp.description |capitalize}}</span>
                             </div>
                                 <div class="img-centre">
                                     <img class="specie-img" src="{{ image }}" alt="Image inconnue" width="256" height="256">
@@ -29,9 +29,9 @@
             {% else %}
                 {% set image = singleSpecies.image.image|default(asset('img/default.png')) %}
                 <li class="species-list"><a class="nav-link species-link" href="{{ path('app_animals', {'idSpecies': singleSpecies.id}) }}">
-                        <div class="DescriptionEspèce">
+                        <div class="DescriptionEspèce d-flex flex-column">
                             <span class="libEspece">{{ singleSpecies.name |capitalize }}</span>
-                            <span>{{ singleSpecies.description |capitalize}}</span>
+                            <span style="width: 15vh">{{ singleSpecies.description |capitalize}}</span>
                         </div>
                             <div class="img-centre">
                                 <img class="specie-img" src="{{ image }}" alt="Image inconnue" width="256" height="256">
