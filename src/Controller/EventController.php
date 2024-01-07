@@ -228,4 +228,30 @@ class EventController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/event/registration/{id}/delete', requirements: ['id' => '\d+'])]
+    public function deleteregistrations(Registration $registration,
+        Request $request, EntityManagerInterface $entityManager)
+    {
+        $form = $this->createFormBuilder()
+            ->add('delete', SubmitType::class)
+            ->add('cancel', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->getClickedButton() === $form->get('delete')) {
+                $entityManager->remove($registration);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_event_show');
+            }
+
+            return $this->redirectToRoute('app_event_show', ['id' => $registration->getId()]);
+        }
+
+        return $this->render('registration/delete.html.twig', [
+            'register' => $registration,
+            'form' => $form,
+        ]);
+    }
 }
