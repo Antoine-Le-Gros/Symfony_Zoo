@@ -21,6 +21,17 @@ class RegistrationRepository extends ServiceEntityRepository
         parent::__construct($registry, Registration::class);
     }
 
+    public function getRegistrationForEventAndUser(int $idEvent, int $idUser): array
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->where('r.event = :idEvent')
+            ->andWhere('r.user = :idUser')
+            ->setParameter('idEvent', $idEvent)
+            ->setParameter('idUser', $idUser);
+
+        return $qb->getQuery()->execute();
+    }
+
     //    /**
     //     * @return Registration[] Returns an array of Registration objects
     //     */
