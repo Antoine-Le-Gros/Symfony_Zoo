@@ -13,5 +13,10 @@
         <dt> Nombre de visiteurs</dt>
         <dd> {{ event.quota }}</dd>
     </dl>
-    <a class="btn btn-outline-success" href="{{ path('app_event_inscriptioncreate', {id: event.id}) }}"> S'inscrire à l'évènement {{ event.name }}</a>
+    {% if isRegister %}
+        <a class="btn btn-outline-success" href="{{ path('app_event_inscriptionupdate', {id: event.id, idRegistration: registration.id}) }}"> Modifier l'évènement {{ event.name }}</a>
+        <a class="btn btn-outline-danger" href="{{ path('app_event_inscriptiondelete', {id: event.id, idRegistration: registration.id}) }}"> Supprimer l'inscription pour l'évènement {{ event.name }}</a>
+    {% else %}
+        <a class="btn btn-outline-secondary " href="{{ path('app_event_inscriptioncreate', {id: event.id}) }}"> S'inscrire à l'évènement {{ event.name }}</a>
+    {% endif %}
 {% endblock %}
