@@ -47,13 +47,27 @@ class EventController extends AbstractController
 
     #[Route('/event/{id}/show', name: 'app_event_show', requirements: ['id' => '\d+'])]
     public function show(
-        ?Event $event
+        ?Event $event,
+        RegistrationRepository $registrationRepository
     ): Response {
         if (null === $event) {
             throw $this->createNotFoundException("L'évènement n'existe pas ");
         }
-
-        return $this->render('event/show.html.twig', ['event' => $event]);
+        $user = $this->getUser();
+        $registration = null;
+        if (null !== $user) {
+            $registration = $registrationRepository->getRegistrationForEventAndUser($event->getId(), $user->getId());
+            if (empty($registration)) {
+                $registration = null;
+            } else {
+                $registration = $registration[0];
+            }
+        }
+        return $this->render('event/show.html.twig', [
+            'event' => $event,
+            'isRegister' => null !== $registration,
+            'registration' => $registration,
+        ]);
     }
 
     #[Route('/event/{id}/delete', requirements: ['id' => '\d+'])]
