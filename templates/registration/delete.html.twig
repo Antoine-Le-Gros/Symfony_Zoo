@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% set title = "Suppression de l'inscription de #{register.user.name} pour l'évènement #{register.event.name}" %}
+
+{% block body %}
+<h1 class="subsectionTitle">{{ title }}</h1>
+    {{ form_start(form, {'attr': {'class': ' d-flex justify-content-around'}}) }}
+        {{ form_row(form.delete,{'label':'Supprimer'}) }}
+        {{ form_row(form.cancel,{'label':'Annuler','attr':{'class':'btn btn-secondary'}}) }}
+    {{ form_end(form)}}
+{% endblock %}
+
+{% block title %}{{ title }}{% endblock %}
+
