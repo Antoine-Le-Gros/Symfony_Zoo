@@ -64,6 +64,7 @@ class EventController extends AbstractController
                 $registration = $registration[0];
             }
         }
+
         return $this->render('event/show.html.twig', [
             'event' => $event,
             'isRegister' => null !== $registration,
@@ -254,9 +255,10 @@ class EventController extends AbstractController
     }
 
     #[Route('/event/registration/{id}/delete', requirements: ['id' => '\d+'])]
-    public function deleteregistrations(Registration $registration,
-        Request $request, EntityManagerInterface $entityManager)
+    public function deleteregistrations(int $id,
+        Request $request, EntityManagerInterface $entityManager, RegistrationRepository $registrationRepository)
     {
+        $registration = $registrationRepository->find($id);
         $form = $this->createFormBuilder()
             ->add('delete', SubmitType::class)
             ->add('cancel', SubmitType::class)
@@ -267,10 +269,10 @@ class EventController extends AbstractController
                 $entityManager->remove($registration);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_event_show');
+                return $this->redirectToRoute('app_event_showAll');
             }
 
-            return $this->redirectToRoute('app_event_show', ['id' => $registration->getId()]);
+            return $this->redirectToRoute('app_event_show', ['id' => $registration->getEvent()->getId()]);
         }
 
         return $this->render('registration/delete.html.twig', [
