@@ -1,0 +1,52 @@
+<div id="carousel-event" class="flex-grow-1 align-items-center carousel slide carousevent d-flex justify-content-center" data-bs-ride="carousel"  >
+    <div class="carousel-inner w-75 rounded text-center">
+        {% set i= true %}
+        {% for event in events %}
+            {% if enclosure %}
+                {% for ev in event %}
+                    {% set date = ev.Durationformat(COOKIE) %}
+                    <div class="carousel-item data-bs-interval=500  {{ i?"active":"" }}" >
+                        {% set i=false %}
+                        <div class="event">
+                            <a class="link-event"  href="{{ path('app_event_show', {id:event.id}) }}">
+                                        <span class="badge bg-warning">
+                                            {{ ev.name |capitalize }}
+                                        </span>
+                                <span class="badge bg-secondary" >
+                                            {{ ev.enclosure.name |capitalize }}
+                                         </span>
+                            </a>
+                            <a class="btn btn-danger w-50" href="{{ path('app_event_delete', {id:event.id}) }}">SUPPRIMER</a>
+                        </div>
+                    </div>
+
+
+                {% endfor %}
+            {% else %}
+
+                <div class="carousel-item  data-bs-interval=500 {{ i?"active":"" }}" >
+                    {% set i=false %}
+                    <div class="event">
+                        <a class="link-event d-flex flex-column"  href="{{ path('app_event_show', {id:event.id}) }}">
+                            <span class="badge bg-warning">{{ event.name |capitalize }}</span>
+                            <span class="badge bg-secondary" >
+                                {{ event.enclosure.name |capitalize }}
+                            </span>
+                        </a>
+                        <a class="btn btn-danger w-50 delete" href="{{ path('app_event_delete', {id:event.id}) }}">SUPPRIMER</a>
+                    </div>
+                </div>
+
+            {% endif %}
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-event" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button"  data-bs-target="#carousel-event" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+
+</div>

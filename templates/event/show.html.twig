@@ -4,19 +4,16 @@
 
 {% block body %}
 
-    <h1 class="subsectionTitle">{{ event.name }}</h1>
+    <h1 class="subsectionTitle">{{ event.name |capitalize}}</h1>
     <dl>
         <dt> Description évènement </dt>
-        <dd> {{ event.description }}</dd>
+        <dd> {{ event.description | capitalize }}</dd>
         <dt> Date</dt>
         <dd> {{ event.date.format('Y-m-d H:i') }}</dd>
         <dt> Nombre de visiteurs</dt>
         <dd> {{ event.quota }}</dd>
     </dl>
-    {% if isRegister %}
-        <a class="btn btn-outline-success" href="{{ path('app_event_inscriptionupdate', {id:registration.id}) }}"> Modifier l'inscription de l'évènement {{ event.name }}</a>
-        <a class="btn btn-outline-danger" href="{{ path('app_event_deleteregistrations', {id:registration.id}) }}"> Supprimer l'inscription pour l'évènement {{ event.name }}</a>
-    {% else %}
-        <a class="btn btn-outline-secondary " href="{{ path('app_event_inscriptioncreate', {id: event.id}) }}"> S'inscrire à l'évènement {{ event.name }}</a>
-    {% endif %}
+    {% dump(events) %}
+    <p>Voulez vous voir d'autres évènements</p>
+    <a href="{{ path('app_event_show', {id:event.id +1}) }}">Suivant</a>
 {% endblock %}
