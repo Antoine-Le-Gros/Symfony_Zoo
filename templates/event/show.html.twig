@@ -1,16 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ evenement.name }} {% endblock %}
+{% block title %} {{ event.name }} {% endblock %}
 
 {% block body %}
 
-    <h1 class="subsectionTitle">{{ evenement.name }}</h1>
+    <h1 class="subsectionTitle">{{ event.name }}</h1>
     <dl>
         <dt> Description évènement </dt>
-        <dd> {{ evenement.description }}</dd>
+        <dd> {{ event.description }}</dd>
         <dt> Date</dt>
-        <dd> {{ evenement.date.format('Y-m-d H:i') }}</dd>
+        <dd> {{ event.date.format('Y-m-d H:i') }}</dd>
         <dt> Nombre de visiteurs</dt>
-        <dd> {{ evenement.quota }}</dd>
+        <dd> {{ event.quota }}</dd>
     </dl>
+    {% if isRegister %}
+        <a class="btn btn-outline-success" href="{{ path('app_event_inscriptionupdate', {id: event.id, idRegistration: registration.id}) }}"> Modifier l'évènement {{ event.name }}</a>
+        <a class="btn btn-outline-danger" href="{{ path('app_event_inscriptiondelete', {id: event.id, idRegistration: registration.id}) }}"> Supprimer l'inscription pour l'évènement {{ event.name }}</a>
+    {% else %}
+        <a class="btn btn-outline-secondary " href="{{ path('app_event_inscriptioncreate', {id: event.id}) }}"> S'inscrire à l'évènement {{ event.name }}</a>
+    {% endif %}
 {% endblock %}

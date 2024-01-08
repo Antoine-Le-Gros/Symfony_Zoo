@@ -3,15 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\Registration;
 use App\Form\EventType;
+use App\Form\RegistrationType;
 use App\Repository\EnclosureRepository;
 use App\Repository\EventRepository;
+use App\Repository\RegistrationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class EventController extends AbstractController
 {
@@ -42,13 +47,27 @@ class EventController extends AbstractController
 
     #[Route('/event/{id}/show', name: 'app_event_show', requirements: ['id' => '\d+'])]
     public function show(
-        ?Event $event
+        ?Event $event,
+        RegistrationRepository $registrationRepository
     ): Response {
         if (null === $event) {
             throw $this->createNotFoundException("L'évènement n'existe pas ");
         }
-
-        return $this->render('event/show.html.twig', ['event' => $event]);
+        $user = $this->getUser();
+        $registration = null;
+        if (null !== $user) {
+            $registration = $registrationRepository->getRegistrationForEventAndUser($event->getId(), $user->getId());
+            if (empty($registration)) {
+                $registration = null;
+            } else {
+                $registration = $registration[0];
+            }
+        }
+        return $this->render('event/show.html.twig', [
+            'event' => $event,
+            'isRegister' => null !== $registration,
+            'registration' => $registration,
+        ]);
     }
 
     #[Route('/event/{id}/delete', requirements: ['id' => '\d+'])]
@@ -111,6 +130,101 @@ class EventController extends AbstractController
         }
 
         return $this->render('event/create.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/event/{id}/inscription/create', requirements: ['id' => '\d+'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function InscriptionCreate(
+        Event $event,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        EventRepository $eventRepository): Response
+    {
+        $registration = new Registration();
+        $form = $this->createForm(RegistrationType::class, $registration);
+        $form->add('hour', ChoiceType::class, [
+            'mapped' => false,
+            'choices' => $eventRepository->getHours($event->getName()),
+            'choice_label' => function ($choice): string {
+                return $choice;
+            },
+            'label' => 'Heure',
+        ]);
+        $form->add('minute', ChoiceType::class, [
+            'mapped' => false,
+            'choices' => $eventRepository->getMinutes($event->getName()),
+            'choice_label' => function ($choice): string {
+                return $choice;
+            },
+            'label' => 'Minute',
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $registration = $form->getData();
+            $registration->setEvent($event);
+            $registration->setUser($this->getUser());
+            $registration->getDate()->setTime($form->get('hour')->getData(), $form->get('minute')->getData());
+            $entityManager->persist($registration);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_event_show', [
+                'id' => $event->getId(),
+            ]);
+        }
+
+        return $this->render('inscription/create.html.twig', [
+            'form' => $form,
+            'event' => $event,
+        ]);
+    }
+
+    #[Route('/event/{id}/inscription/{idRegistration}/update', requirements: ['id' => '\d+', 'idRegistration' => '\d+'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function InscriptionUpdate(
+        Event $event,
+        int $idRegistration,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        EventRepository $eventRepository,
+        RegistrationRepository $registrationRepository): Response
+    {
+        $registration = $registrationRepository->find($idRegistration);
+        $user = $registration->getUser();
+        if ($user !== $this->getUser()) {
+            throw $this->createNotFoundException('Vous ne pouvez pas modifier une inscription ne vous appartenant pas');
+        }
+        $form = $this->createForm(RegistrationType::class, $registration);
+        $form->add('hour', ChoiceType::class, [
+            'mapped' => false,
+            'choices' => $eventRepository->getHours($event->getName()),
+            'choice_label' => function ($choice): string {
+                return $choice;
+            },
+            'label' => 'Heure',
+        ]);
+        $form->add('minute', ChoiceType::class, [
+            'mapped' => false,
+            'choices' => $eventRepository->getMinutes($event->getName()),
+            'choice_label' => function ($choice): string {
+                return $choice;
+            },
+            'label' => 'Minute',
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $registration->getDate()->setTime($form->get('hour')->getData(), $form->get('minute')->getData());
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_event_show', [
+                'id' => $event->getId(),
+            ]);
+        }
+
+        return $this->render('inscription/update.html.twig', [
+            'event' => $event,
+            'registration' => $registration,
             'form' => $form,
         ]);
     }
