@@ -204,17 +204,17 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/event/{id}/inscription/{idRegistration}/update', requirements: ['id' => '\d+', 'idRegistration' => '\d+'])]
+    #[Route('/event/inscription/{id}/update', requirements: ['id' => '\d+', 'idRegistration' => '\d+'])]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function InscriptionUpdate(
-        Event $event,
-        int $idRegistration,
+        int $id,
         Request $request,
         EntityManagerInterface $entityManager,
         EventRepository $eventRepository,
         RegistrationRepository $registrationRepository): Response
     {
-        $registration = $registrationRepository->find($idRegistration);
+        $registration = $registrationRepository->find($id);
+        $event = $registration->getEvent();
         $user = $registration->getUser();
         if ($user !== $this->getUser()) {
             throw $this->createNotFoundException('Vous ne pouvez pas modifier une inscription ne vous appartenant pas');
