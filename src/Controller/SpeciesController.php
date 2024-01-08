@@ -18,12 +18,12 @@ class SpeciesController extends AbstractController
         $family = $AnimalFamilyRepository->getAllSpecies($idFamily, $search);
         $familyName = '';
         if ([] != $family) {
-            $familyName = $family[0]->getNomFamille();
+            $familyName = $family[0]->getName();
         }
 
         return $this->render('species/index.html.twig', [
             'species' => $family,
-            'familyName' => $AnimalFamilyRepository->find($idFamily)?->getName(),
+            'name' => $AnimalFamilyRepository->find($idFamily)?->getName(),
             'family' => true,
             'idFamily' => $idFamily,
             'search' => $search,

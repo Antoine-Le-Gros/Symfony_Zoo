@@ -27,9 +27,9 @@
                 {% set image = animal.image.image|default('') %}
                 <li class="card m-3" style="width: min-content">
                     <img src="{{ animal.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256">
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
                         <h5 class="cardtitle" style="color: black">{{ animal.name }} ({{ animal.species.name }})</h5>
-                        <p class="card-text" style="color: black">{{ animal.description }} </p>
+                        <p class="card-text flex-fill" style="color: black">{{ animal.description }} </p>
                         <a href="{{ path('app_animal_show', {'id': animal.id}) }}" class="btn btn-primary">Afficher les détails à propos de {{ animal.name }}</a>
                     </div>
                 </li>
