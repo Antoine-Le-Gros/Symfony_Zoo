@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Entity\Registration;
-use App\Entity\User;
 use App\Form\EventType;
 use App\Form\RegistrationType;
 use App\Repository\EnclosureRepository;
@@ -135,29 +134,6 @@ class EventController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/event/{id}/inscription/create', requirements: ['id' => '\d+'])]
-    public function InscriptionCreate(User $user, Event $event, Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $registration = new Registration();
-        $form = $this->createForm(RegistrationType::class, $registration);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $registration = $form->getData();
-            $registration->setEvent($event);
-            $registration->setUser($user);
-            $entityManager->persist($registration);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_event_show', [
-                'id' => $event->getId(),
-            ]);
-        }
-
-        return $this->render('inscription/create.html.twig', [
-            'form' => $form,
-            'event' => $event,
-        ]);
-    }
 
     #[Route('/event/{id}/inscription/create', requirements: ['id' => '\d+'])]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
@@ -259,7 +235,7 @@ class EventController extends AbstractController
      */
     #[Route('/event/inscription/{id}/delete', requirements: ['id' => '\d+'])]
     public function deleteRegistrations(int $id,
-        Request $request, EntityManagerInterface $entityManager, RegistrationRepository $registrationRepository)
+        Request $request, EntityManagerInterface $entityManager, RegistrationRepository $registrationRepository): \Symfony\Component\HttpFoundation\RedirectResponse|Response
     {
         $registration = $registrationRepository->find($id);
         $form = $this->createFormBuilder()
