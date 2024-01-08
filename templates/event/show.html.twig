@@ -14,6 +14,31 @@
         <dd> {{ event.quota }}</dd>
     </dl>
     {% dump(events) %}
-    <p>Voulez vous voir d'autres évènements</p>
-    <a href="{{ path('app_event_show', {id:event.id +1}) }}">Suivant</a>
+
+    {% set cle=-1 %}
+    {% set cleprev=-1 %}
+    {% for key,value in events %}
+        {%if value.id == event.id%}
+            {% set cle = key%}
+            {% set cleprev=key %}
+        {% endif %}
+    {% endfor %}
+    {% dump(cle) %}
+    {% if cle==events|length -1  %}
+        {% set cle=-1 %}
+    {% endif %}
+    {% dump(cle) %}
+    {% set next=events[cle+1].id  %}
+    {% dump(next) %}
+    {% if cleprev<=0 %}
+        {% set cleprev= (events|length)  %}
+    {% endif %}
+    {% dump(cle) %}
+    {% set previous=events[cleprev-1].id  %}
+
+    <p>Pour en apprendre plus sur d'autres évènements</p>
+    <div class="btn-group" role="group" aria-label="Basic mixed styles" >
+        <a  class="btn btn-warning" href="{{ path('app_event_show', {id:previous}) }}">Précédent</a>
+        <a class="btn btn-primary" href="{{ path('app_event_show', {id:next}) }}">Suivant</a>
+    </div>
 {% endblock %}
