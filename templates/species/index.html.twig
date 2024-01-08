@@ -6,20 +6,20 @@
 {% block body %}
     <h1 class="subsectionTitle text-center">Liste des espèces {% if family %} appartenant à la famille {{ name }} {% endif %}</h1>
     <hr>
-    <ul class="especesAnimal">
+    <ul class="especesAnimal p-0" style="list-style-type: none">
         {% for singleSpecies in species %}
             {% if family %}
                 {% for esp in singleSpecies.species %}
                     {% set image = esp.image.image|default(asset('img/default.png')) %}
                     <li class="species-list"><a class="nav-link species-link" href="{{ path('app_animals', {'idSpecies': esp.id}) }}">
-                            <div class="DescriptionEspèce d-flex flex-column">
+                            <div class="w-20 d-flex flex-column" >
                                 <span>{{ esp.name |capitalize }}</span>
-                                <span style="width: 15vh>{{ esp.description |capitalize}}</span>
+                                <span>{{ esp.description |capitalize}}</span>
                             </div>
                                 <div class="img-centre">
                                     <img class="specie-img" src="{{ image }}" alt="Image inconnue" width="256" height="256">
                                 </div>
-                            <div class="DétailsEspèce">
+                            <div class="d-flex flex-column">
                                 <span>{{ esp.diet.name |capitalize }}</span>
                                 <span>{{ esp.animals |length }} individus dans l'espèce</span>
                             </div>
@@ -29,14 +29,14 @@
             {% else %}
                 {% set image = singleSpecies.image.image|default(asset('img/default.png')) %}
                 <li class="species-list"><a class="nav-link species-link" href="{{ path('app_animals', {'idSpecies': singleSpecies.id}) }}">
-                        <div class="DescriptionEspèce d-flex flex-column">
+                        <div class="d-flex flex-column w-20">
                             <span class="libEspece">{{ singleSpecies.name |capitalize }}</span>
-                            <span style="width: 15vh">{{ singleSpecies.description |capitalize}}</span>
+                            <span>{{ singleSpecies.description |capitalize}}</span>
                         </div>
                             <div class="img-centre">
                                 <img class="specie-img" src="{{ image }}" alt="Image inconnue" width="256" height="256">
                             </div>
-                        <div class="DétailsEspèce">
+                        <div class="d-flex flex-column">
                             <span>{{ singleSpecies.diet.name |capitalize }}</span>
                             <span>{{ singleSpecies.animals | length }} individus dans l'espèce</span>
                         </div>
