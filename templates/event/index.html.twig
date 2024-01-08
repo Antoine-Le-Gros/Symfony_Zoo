@@ -4,25 +4,27 @@
 {% block stylesheets %} <link href="{{ asset('css/Event.css') }}" rel="stylesheet"> {% endblock %}
 {% block body %}
 
-    <h1 class="subsectionTitle">Liste des évènements {% if enclosure %} pour l'enclos {{ name }} {% endif %}</h1>
+    <h1 class="subsectionTitle text-center">Liste des évènements {% if enclosure %} pour l'enclos {{ name }} {% endif %}</h1>
     {#  <ul class="Events">#}
-    <div id="carousel-event" class="carousel slide carousevent "   data-bs-ride="carousel"  >
-        <div class="carousel-inner ">
+    <div id="carousel-event" class="flex-grow-1 align-items-center carousel slide carousevent d-flex justify-content-center" data-bs-ride="carousel"  >
+        <div class="carousel-inner w-75 rounded text-center">
             {% set i= true %}
             {% for event in events %}
                 {% if enclosure %}
                     {% for ev in event %}
                         {% set date = ev.Durationformat(COOKIE) %}
-                        <div class="carousel-item  data-bs-interval=500 {{ i?"active":"" }}" >
+                        <div class="carousel-item data-bs-interval=500  {{ i?"active":"" }}" >
                             {% set i=false %}
                                 <div class="event">
-                                    <a class="link-event d-flex flex-column"  href="{{ path('app_event_show', {id:event.id}) }}">
-                                        <span class="badge bg-warning">{{ ev.name |capitalize }}</span>
+                                    <a class="link-event"  href="{{ path('app_event_show', {id:event.id}) }}">
+                                        <span class="badge bg-warning">
+                                            {{ ev.name |capitalize }}
+                                        </span>
                                         <span class="badge bg-secondary" >
-                                {{ ev.enclosure.name |capitalize }}
-                            </span>
+                                            {{ ev.enclosure.name |capitalize }}
+                                         </span>
                                     </a>
-                                    <a class="btn btn-danger w-50 delete" href="{{ path('app_event_delete', {id:event.id}) }}">SUPPRIMER</a>
+                                    <a class="btn btn-danger w-50" href="{{ path('app_event_delete', {id:event.id}) }}">SUPPRIMER</a>
                                 </div>
                             </div>
 
