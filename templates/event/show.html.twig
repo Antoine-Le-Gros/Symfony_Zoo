@@ -50,4 +50,7 @@
     {% else %}
         <a class="btn btn-outline-secondary " href="{{ path('app_event_inscriptioncreate', {id: event.id}) }}"> S'inscrire à l'évènement {{ event.name }}</a>
     {% endif %}
+    {% dump(events) %}
+    <p>Voulez vous voir d'autres évènements</p>
+    <a href="{{ path('app_event_show', {id:event.id +1}) }}">Suivant</a>
 {% endblock %}
