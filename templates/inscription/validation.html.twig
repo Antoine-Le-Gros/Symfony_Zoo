@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %} Validation d'inscription {% endblock %}
+{% block body %}
+    <div class="d-flex flex-column">
+        <h1 class="subsectionTitle text-center">Validation de l'inscription de l'évènement {{ event.name }} pour le {{ event.date|format_datetime('full', 'short', locale='fr') }}</h1>
+
+        <span>Merci de vous être inscrit !</span>
+        <a class="btn btn-primary ms-auto" style="" href="{{ path('app_event_inscriptioninvoice', {id: event.id}) }}">Voir votre facture</a>
+    </div>
+{% endblock %}
