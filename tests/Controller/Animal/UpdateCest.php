@@ -6,6 +6,7 @@ use App\Entity\Animal;
 use App\Factory\AnimalFactory;
 use App\Factory\EnclosureFactory;
 use App\Factory\SpeciesFactory;
+use App\Factory\UserFactory;
 use App\Tests\Support\ControllerTester;
 
 class UpdateCest
@@ -19,7 +20,7 @@ class UpdateCest
 
     public function formUpdateAnimal(ControllerTester $I): void
     {
-        $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        $adminUser = UserFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
         $I->amLoggedInAs($adminUser);
 
         AnimalFactory::createOne([
@@ -41,7 +42,7 @@ class UpdateCest
 
     public function FormUpdateAnimalSend(ControllerTester $I): void
     {
-        $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        $adminUser = UserFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
         $I->amLoggedInAs($adminUser);
 
         AnimalFactory::createOne([

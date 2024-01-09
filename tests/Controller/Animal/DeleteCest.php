@@ -3,7 +3,9 @@
 namespace Controller\Animal;
 
 use App\Entity\Animal;
+use App\Entity\User;
 use App\Factory\AnimalFactory;
+use App\Factory\UserFactory;
 use App\Tests\Support\ControllerTester;
 
 class DeleteCest
@@ -16,7 +18,7 @@ class DeleteCest
 
     public function formDeleteAnimal(ControllerTester $I): void
     {
-        $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        $adminUser = UserFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
         $I->amLoggedInAs($adminUser);
 
         AnimalFactory::createOne([
@@ -32,7 +34,7 @@ class DeleteCest
 
     public function formDeleteAnimalDenied(ControllerTester $I): void
     {
-        $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        $adminUser = UserFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
         $I->amLoggedInAs($adminUser);
 
         AnimalFactory::createOne([
@@ -48,7 +50,7 @@ class DeleteCest
 
     public function formDeleteAnimalAccepted(ControllerTester $I): void
     {
-        $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        $adminUser = UserFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
         $I->amLoggedInAs($adminUser);
 
         AnimalFactory::createOne([
