@@ -44,7 +44,7 @@ class AnimalCategoryRepository extends ServiceEntityRepository
     public function getAllFamilies(int $idCategory, string $search): array
     {
         $qb = $this->createQueryBuilder('c');
-        $qb->leftJoin('c.animalsFamily', 'families')
+        $qb->leftJoin('c.animalFamilies', 'families')
             ->leftJoin('families.image', 'images')
             ->addSelect('images')
             ->addSelect('families')
