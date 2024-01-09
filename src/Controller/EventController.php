@@ -90,7 +90,7 @@ class EventController extends AbstractController
                 return $this->redirectToRoute('app_event_showAll');
             }
 
-            return $this->redirectToRoute('app_event_showAll', [
+            return $this->redirectToRoute('app_event_show', [
                 'id' => $event->getId(),
             ]);
         }
@@ -254,8 +254,11 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/event/registration/{id}/delete', requirements: ['id' => '\d+'])]
-    public function deleteregistrations(int $id,
+    /**
+     * @throws \Exception
+     */
+    #[Route('/event/inscription/{id}/delete', requirements: ['id' => '\d+'])]
+    public function deleteRegistrations(int $id,
         Request $request, EntityManagerInterface $entityManager, RegistrationRepository $registrationRepository)
     {
         $registration = $registrationRepository->find($id);
@@ -264,20 +267,32 @@ class EventController extends AbstractController
             ->add('cancel', SubmitType::class)
             ->getForm();
         $form->handleRequest($request);
+        $event = $registration->getEvent();
         if ($form->isSubmitted()) {
             if ($form->getClickedButton() === $form->get('delete')) {
-                $entityManager->remove($registration);
-                $entityManager->flush();
+                dump(date('Y-m-d H:i:s'));
+                $origin = new \DateTimeImmutable($event->getDate()->format('Y-m-d H:i:s'));
+                $target = new \DateTimeImmutable(date('Y-m-d H:i:s'));
+                $interval = $target->diff($origin);
+                if (0 == $interval->invert) {
+                    $entityManager->remove($registration);
+                    $entityManager->flush();
 
-                return $this->redirectToRoute('app_event_showAll');
+                    return $this->redirectToRoute('app_event_showAll');
+                }
+
+                return $this->render('inscription/delete.html.twig', [
+                    'register' => $registration,
+                    'form' => $form,
+                    'not_deletable' => true,
+                ]);
             }
-
-            return $this->redirectToRoute('app_event_show', ['id' => $registration->getEvent()->getId()]);
         }
 
-        return $this->render('registration/delete.html.twig', [
+        return $this->render('inscription/delete.html.twig', [
             'register' => $registration,
             'form' => $form,
+            'not_deletable' => false,
         ]);
     }
 }
