@@ -24,6 +24,8 @@ class EventRepository extends ServiceEntityRepository
     public function getAll(string $search): array
     {
         return $this->createQueryBuilder('e')
+            ->leftJoin('e.enclosure', 'enclosure')
+            ->addSelect('enclosure')
             ->Where('e.name LIKE :search')
             ->setParameter('search', '%'.$search.'%')
             ->orderBy('e.name')
