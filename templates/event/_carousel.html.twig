@@ -1,4 +1,9 @@
 <div id="carousel-event" class="flex-grow-1 align-items-center carousel slide carousevent d-flex justify-content-center" data-bs-ride="carousel"  >
+    <div class="carousel-indicators">
+        {% for i in 0..events | length -1 %}
+            <button type="button" data-bs-target="#carousel-event" data-bs-slide-to="{{ i }}" {{ i==0?"class='active'":""}} aria-current="true" aria-label="Slide {{ i }}"></button>
+        {% endfor %}
+    </div>
     <div class="carousel-inner w-75 rounded text-center">
         {% set i= true %}
         {% for event in events %}
@@ -8,7 +13,7 @@
                     <div class="carousel-item data-bs-interval=500  {{ i?"active":"" }}" >
                         {% set i=false %}
                         <div class="event">
-                            <a class="link-event"  href="{{ path('app_event_show', {id:event.id}) }}">
+                            <a class="link-event"  href="{{ path('app_event_show', {id:ev.id}) }}">
                                         <span class="badge bg-warning">
                                             {{ ev.name |capitalize }}
                                         </span>
@@ -16,7 +21,11 @@
                                             {{ ev.enclosure.name |capitalize }}
                                          </span>
                             </a>
-                            <a class="btn btn-danger w-50" href="{{ path('app_event_delete', {id:event.id}) }}">SUPPRIMER</a>
+                            <div class="crud d-flex">
+                                <a class="btn btn-danger w-50 delete" href="{{ path('app_event_delete', {id:ev.id}) }}">SUPPRIMER</a>
+                                <a class="btn btn-success w-50 update" href="{{ path('app_event_update', {id:ev.id}) }}">Modifier</a>
+                            </div>
+
                         </div>
                     </div>
 
