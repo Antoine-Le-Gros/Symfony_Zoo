@@ -29,7 +29,7 @@ class AnimalCategory
 
     public function __construct()
     {
-        $this->animalsFamily = new ArrayCollection();
+        $this->animalFamilies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,24 +61,24 @@ class AnimalCategory
         return $this;
     }
 
-    public function getAnimalsFamily(): Collection
+    public function getAnimalFamilies(): Collection
     {
-        return $this->animalsFamily;
+        return $this->animalFamilies;
     }
 
-    public function addAnimalFamily(AnimalFamily $AnimalFamily): static
+    public function addAnimalFamilies(AnimalFamily $AnimalFamily): static
     {
-        if (!$this->animalsFamily->contains($AnimalFamily)) {
-            $this->animalsFamily->add($AnimalFamily);
+        if (!$this->animalFamilies->contains($AnimalFamily)) {
+            $this->animalFamilies->add($AnimalFamily);
             $AnimalFamily->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeAnimalFamily(AnimalFamily $animalFamily): static
+    public function removeAnimalFamilies(AnimalFamily $animalFamily): static
     {
-        if ($this->animalsFamily->removeElement($animalFamily)) {
+        if ($this->animalFamilies->removeElement($animalFamily)) {
             // set the owning side to null (unless already changed)
             if ($animalFamily->getCategory() === $this) {
                 $animalFamily->setCategory(null);

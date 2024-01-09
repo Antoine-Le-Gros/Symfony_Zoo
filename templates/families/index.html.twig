@@ -8,7 +8,7 @@
     <ul class="container d-flex flex-wrap justify-content-center">
         {% for family in families %}
             {% if category %}
-                {% for fam in family.AnimalsFamily %}
+                {% for fam in family.AnimalFamilies %}
                     {% set image = fam.image.image|default(asset('/img/default.png')) %}
                     <li class="card left-card m-3" style="width: 80vh;">
                         <img class="card-img-top" src="{{ image }}" alt="Image inconnue" width="256" height="256">
