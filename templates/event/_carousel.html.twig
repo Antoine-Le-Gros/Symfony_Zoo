@@ -33,7 +33,10 @@
                                 {{ event.enclosure.name |capitalize }}
                             </span>
                         </a>
-                        <a class="btn btn-danger w-50 delete" href="{{ path('app_event_delete', {id:event.id}) }}">SUPPRIMER</a>
+                        <div class="crud d-flex g-lg-1 ">
+                            <a class="btn btn-danger w-50 delete" href="{{ path('app_event_delete', {id:event.id}) }}">SUPPRIMER</a>
+                            <a class="btn btn-success w-50 update" href="{{ path('app_event_delete', {id:event.id}) }}">Modifier</a>
+                        </div>
                     </div>
                 </div>
 
