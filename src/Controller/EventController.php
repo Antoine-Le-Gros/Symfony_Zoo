@@ -83,6 +83,7 @@ class EventController extends AbstractController
         EntityManagerInterface $entityManager,
         Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createFormBuilder()
             ->add('delete', SubmitType::class)
             ->add('cancel', SubmitType::class)
@@ -110,6 +111,7 @@ class EventController extends AbstractController
     #[Route('/event/{id}/update', requirements: ['id' => '\d+'])]
     public function update(Event $event, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -137,6 +139,7 @@ class EventController extends AbstractController
     #[Route('/event/create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
