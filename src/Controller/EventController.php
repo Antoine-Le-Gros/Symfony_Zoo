@@ -47,9 +47,11 @@ class EventController extends AbstractController
 
     #[Route('/event/{id}/show', name: 'app_event_show', requirements: ['id' => '\d+'])]
     public function show(
-        ?Event $event,
-        RegistrationRepository $registrationRepository
+        RegistrationRepository $registrationRepository,
+        int $id,
+        EventRepository $eventRepository
     ): Response {
+        $event = $eventRepository->find($id);
         if (null === $event) {
             throw $this->createNotFoundException("L'évènement n'existe pas ");
         }
@@ -68,6 +70,8 @@ class EventController extends AbstractController
             'event' => $event,
             'isRegister' => null !== $registration,
             'registration' => $registration,
+            'enclosure' => false,
+            'events' => $eventRepository->getAll(''),
         ]);
     }
 

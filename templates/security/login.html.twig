@@ -4,17 +4,16 @@
 
 {% block body %}
 <form method="post">
+
+    <h1 class="h3 mb-3 font-weight-normal subsectionTitle text-center">Connectez-vous</h1>
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-
     {% if app.user %}
         <div class="mb-3">
             Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal subsectionTitle text-center">Connectez-vous</h1>
     <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
     <label for="inputPassword">Mot de passe</label>
@@ -29,4 +28,5 @@
     </button>
 </form>
     <h4 class="text-center">Ou si vous n'avez pas encore de compte, <a href="{{ path('app_register') }}">créez-en un !</a></h4>
+
 {% endblock %}
