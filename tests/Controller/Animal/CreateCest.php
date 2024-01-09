@@ -5,6 +5,7 @@ namespace Controller\Animal;
 use App\Entity\Animal;
 use App\Factory\EnclosureFactory;
 use App\Factory\SpeciesFactory;
+use App\Factory\UserFactory;
 use App\Tests\Support\ControllerTester;
 
 class CreateCest
@@ -17,7 +18,7 @@ class CreateCest
 
     public function formCreateAnimal(ControllerTester $I): void
     {
-        $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        $adminUser = UserFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
         $I->amLoggedInAs($adminUser);
 
         $I->amOnPage('/animal/create');
@@ -28,7 +29,7 @@ class CreateCest
 
     public function formErrorWithNoData(ControllerTester $I): void
     {
-        $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        $adminUser = UserFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
         $I->amLoggedInAs($adminUser);
 
         $I->amOnPage('/animal/create');
@@ -40,7 +41,7 @@ class CreateCest
     // Activate "extension=fileinfo" in PHP.ini
     public function formWithDataIsOk(ControllerTester $I): void
     {
-        $adminUser = UtilisateurFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        $adminUser = UserFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
         $I->amLoggedInAs($adminUser);
 
         EnclosureFactory::createOne(['name' => 'Le cirque']);
