@@ -12,6 +12,7 @@
                     <li>
                     <span class="event">
                         <a href="{{ path('app_event_delete', {id:ev.id}) }}"><span class="material-symbols-outlined text-danger">delete</span></a>
+                        <a href="{{ path('app_event_update', {id:ev.id}) }}"><span class="material-symbols-outlined text-warning">update</span></a>
                         <a href="{{ path('app_event_show', {id:ev.id}) }}">
                             {{ ev.name }},
                             {{ ev.description }}
@@ -26,6 +27,7 @@
                 <li>
                 <span class="evenement">
                     <a href="{{ path('app_event_delete', {id:event.id}) }}"><span class="material-symbols-outlined text-danger">delete</span></a>
+                    <a href="{{ path('app_event_update', {id:event.id}) }}"><span class="material-symbols-outlined text-warning">update</span></a>
                     <a href="{{ path('app_event_show', {id:event.id}) }}">
                         {{ event.name }},
                         {{ event.description }}
