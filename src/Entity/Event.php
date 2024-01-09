@@ -39,7 +39,7 @@ class Event
     #[Assert\NotBlank]
     private ?int $quota = null;
 
-    #[ORM\ManyToOne(inversedBy: 'evenements')]
+    #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Enclosure $enclosure = null;
 
