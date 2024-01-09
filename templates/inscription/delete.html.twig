@@ -7,6 +7,11 @@
         {{ form_row(form.delete,{'label':'Supprimer'}) }}
         {{ form_row(form.cancel,{'label':'Annuler','attr':{'class':'btn btn-secondary'}}) }}
     {{ form_end(form)}}
+    {% if not_deletable %}
+    <div class="alert alert-danger" role="alert">
+        L'inscription ne peut pas être supprimé pas de bol...
+    </div>
+    {% endif %}
 {% endblock %}
 
 {% block title %}{{ title }}{% endblock %}
