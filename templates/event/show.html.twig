@@ -73,9 +73,5 @@
     {% dump(cle) %}
     {% set previous=events[cleprev-1].id  %}
 
-    <p>Pour en apprendre plus sur d'autres évènements</p>
-    <div class="btn-group" role="group" aria-label="Basic mixed styles" >
-        <a  class="btn btn-warning" href="{{ path('app_event_show', {id:previous}) }}">Précédent</a>
-        <a class="btn btn-primary" href="{{ path('app_event_show', {id:next}) }}">Suivant</a>
-    </div>
+
 {% endblock %}
