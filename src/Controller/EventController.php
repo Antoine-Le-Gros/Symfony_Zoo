@@ -63,6 +63,7 @@ class EventController extends AbstractController
                 $registration = $registration[0];
             }
         }
+
         return $this->render('event/show.html.twig', [
             'event' => $event,
             'isRegister' => null !== $registration,
@@ -88,7 +89,7 @@ class EventController extends AbstractController
                 return $this->redirectToRoute('app_event_showAll');
             }
 
-            return $this->redirectToRoute('app_event_showAll', [
+            return $this->redirectToRoute('app_event_show', [
                 'id' => $event->getId(),
             ]);
         }
@@ -180,17 +181,17 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/event/{id}/inscription/{idRegistration}/update', requirements: ['id' => '\d+', 'idRegistration' => '\d+'])]
+    #[Route('/event/inscription/{id}/update', requirements: ['id' => '\d+', 'idRegistration' => '\d+'])]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function InscriptionUpdate(
-        Event $event,
-        int $idRegistration,
+        int $id,
         Request $request,
         EntityManagerInterface $entityManager,
         EventRepository $eventRepository,
         RegistrationRepository $registrationRepository): Response
     {
-        $registration = $registrationRepository->find($idRegistration);
+        $registration = $registrationRepository->find($id);
+        $event = $registration->getEvent();
         $user = $registration->getUser();
         if ($user !== $this->getUser()) {
             throw $this->createNotFoundException('Vous ne pouvez pas modifier une inscription ne vous appartenant pas');
@@ -226,6 +227,48 @@ class EventController extends AbstractController
             'event' => $event,
             'registration' => $registration,
             'form' => $form,
+        ]);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    #[Route('/event/inscription/{id}/delete', requirements: ['id' => '\d+'])]
+    public function deleteRegistrations(int $id,
+        Request $request, EntityManagerInterface $entityManager, RegistrationRepository $registrationRepository): \Symfony\Component\HttpFoundation\RedirectResponse|Response
+    {
+        $registration = $registrationRepository->find($id);
+        $form = $this->createFormBuilder()
+            ->add('delete', SubmitType::class)
+            ->add('cancel', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        $event = $registration->getEvent();
+        if ($form->isSubmitted()) {
+            if ($form->getClickedButton() === $form->get('delete')) {
+                dump(date('Y-m-d H:i:s'));
+                $origin = new \DateTimeImmutable($event->getDate()->format('Y-m-d H:i:s'));
+                $target = new \DateTimeImmutable(date('Y-m-d H:i:s'));
+                $interval = $target->diff($origin);
+                if (0 == $interval->invert) {
+                    $entityManager->remove($registration);
+                    $entityManager->flush();
+
+                    return $this->redirectToRoute('app_event_showAll');
+                }
+
+                return $this->render('inscription/delete.html.twig', [
+                    'register' => $registration,
+                    'form' => $form,
+                    'not_deletable' => true,
+                ]);
+            }
+        }
+
+        return $this->render('inscription/delete.html.twig', [
+            'register' => $registration,
+            'form' => $form,
+            'not_deletable' => false,
         ]);
     }
 }
