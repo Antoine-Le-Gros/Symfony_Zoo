@@ -189,7 +189,7 @@ class EventController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_event_inscriptionvalidation', [
-                'id' => $event->getId(),
+                'id' => $registration->getId(),
             ]);
         }
 
@@ -310,7 +310,9 @@ class EventController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->get('validate')->isClicked()) {
-                $entityManager->persist($registration);
+                return $this->redirectToRoute('app_event_showAll');
+            } elseif ($form->get('cancel')->isClicked()) {
+                $entityManager->remove($registration);
                 $entityManager->flush();
 
                 return $this->redirectToRoute('app_event_inscriptioncreate', [
@@ -321,6 +323,7 @@ class EventController extends AbstractController
 
         return $this->render('inscription/validation.html.twig', [
             'event' => $registration->getEvent(),
+            'form' => $form,
         ]);
     }
 }
