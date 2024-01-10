@@ -26,7 +26,7 @@ class AnimalFamilyCrudController extends AbstractCrudController
             TextEditorField::new('description'),
             AssociationField::new('category')
                 ->setFormTypeOptions([
-                    'placeholder' => 'Categorie',
+                    'placeholder' => 'Catégorie',
                     'choice_label' => 'name',
                     'query_builder' => function (EntityRepository $entityRepository) {
                         return $entityRepository->createQueryBuilder('c')
