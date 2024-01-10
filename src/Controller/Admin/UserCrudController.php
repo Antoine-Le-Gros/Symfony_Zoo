@@ -58,19 +58,10 @@ class UserCrudController extends AbstractCrudController
 
                     return $symbols;
                 }),
-            DateTimeField::new('dateOfBirth')
-            ->formatValue(function (?\DateTime $dateOfBirth) {
-                return $dateOfBirth->format('Y-m-d H:i') ?: 'Aucune';
-            }),
-            DateTimeField::new('hiringDate')
-                ->formatValue(function (?\DateTime $hiringDate) {
-                    return $hiringDate->format('Y-m-d H:i') ?: 'Aucune';
-                }),
+            DateTimeField::new('dateOfBirth'),
+            DateTimeField::new('hiringDate'),
             IntegerField::new('contractDuration'),
-            DateTimeField::new('dateVisitor')
-                ->formatValue(function (?\DateTime $dateVisitor) {
-                    return $dateVisitor->format('Y-m-d H:i') ?: 'Aucune';
-                }),
+            DateTimeField::new('dateVisitor'),
         ];
     }
 
