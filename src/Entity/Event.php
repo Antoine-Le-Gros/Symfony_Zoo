@@ -39,7 +39,7 @@ class Event
     #[Assert\NotBlank]
     private ?int $quota = null;
 
-    #[ORM\ManyToOne(inversedBy: 'evenements')]
+    #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Enclosure $enclosure = null;
 
@@ -156,5 +156,14 @@ class Event
         }
 
         return $this;
+    }
+
+    public function getNbRegister(): int
+    {
+        $nbRegister = 0;
+        foreach ($this->registrations as $registration) {
+            $nbRegister += $registration->getNbReservedPlaces();
+        }
+        return $nbRegister;
     }
 }

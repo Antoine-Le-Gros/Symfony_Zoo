@@ -79,6 +79,12 @@
     "quota": 200
   },
   {
+    "name": "sage de la fôret",
+    "description": "description à définir",
+    "duration": 75,
+    "quota": 2000
+  },
+  {
     "name": "ça mouille ",
     "description": " description à définir",
     "duration": 75,

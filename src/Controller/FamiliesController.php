@@ -18,7 +18,7 @@ class FamiliesController extends AbstractController
 
         return $this->render('families/index.html.twig', [
             'families' => $AnimalCategoryRepository->getAllFamilies($idCategory, $search),
-            'categoryName' => $AnimalCategoryRepository->find($idCategory)->getName(),
+            'name' => $AnimalCategoryRepository->find($idCategory)->getName(),
             'category' => true,
             'idCategory' => $idCategory,
             'search' => $search,
