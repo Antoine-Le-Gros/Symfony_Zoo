@@ -53,7 +53,7 @@ class IndexCest
             'Gabriellebg',
             'Pierre',
         ],
-            $I->grabMultiple('.libEspece'));
+            $I->grabMultiple('#name'));
     }
 
     public function testSearchSpecies(ControllerTester $I): void
