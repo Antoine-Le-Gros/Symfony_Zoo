@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenements auxquels vous êtes inscrits{% endblock %}
+
+{% block body %}
+    <h1 class="subsectionTitle">Bonjour, {{ app.user.firstname }}</h1>
+    <h3>Voici la liste des évènements auxquels vous êtes incrits :</h3>
+    <div class="container d-flex flex-wrap justify-content-center">
+    {% for registration in registrations %}
+    <div class="card border-dark m-3" style="max-width: 18rem;">
+        <div class="card-header">Evènement : {{ registration.event.name }}</div>
+        <div class="card-body text-dark">
+            <h5 class="card-title">Description de l'évènement</h5>
+            <p class="card-text">{{ registration.event.description }}</p>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+{% endblock %}
