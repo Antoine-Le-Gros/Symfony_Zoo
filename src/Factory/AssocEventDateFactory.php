@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<AssocEventDate>
  *
- * @method        AssocEventDate|Proxy create(array|callable $attributes = [])
- * @method static AssocEventDate|Proxy createOne(array $attributes = [])
- * @method static AssocEventDate|Proxy find(object|array|mixed $criteria)
- * @method static AssocEventDate|Proxy findOrCreate(array $attributes)
- * @method static AssocEventDate|Proxy first(string $sortedField = 'id')
- * @method static AssocEventDate|Proxy last(string $sortedField = 'id')
- * @method static AssocEventDate|Proxy random(array $attributes = [])
- * @method static AssocEventDate|Proxy randomOrCreate(array $attributes = [])
+ * @method        AssocEventDate|Proxy                     create(array|callable $attributes = [])
+ * @method static AssocEventDate|Proxy                     createOne(array $attributes = [])
+ * @method static AssocEventDate|Proxy                     find(object|array|mixed $criteria)
+ * @method static AssocEventDate|Proxy                     findOrCreate(array $attributes)
+ * @method static AssocEventDate|Proxy                     first(string $sortedField = 'id')
+ * @method static AssocEventDate|Proxy                     last(string $sortedField = 'id')
+ * @method static AssocEventDate|Proxy                     random(array $attributes = [])
+ * @method static AssocEventDate|Proxy                     randomOrCreate(array $attributes = [])
  * @method static AssocEventDateRepository|RepositoryProxy repository()
- * @method static AssocEventDate[]|Proxy[] all()
- * @method static AssocEventDate[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static AssocEventDate[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static AssocEventDate[]|Proxy[] findBy(array $attributes)
- * @method static AssocEventDate[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static AssocEventDate[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static AssocEventDate[]|Proxy[]                 all()
+ * @method static AssocEventDate[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static AssocEventDate[]|Proxy[]                 createSequence(iterable|callable $sequence)
+ * @method static AssocEventDate[]|Proxy[]                 findBy(array $attributes)
+ * @method static AssocEventDate[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static AssocEventDate[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class AssocEventDateFactory extends ModelFactory
 {

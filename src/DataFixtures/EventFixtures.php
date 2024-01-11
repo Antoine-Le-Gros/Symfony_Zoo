@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Factory\AnimalFactory;
 use App\Factory\EnclosureFactory;
-use App\Factory\EventDateFactory;
 use App\Factory\EventFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

@@ -49,11 +49,6 @@ de gestion d'un zoo sous la forme d’une application web. Ce projet permet :
 - de s’inscrire à un ou plusieurs spectacles (pour les visiteurs)
 - de consulter les animaux et enclos...
 
-**Utilisateur Admin :**
-
-- `admin@example.com`
-- `admin`
-
 ---
 
 ## 🛠️ Mise en place du projet :
@@ -85,6 +80,11 @@ composer start
 ### 🌐 Accès au serveur Web
 
 Naviguez alors à partir de cette adresse : <http://127.0.0.1:8000>
+
+**Utilisateur administrateur :**
+
+- `admin@example.com`
+- `admin`
 
 ---
 

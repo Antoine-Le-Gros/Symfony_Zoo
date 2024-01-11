@@ -28,7 +28,7 @@ class AnimalRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a');
         $qb->leftJoin('a.image', 'image')
-            ->leftJoin('a.species','species')
+            ->leftJoin('a.species', 'species')
             ->addSelect('image')
             ->addSelect('species')
             ->where('a.name LIKE :search')

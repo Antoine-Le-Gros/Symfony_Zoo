@@ -18,7 +18,6 @@ class AssocEventDateFixtures extends Fixture implements DependentFixtureInterfac
         for ($i = 0; $i < 19; ++$i) {
             AssocEventDateFactory::createOne(['eventId ' => $events[$i], 'eventDatesId' => $dates[$i]]);
         }
-
     }
 
     public function getDependencies(): array

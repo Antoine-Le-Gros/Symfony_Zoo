@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<AnimalDiet>
  *
- * @method        AnimalDiet|Proxy                 create(array|callable $attributes = [])
- * @method static AnimalDiet|Proxy                 createOne(array $attributes = [])
- * @method static AnimalDiet|Proxy                 find(object|array|mixed $criteria)
- * @method static AnimalDiet|Proxy                 findOrCreate(array $attributes)
- * @method static AnimalDiet|Proxy                 first(string $sortedField = 'id')
- * @method static AnimalDiet|Proxy                 last(string $sortedField = 'id')
- * @method static AnimalDiet|Proxy                 random(array $attributes = [])
- * @method static AnimalDiet|Proxy                 randomOrCreate(array $attributes = [])
+ * @method        AnimalDiet|Proxy               create(array|callable $attributes = [])
+ * @method static AnimalDiet|Proxy               createOne(array $attributes = [])
+ * @method static AnimalDiet|Proxy               find(object|array|mixed $criteria)
+ * @method static AnimalDiet|Proxy               findOrCreate(array $attributes)
+ * @method static AnimalDiet|Proxy               first(string $sortedField = 'id')
+ * @method static AnimalDiet|Proxy               last(string $sortedField = 'id')
+ * @method static AnimalDiet|Proxy               random(array $attributes = [])
+ * @method static AnimalDiet|Proxy               randomOrCreate(array $attributes = [])
  * @method static DietRepository|RepositoryProxy repository()
- * @method static AnimalDiet[]|Proxy[]             all()
- * @method static AnimalDiet[]|Proxy[]             createMany(int $number, array|callable $attributes = [])
- * @method static AnimalDiet[]|Proxy[]             createSequence(iterable|callable $sequence)
- * @method static AnimalDiet[]|Proxy[]             findBy(array $attributes)
- * @method static AnimalDiet[]|Proxy[]             randomRange(int $min, int $max, array $attributes = [])
- * @method static AnimalDiet[]|Proxy[]             randomSet(int $number, array $attributes = [])
+ * @method static AnimalDiet[]|Proxy[]           all()
+ * @method static AnimalDiet[]|Proxy[]           createMany(int $number, array|callable $attributes = [])
+ * @method static AnimalDiet[]|Proxy[]           createSequence(iterable|callable $sequence)
+ * @method static AnimalDiet[]|Proxy[]           findBy(array $attributes)
+ * @method static AnimalDiet[]|Proxy[]           randomRange(int $min, int $max, array $attributes = [])
+ * @method static AnimalDiet[]|Proxy[]           randomSet(int $number, array $attributes = [])
  */
 final class DietFactory extends ModelFactory
 {

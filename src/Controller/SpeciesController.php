@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Repository\SpeciesRepository;
 use App\Repository\AnimalFamilyRepository;
+use App\Repository\SpeciesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

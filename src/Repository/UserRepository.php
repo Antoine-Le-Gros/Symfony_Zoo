@@ -49,7 +49,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->andWhere('registrations.user is null')
             ->setParameter('id', $id);
 
-
         return $qb->getQuery()->execute();
     }
     //    /**

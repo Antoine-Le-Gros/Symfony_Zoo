@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Species>
  *
- * @method        Species|Proxy                    create(array|callable $attributes = [])
- * @method static Species|Proxy                    createOne(array $attributes = [])
- * @method static Species|Proxy                    find(object|array|mixed $criteria)
- * @method static Species|Proxy                    findOrCreate(array $attributes)
- * @method static Species|Proxy                    first(string $sortedField = 'id')
- * @method static Species|Proxy                    last(string $sortedField = 'id')
- * @method static Species|Proxy                    random(array $attributes = [])
- * @method static Species|Proxy                    randomOrCreate(array $attributes = [])
+ * @method        Species|Proxy                     create(array|callable $attributes = [])
+ * @method static Species|Proxy                     createOne(array $attributes = [])
+ * @method static Species|Proxy                     find(object|array|mixed $criteria)
+ * @method static Species|Proxy                     findOrCreate(array $attributes)
+ * @method static Species|Proxy                     first(string $sortedField = 'id')
+ * @method static Species|Proxy                     last(string $sortedField = 'id')
+ * @method static Species|Proxy                     random(array $attributes = [])
+ * @method static Species|Proxy                     randomOrCreate(array $attributes = [])
  * @method static SpeciesRepository|RepositoryProxy repository()
- * @method static Species[]|Proxy[]                all()
- * @method static Species[]|Proxy[]                createMany(int $number, array|callable $attributes = [])
- * @method static Species[]|Proxy[]                createSequence(iterable|callable $sequence)
- * @method static Species[]|Proxy[]                findBy(array $attributes)
- * @method static Species[]|Proxy[]                randomRange(int $min, int $max, array $attributes = [])
- * @method static Species[]|Proxy[]                randomSet(int $number, array $attributes = [])
+ * @method static Species[]|Proxy[]                 all()
+ * @method static Species[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static Species[]|Proxy[]                 createSequence(iterable|callable $sequence)
+ * @method static Species[]|Proxy[]                 findBy(array $attributes)
+ * @method static Species[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static Species[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class SpeciesFactory extends ModelFactory
 {

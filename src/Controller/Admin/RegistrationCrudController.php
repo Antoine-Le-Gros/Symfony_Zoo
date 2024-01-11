@@ -17,7 +17,6 @@ class RegistrationCrudController extends AbstractCrudController
         return Registration::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -47,5 +46,4 @@ class RegistrationCrudController extends AbstractCrudController
                 }),
         ];
     }
-
 }

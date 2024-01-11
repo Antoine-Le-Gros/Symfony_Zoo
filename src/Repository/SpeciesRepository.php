@@ -55,8 +55,6 @@ class SpeciesRepository extends ServiceEntityRepository
         return $qb->getQuery()->execute();
     }
 
-
-
     //    /**
     //     * @return Species[] Returns an array of Species objects
     //     */

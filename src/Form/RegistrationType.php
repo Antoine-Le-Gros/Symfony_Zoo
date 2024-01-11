@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Registration;
-use App\Repository\EventRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -17,14 +16,12 @@ class RegistrationType extends AbstractType
         $builder
             ->add('date', DateType::class, [
                 'placeholder' => [
-                    'day' => 'Day', 'month' => 'Month', 'year' => 'Year',
+                    'day' => 'Jour', 'month' => 'Mois', 'year' => 'Année',
                 ],
+                'years' => range(date('Y'), date('Y')),
             ])
             ->add('nbReservedPlaces', IntegerType::class);
-
-
     }
-
 
     public function configureOptions(OptionsResolver $resolver): void
     {

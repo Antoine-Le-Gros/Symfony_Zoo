@@ -17,7 +17,6 @@ class UpdateCest
         $I->amOnRoute('app_login');
     }
 
-
     public function formUpdateAnimal(ControllerTester $I): void
     {
         $adminUser = UserFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
@@ -37,7 +36,7 @@ class UpdateCest
         $I->seeInField('Nom de l\'animal', 'Pierre');
         $I->seeInField('Description de l\'animal', 'Pierre est un cailloux');
         $I->seeOptionIsSelected('Espèce de l\'animal', 'stone');
-        $I->seeOptionIsSelected('Enclosure de l\'animal', 'Le cirque');
+        $I->seeOptionIsSelected('Enclos de l\'animal', 'Le cirque');
     }
 
     public function FormUpdateAnimalSend(ControllerTester $I): void

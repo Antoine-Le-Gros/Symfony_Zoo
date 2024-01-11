@@ -2,7 +2,6 @@
 
 {% block title %} Votre facture {% endblock %}
 
-{% block body %}
 {% block stylesheets %}
     <style>
         ul.invoice{
@@ -21,27 +20,30 @@
             }
         }
     </style>
-{% endblock%}
+{% endblock %}
+
+{% block body %}
 <h1 class="subsectionTitle">Récapitulatif de votre commande</h1>
-    <ul class="invoice">
-        <li>Événement : </li>
-        <ul>
-            <li>Nom de l'événement : {{ event.name |capitalize}} </li>
-            <li>Enclos lié : {{ event.enclosure.name |capitalize}}</li>
-            <li>Description : {{ event.description |capitalize}}</li>
-            <li>Durée de l'événement : {{ event.duration }} minutes</li>
-        </ul>
-        <li>Inscription : </li>
-        <ul>
-            <li>Date de l'événement : {{ registration.date |date('d-m-Y') }}</li>
-            <li>Nombre de places réservées : {{ registration.nbReservedPlaces }} places</li>
-        </ul>
-        <li>Animaux concernés</li>
-        <ul>
-            {% for specie in species %}
-            <li>{{ specie.name }}</li>
-            {% endfor %}
-        </ul>
+<ul class="invoice">
+    <li>Événement : </li>
+    <ul>
+        <li>Nom de l'événement : {{ event.name |capitalize}} </li>
+        <li>Enclos lié : {{ event.enclosure.name |capitalize}}</li>
+        <li>Description : {{ event.description |capitalize}}</li>
+        <li>Durée de l'événement : {{ event.duration }} minutes</li>
+    </ul>
+    <li>Inscription : </li>
+    <ul>
+        <li>Date de l'événement : {{ registration.date |date('d-m-Y') }}</li>
+        <li>Nombre de places réservées : {{ registration.nbReservedPlaces }} places</li>
+    </ul>
+    <li>Animaux concernés</li>
+    <ul>
+        {% for specie in species %}
+        <li>{{ specie.name | capitalize}}</li>
+        {% endfor %}
+
+    </ul>
         <li>Informations utilisateurs : </li>
         <ul>
             <li>Nom : {{ app.user.lastName |capitalize}}</li>
@@ -52,5 +54,4 @@
         <li>Prix de l'inscription : {{ 3.99 * registration.nbReservedPlaces }}€ </li>
     </ul>
     <h1>Merci de votre visite !</h1>
-
 {% endblock %}
