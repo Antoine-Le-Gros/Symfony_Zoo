@@ -9,7 +9,9 @@
         <dt> Description évènement </dt>
         <dd> {{ event.description | capitalize }}</dd>
         <dt> Date</dt>
-        <dd> {{ event.date.format('Y-m-d H:i') }}</dd>
+            {% for date in dates %}
+                <li>{{ date.eventDatesId.date |date('d-m-Y') }}</li>
+            {% endfor %}
         <dt> Nombre de visiteurs</dt>
         <dd> {{ event.quota }}</dd>
     </dl>

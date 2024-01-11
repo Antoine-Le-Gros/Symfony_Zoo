@@ -33,12 +33,24 @@ class EventRepository extends ServiceEntityRepository
             ->execute();
     }
 
+    public function getDateForEvent(string $eventName): array
+    {
+        $query = $this->createQueryBuilder('e');
+        $query->select('eventDate.date')
+            ->Join('e.eventDates', 'assoc')
+            ->Join('assoc.eventDatesId', 'eventDate')
+            ->Where('UPPER(e.name) = UPPER(:eventName)')
+            ->setParameter('eventName', $eventName);
+
+        return $query->getQuery()->execute();
+    }
+
     public function getHours(string $eventName): array
     {
-        $events = $this->findBy(['name' => $eventName]);
+        $dates = $this->getDateForEvent($eventName);
         $hoursAvailable = [];
-        foreach ($events as $event) {
-            $hoursAvailable[] = date_parse_from_format('Y-m-d H:i:s', $event->getDate()->format('Y-m-d H:i:s'))['hour'];
+        foreach ($dates as $date) {
+            $hoursAvailable[] = date_parse_from_format('Y-m-d H:i:s', $date['date']->format('Y-m-d H:i:s'))['hour'];
         }
 
         return $hoursAvailable;
@@ -46,10 +58,10 @@ class EventRepository extends ServiceEntityRepository
 
     public function getMinutes(string $eventName): array
     {
-        $events = $this->findBy(['name' => $eventName]);
+        $dates = $this->getDateForEvent($eventName);
         $minAvailable = [];
-        foreach ($events as $event) {
-            $minAvailable[] = date_parse_from_format('Y-m-d H:i:s', $event->getDate()->format('Y-m-d H:i:s'))['minute'];
+        foreach ($dates as $date) {
+            $minAvailable[] = date_parse_from_format('Y-m-d H:i:s', $date->format('Y-m-d H:i:s'))['minute'];
         }
 
         return $minAvailable;

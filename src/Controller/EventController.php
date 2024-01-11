@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Event;
-use App\Entity\Registration;
+use App\Factory\AssocEventDateFactory;
+use App\Factory\EventDateFactory;
 use App\Form\EventType;
+use App\Entity\Registration;
 use App\Form\RegistrationType;
+use App\Repository\AssocEventDateRepository;
 use App\Repository\EnclosureRepository;
 use App\Repository\EventRepository;
 use App\Repository\RegistrationRepository;
@@ -47,11 +50,11 @@ class EventController extends AbstractController
 
     #[Route('/event/{id}/show', name: 'app_event_show', requirements: ['id' => '\d+'])]
     public function show(
+        ?Event $event,
+        AssocEventDateRepository $assocEventDateRepository,
         RegistrationRepository $registrationRepository,
-        int $id,
         EventRepository $eventRepository
     ): Response {
-        $event = $eventRepository->find($id);
         if (null === $event) {
             throw $this->createNotFoundException("L'évènement n'existe pas ");
         }
@@ -66,13 +69,12 @@ class EventController extends AbstractController
             }
         }
 
-        return $this->render('event/show.html.twig', [
-            'event' => $event,
+        return $this->render('event/show.html.twig', ['event' => $event,
+            'dates' => $assocEventDateRepository->getAllDatesForEvent($event->getId()),
             'isRegister' => null !== $registration,
             'registration' => $registration,
             'enclosure' => false,
-            'events' => $eventRepository->getAll(''),
-        ]);
+            'events' => $eventRepository->getAll(''), ]);
     }
 
     #[Route('/event/{id}/delete', requirements: ['id' => '\d+'])]
@@ -110,9 +112,19 @@ class EventController extends AbstractController
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            if (null != $form->get('date')->getData()) {
+                dump($event->getEventDates());
+                foreach ($event->getEventDates() as $assoc) {
+                    $entityManager->remove($assoc);
+                    $event->removeAssoc();
+                }
+                $date = EventDateFactory::createOne(['date' => $form->get('date')->getData()]);
+                AssocEventDateFactory::createOne(['eventId' => $event, 'eventDatesId' => $date]);
+            }
+
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_animal');
+            return $this->redirectToRoute('app_event_showAll');
         }
 
         return $this->render('event/update.html.twig', [
@@ -128,10 +140,12 @@ class EventController extends AbstractController
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $date = EventDateFactory::createOne(['date' => $form->get('date')->getData()]);
+            AssocEventDateFactory::createOne(['eventId' => $event, 'eventDatesId' => $date]);
             $entityManager->persist($event);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_animal');
+            return $this->redirectToRoute('app_event_showAll');
         }
 
         return $this->render('event/create.html.twig', [

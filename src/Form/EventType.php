@@ -7,7 +7,7 @@ use App\Entity\Event;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,7 +20,15 @@ class EventType extends AbstractType
         $builder
             ->add('name', null, ['empty_data' => ''])
             ->add('description', TextType::class)
-            ->add('date', DateType::class)
+            ->add('date', DateTimeType::class, [
+                'mapped' => false,
+                'required' => false,
+                'years' => [(int) date('Y'), (int) date('Y') + 1],
+                'placeholder' => [
+                    'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+                    'hour' => 'Heure', 'minute' => 'Minutes',
+                ],
+            ])
             ->add('duration', NumberType::class)
             ->add('quota', NumberType::class)
             ->add('enclosure', EntityType::class, [

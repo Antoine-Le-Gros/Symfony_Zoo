@@ -25,6 +25,8 @@ class EnclosureRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('e')
             ->leftJoin('e.events', 'events')
+            ->leftJoin('events.eventDates', 'dates')
+            ->addSelect('dates')
             ->addSelect('events')
             ->where('e.id = :id')
             ->andWhere('events.name LIKE :search')
