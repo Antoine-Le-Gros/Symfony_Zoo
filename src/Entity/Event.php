@@ -179,6 +179,14 @@ class Event
 
         return $this;
     }
+    public function removeEventDate(EventDate $eventDate): static
+    {
+        if (!$this->eventDates->contains($eventDate)) {
+            $this->eventDates->remove($eventDate);
+        }
+
+        return $this;
+    }
 
     public function removeAssoc(): void
     {
