@@ -17,7 +17,6 @@
             <tr>
                 <th scope="col">Nom Évènement</th>
                 <th scope="col">Date Évènement</th>
-                <th scope="col">Date Inscription</th>
                 <th scope="col">Nombre de place de réservés</th>
                 <th scope="col">Prix unitaire</th>
                 <th scope="col">Montant</th>
@@ -26,7 +25,6 @@
         <tbody>
             <tr>
                 <td>{{ event.name | capitalize }}</td>
-                <td>{{ event.date | date("Y-m-d H:i:s") }}</td>
                 <td>{{ registration.date | date("Y-m-d H:i:s") }}</td>
                 <td>{{ registration.nbReservedPlaces }}</td>
                 <td>3.99</td>
