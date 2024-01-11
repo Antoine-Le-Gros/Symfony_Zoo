@@ -21,6 +21,8 @@ class UserFixtures extends Fixture
         });
 
         UserFactory::createOne([
+            'email' => 'admin@example.com',
+            'password' => 'admin',
             'firstName' => 'Pierre',
             'lastName' => 'Gouedar',
             'roles' => ['ROLE_ADMIN'],

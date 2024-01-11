@@ -6,12 +6,23 @@ use App\Entity\Animal;
 use App\Factory\AnimalFactory;
 use App\Factory\EnclosureFactory;
 use App\Factory\SpeciesFactory;
+use App\Factory\UserFactory;
 use App\Tests\Support\ControllerTester;
 
 class UpdateCest
 {
+    public function accessIsRestrictedForNoAdmin(ControllerTester $I): void
+    {
+        $I->amOnPage('/animal/create');
+        $I->amOnRoute('app_login');
+    }
+
+
     public function formUpdateAnimal(ControllerTester $I): void
     {
+        $adminUser = UserFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        $I->amLoggedInAs($adminUser);
+
         AnimalFactory::createOne([
             'name' => 'Pierre',
             'description' => 'Pierre est un cailloux',
@@ -31,6 +42,9 @@ class UpdateCest
 
     public function FormUpdateAnimalSend(ControllerTester $I): void
     {
+        $adminUser = UserFactory::createOne(['roles' => ['ROLE_ADMIN']])->object();
+        $I->amLoggedInAs($adminUser);
+
         AnimalFactory::createOne([
             'name' => 'Pierre',
             'description' => 'Pierre est un cailloux',
