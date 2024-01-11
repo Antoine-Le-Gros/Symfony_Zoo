@@ -8,10 +8,6 @@
     <dl>
         <dt> Description évènement </dt>
         <dd> {{ event.description | capitalize }}</dd>
-        <dt> Date</dt>
-            {% for date in dates %}
-                <li>{{ date.eventDatesId.date |date('d-m-Y') }}</li>
-            {% endfor %}
         <dt> Nombre de visiteurs</dt>
         <dd> {{ event.quota }}</dd>
     </dl>
