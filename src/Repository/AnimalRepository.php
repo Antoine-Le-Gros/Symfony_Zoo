@@ -38,6 +38,18 @@ class AnimalRepository extends ServiceEntityRepository
         return $qb->getQuery()->execute();
     }
 
+    public function getAllASpeciesInEnclosure(int $idEnclosure): array
+    {
+        $query = $this->createQueryBuilder('a');
+        $query->leftJoin('a.species', 'species')
+            ->leftJoin('a.enclosure', 'enclosure')
+            ->select('DISTINCT species.name')
+            ->where('enclosure.id = :id')
+            ->setParameter('id', $idEnclosure);
+
+        return $query->getQuery()->execute();
+    }
+
     //    /**
     //     * @return Animal[] Returns an array of Animal objects
     //     */
