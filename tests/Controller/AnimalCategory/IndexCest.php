@@ -28,7 +28,7 @@ class IndexCest
 
         $I->amOnPage('/categories');
 
-        $I->click('reptile description');
+        $I->click(' Voir les familles appartenant à cette catégorie');
         $I->seeResponseCodeIs(200);
 
         $I->seeCurrentUrlEquals('/families/1');
