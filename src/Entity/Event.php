@@ -157,4 +157,13 @@ class Event
 
         return $this;
     }
+
+    public function getNbRegister(): int
+    {
+        $nbRegister = 0;
+        foreach ($this->registrations as $registration) {
+            $nbRegister += $registration->getNbReservedPlaces();
+        }
+        return $nbRegister;
+    }
 }
