@@ -31,7 +31,7 @@ class IndexCest
         $I->amOnPage('/families');
         $I->seeResponseCodeIs(200);
 
-        $I->click('canidé description');
+        $I->click('Voir les espèces appartenant à cette famille');
         $I->seeCurrentUrlEquals('/species/1');
     }
 
