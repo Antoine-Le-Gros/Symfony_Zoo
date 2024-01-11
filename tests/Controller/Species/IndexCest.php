@@ -16,7 +16,7 @@ class IndexCest
 
         $I->seeInTitle('Liste des espèces');
         $I->see('Liste des espèces ', 'h1');
-        $I->seeNumberOfElements('.especesAnimal li>a[href]', 10);
+        $I->seeNumberOfElements('ul.p-0>li>a', 10);
     }
 
     public function listAnimalOfOneSpecies(ControllerTester $I): void
