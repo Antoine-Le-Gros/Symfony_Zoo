@@ -17,7 +17,7 @@ class IndexCest
 
         $I->seeInTitle('Liste des familles');
         $I->see('Liste des familles ', 'h1');
-        $I->seeNumberOfElements('.famillesAnimal li>a[href]', 10);
+        $I->seeNumberOfElements('ul.container>li.card', 10);
     }
 
     public function clickOnFirstElementOfFamilyList(ControllerTester $I): void
@@ -31,7 +31,7 @@ class IndexCest
         $I->amOnPage('/families');
         $I->seeResponseCodeIs(200);
 
-        $I->click('canidé description');
+        $I->click('Voir les espèces appartenant à cette famille');
         $I->seeCurrentUrlEquals('/species/1');
     }
 
@@ -39,10 +39,10 @@ class IndexCest
     {
         AnimalFamilyFactory::createSequence(
             [
-                ['name' => 'homnidé'],
-                ['name' => 'bovidé'],
-                ['name' => 'félidé'],
-                ['name' => 'cerbidé'],
+                ['name' => 'homnidés'],
+                ['name' => 'bovidés'],
+                ['name' => 'félidés'],
+                ['name' => 'cerbidés'],
             ]
         );
 
@@ -50,12 +50,12 @@ class IndexCest
         $I->seeResponseCodeIs(200);
 
         $I->assertEquals([
-            'bovidé',
-            'cerbidé',
-            'félidé',
-            'homnidé',
+            'La famille des bovidés.(s)',
+            'La famille des cerbidés.(s)',
+            'La famille des félidés.(s)',
+            'La famille des homnidés.(s)',
         ],
-            $I->grabMultiple('.famillesAnimal li a p'));
+            $I->grabMultiple('ul.container>li.card>.card-body>.card-title'));
     }
 
     public function testSearchForFamilyList(ControllerTester $I): void
@@ -76,7 +76,7 @@ class IndexCest
         $I->assertEquals([
             'cebidé',
             'cervidé',
-        ], $I->grabMultiple('.famillesAnimal li a p'));
+        ], $I->grabMultiple('.ul.container>li.card>.card'));
     }
 
     public function listOfFamilyAccordingCategory(ControllerTester $I): void

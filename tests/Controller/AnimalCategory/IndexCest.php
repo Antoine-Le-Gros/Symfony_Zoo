@@ -7,7 +7,7 @@ use App\Tests\Support\ControllerTester;
 
 class IndexCest
 {
-    public function defaultNumberOfAnimalCategory10(ControllerTester $I): void
+    public function defaultNumberOfAnimalCategoryIs10(ControllerTester $I): void
     {
         AnimalCategoryFactory::createMany(10);
 
@@ -16,7 +16,7 @@ class IndexCest
 
         $I->seeInTitle('Liste des catégories présentes au sein du zoo');
         $I->see('Liste des catégories présentes au sein du zoo', 'h1');
-        $I->seeNumberOfElements('.categoriesAnimal>li>a[href]', 10);
+        $I->seeNumberOfElements('ul.container>li.card', 10);
     }
 
     public function clickOnFirstElementOfCategoryList(ControllerTester $I): void
@@ -28,7 +28,7 @@ class IndexCest
 
         $I->amOnPage('/categories');
 
-        $I->click('reptile description');
+        $I->click(' Voir les familles appartenant à cette catégorie');
         $I->seeResponseCodeIs(200);
 
         $I->seeCurrentUrlEquals('/families/1');
@@ -61,12 +61,21 @@ class IndexCest
 
         $I->assertEquals(
             [
-                'amphibien description',
-                'mammifère description',
-                'oiseau description',
-                'reptile description',
+                'La catégorie des amphibien',
+                'La catégorie des mammifère',
+                'La catégorie des oiseau',
+                'La catégorie des reptile',
             ],
-            $I->grabMultiple('.categoriesAnimal li>a')
+            $I->grabMultiple('ul.container>li.card>.card-body>.card-title')
+        );
+        $I->assertEquals(
+            [
+                'description',
+                'description',
+                'description',
+                'description',
+            ],
+            $I->grabMultiple('ul.container>li.card>.card-body>.card-text')
         );
     }
 
@@ -97,10 +106,17 @@ class IndexCest
 
         $I->assertEquals(
             [
-                'amphibien description',
-                'mammifère description',
+                'La catégorie des amphibien',
+                'La catégorie des mammifère',
             ],
-            $I->grabMultiple('.categoriesAnimal li>a')
+            $I->grabMultiple('ul.container>li.card>.card-body>.card-title')
+        );
+        $I->assertEquals(
+            [
+                'description',
+                'description',
+            ],
+            $I->grabMultiple('ul.container>li.card>.card-body>.card-text')
         );
     }
 }
