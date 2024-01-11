@@ -9,10 +9,9 @@
                 <li class="card left-card m-3" style="width: 80vh">
                     <img class="card-img-top" src="{{ category.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256">
                     <div class="card-body">
-                        <h5 class="card-title"> La catégorie des {{ category.name }}</h5>
-                        <p class="card-text">
-                            {{ category.description }}
-                        </p>
+                        <h5 class="card-title">La catégorie des {{ category.name }}</h5>
+                        <p class="card-text"
+                        >{{ category.description }}</p>
                         <a class="btn btn-primary"  href="{{ path('app_families', {'idCategory': category.id}) }}"> Voir les familles appartenant à cette catégorie</a>
                     </div>
                 </li>
