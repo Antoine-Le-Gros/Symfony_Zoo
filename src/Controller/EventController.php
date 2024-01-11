@@ -184,7 +184,19 @@ class EventController extends AbstractController
             $registration = $form->getData();
             $registration->setEvent($event);
             $registration->setUser($this->getUser());
-            $registration->getDate()->setTime($form->get('hour')->getData(), $form->get('minute')->getData());
+            $date = $registration->getDate()->setTime($form->get('hour')->getData(), $form->get('minute')->getData());
+            $date = new \DateTimeImmutable($date->format('Y-m-d H:i:s'));
+            $registersLeft = $event->getNbRegisterLeft($date);
+            if ($registersLeft - $registration->getNbReservedPlaces() < 0) {
+                return $this->render('inscription/create.html.twig', [
+                    'form' => $form,
+                    'event' => $event,
+                    'registration_done' => false,
+                    'registerLeft' => $registersLeft,
+
+                ]);
+            }
+
             $entityManager->persist($registration);
             $entityManager->flush();
 
@@ -196,6 +208,7 @@ class EventController extends AbstractController
         return $this->render('inscription/create.html.twig', [
             'form' => $form,
             'event' => $event,
+            'registration_done' => true,
         ]);
     }
 
@@ -233,7 +246,18 @@ class EventController extends AbstractController
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $registration->getDate()->setTime($form->get('hour')->getData(), $form->get('minute')->getData());
+            $date = $registration->getDate()->setTime($form->get('hour')->getData(), $form->get('minute')->getData());
+            $date = new \DateTimeImmutable($date->format('Y-m-d H:i:s'));
+            $registersLeft = $event->getNbRegisterLeft($date);
+            if ($registersLeft - $registration->getNbReservedPlaces() < 0) {
+                return $this->render('inscription/update.html.twig', [
+                    'form' => $form,
+                    'event' => $event,
+                    'registration_done' => false,
+                    'registerLeft' => $registersLeft,
+
+                ]);
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_event_show', [
@@ -245,6 +269,7 @@ class EventController extends AbstractController
             'event' => $event,
             'registration' => $registration,
             'form' => $form,
+            'registration_done' => true,
         ]);
     }
 
@@ -264,15 +289,11 @@ class EventController extends AbstractController
         $event = $registration->getEvent();
         if ($form->isSubmitted()) {
             if ($form->getClickedButton() === $form->get('delete')) {
-                dump(date('Y-m-d H:i:s'));
-                $origin = new \DateTimeImmutable($event->getDate()->format('Y-m-d H:i:s'));
+                $origin = new \DateTimeImmutable($registration->getDate()->format('Y-m-d H:i:s'));
                 $target = new \DateTimeImmutable(date('Y-m-d H:i:s'));
                 $interval = $target->diff($origin);
                 if (0 == $interval->invert) {
-                    $entityManager->remove($registration);
-                    $entityManager->flush();
-
-                    return $this->redirectToRoute('app_event_showAll');
+                    return $this->redirectToRoute('app_event_refund', ['id' => $registration->getId()]);
                 }
 
                 return $this->render('inscription/delete.html.twig', [
@@ -324,6 +345,21 @@ class EventController extends AbstractController
         return $this->render('inscription/validation.html.twig', [
             'event' => $registration->getEvent(),
             'form' => $form,
+            'registration' => $registration,
+        ]);
+    }
+
+    #[Route('/event/{id}/refund', requirements: ['id' => '\d+'])]
+    public function refund(int $id, RegistrationRepository $registrationRepository, EntityManagerInterface $entityManager): Response
+    {
+        $registration = $registrationRepository->find($id);
+        $event = $registration->getEvent();
+        $entityManager->remove($registration);
+        $entityManager->flush();
+
+        return $this->render('event/refund.html.twig', [
+            'event' => $event,
+            'registration' => $registration,
         ]);
     }
 }

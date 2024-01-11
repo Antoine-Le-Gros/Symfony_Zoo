@@ -152,16 +152,6 @@ class Event
         return $this;
     }
 
-    public function getNbRegister(): int
-    {
-        $nbRegister = 0;
-        foreach ($this->registrations as $registration) {
-            $nbRegister += $registration->getNbReservedPlaces();
-        }
-
-        return $nbRegister;
-    }
-
     /**
      * @return Collection<int, EventDate>
      */
@@ -179,6 +169,7 @@ class Event
 
         return $this;
     }
+
     public function removeEventDate(EventDate $eventDate): static
     {
         if (!$this->eventDates->contains($eventDate)) {
@@ -191,5 +182,32 @@ class Event
     public function removeAssoc(): void
     {
         $this->eventDates->remove(0);
+    }
+
+    public function getNbRegisterSince(\DateTimeImmutable $date): int
+    {
+        $nbRegister = 0;
+        foreach ($this->registrations as $registration) {
+            $origin = new \DateTimeImmutable($registration->getDate()->format('Y-m-d H:i:s'));
+            $interval = $date->diff($origin);
+            if (0 == $interval->invert) {
+                $nbRegister += $registration->getNbReservedPlaces();
+            }
+        }
+
+        return $nbRegister;
+    }
+
+    public function getNbRegisterLeft(\DateTimeImmutable $date): int
+    {
+        $nbRegister = 0;
+        foreach ($this->registrations as $registration) {
+            $origin = new \DateTimeImmutable($registration->getDate()->format('Y-m-d H:i:s'));
+            if ($origin === $date) {
+                $nbRegister += $registration->getNbReservedPlaces();
+            }
+        }
+
+        return $this->quota - $nbRegister;
     }
 }

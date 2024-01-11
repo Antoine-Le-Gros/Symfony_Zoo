@@ -61,7 +61,7 @@ class EventRepository extends ServiceEntityRepository
         $dates = $this->getDateForEvent($eventName);
         $minAvailable = [];
         foreach ($dates as $date) {
-            $minAvailable[] = date_parse_from_format('Y-m-d H:i:s', $date->format('Y-m-d H:i:s'))['minute'];
+            $minAvailable[] = date_parse_from_format('Y-m-d H:i:s', $date['date']->format('Y-m-d H:i:s'))['minute'];
         }
 
         return $minAvailable;

@@ -8,14 +8,10 @@
     <dl>
         <dt> Description évènement </dt>
         <dd> {{ event.description | capitalize }}</dd>
-        <dt> Date</dt>
-            {% for date in dates %}
-                <li>{{ date.eventDatesId.date |date('d-m-Y') }}</li>
-            {% endfor %}
         <dt> Nombre de visiteurs</dt>
         <dd> {{ event.quota }}</dd>
     </dl>
-    {% dump(events) %}
+
 
     {% set cle=-1 %}
     {% set cleprev=-1 %}
@@ -25,17 +21,17 @@
             {% set cleprev=key %}
         {% endif %}
     {% endfor %}
-    {% dump(cle) %}
+
     {% if cle==events|length -1  %}
         {% set cle=-1 %}
     {% endif %}
-    {% dump(cle) %}
+
     {% set next=events[cle+1].id  %}
-    {% dump(next) %}
+
     {% if cleprev<=0 %}
         {% set cleprev= (events|length)  %}
     {% endif %}
-    {% dump(cle) %}
+
     {% set previous=events[cleprev-1].id  %}
 
     <p>Pour en apprendre plus sur d'autres évènements</p>
@@ -43,9 +39,6 @@
         <a  class="btn btn-warning" href="{{ path('app_event_show', {id:previous}) }}">Précédent</a>
         <a class="btn btn-primary" href="{{ path('app_event_show', {id:next}) }}">Suivant</a>
     </div>
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a class="btn btn-outline-success" href="{{ path('app_event_inscriptioncreate', {id: event.id}) }}"> S'inscrire à l'évènement {{ event.name }}</a>
-    {% endif %}
     {% if isRegister %}
         <a class="btn btn-outline-success" href="{{ path('app_event_inscriptionupdate', {id:registration.id}) }}"> Modifier l'évènement {{ event.name }}</a>
         <a class="btn btn-outline-danger" href="{{ path('app_event_deleteregistrations', {id:registration.id}) }}"> Supprimer l'inscription pour l'évènement {{ event.name }}</a>
@@ -54,26 +47,7 @@
     {% endif %}
 
 
-    {% set cle=-1 %}
-    {% set cleprev=-1 %}
-    {% for key,value in events %}
-        {%if value.id == event.id%}
-            {% set cle = key%}
-            {% set cleprev=key %}
-        {% endif %}
-    {% endfor %}
-    {% dump(cle) %}
-    {% if cle==events|length -1  %}
-        {% set cle=-1 %}
-    {% endif %}
-    {% dump(cle) %}
-    {% set next=events[cle+1].id  %}
-    {% dump(next) %}
-    {% if cleprev<=0 %}
-        {% set cleprev= (events|length)  %}
-    {% endif %}
-    {% dump(cle) %}
-    {% set previous=events[cleprev-1].id  %}
+
 
 
 {% endblock %}
