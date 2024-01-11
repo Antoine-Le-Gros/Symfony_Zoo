@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="subsectionTitle">Fiche de l'animal {{ animal.name }} ({{ animal.species.name }})</h1>
+    <h1 class="subsectionTitle">Fiche de l'animal {{ animal.name | capitalize}} ({{ animal.species.name }})</h1>
     <dl>
         <dt>Nom :</dt>
-        <dd>{{ animal.name }}</dd>
+        <dd>{{ animal.name | capitalize }}</dd>
 
         <dt>Description :</dt>
         <dd>{{ animal.description }}</dd>
@@ -12,15 +12,16 @@
         <dt>Espèce :</dt>
         <dd><span class="badge bg-secondary">
                 <a class="nav-link"
-                   href="{{ path("app_animals", {idSpecies: animal.species.id}) }}">{{ animal.species.name }}</a>
+                   href="{{ path("app_animals", {idSpecies: animal.species.id}) }}">{{ animal.species.name | capitalize }}</a>
             </span>
         </dd>
 
         <dt>Enclos :</dt>
-        <dd><span class="badge bg-secondary">{{ animal.enclosure.name }}</span></dd>
+        <dd><span class="badge bg-secondary">{{ animal.enclosure.name | capitalize}}</span></dd>
 
+        {% set image = animal.image.image|default(null) %}
         <dt>Image :</dt>
-        <dd><img src="{{ animal.image.image ?? asset('img/default.png') }}" width="256" height="256" alt="Image animal">
+        <dd><img src="{{ image ?? asset('img/default.png') }}" width="256" height="256" alt="Image animal">
         </dd>
 
         {% if animal.parent1 is not null %}
@@ -41,7 +42,7 @@
                 </ul>
             </dt>
         {% endif %}
-        <dt>Nombre de personnes inscrites pour {{ animal.name }} :
+        <dt>Nombre de personnes inscrites pour des événements avec {{ animal.name|capitalize }} :
             <dd>
             <span>{{ nbRegister }}</span>
             </dd>
@@ -50,5 +51,5 @@
 {% endblock %}
 
 {% block title %}
-    {{ animal.name }}
+    {{ animal.name|capitalize }}
 {% endblock %}

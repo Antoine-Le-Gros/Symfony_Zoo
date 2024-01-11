@@ -21,10 +21,12 @@
                                             {{ ev.enclosure.name |capitalize }}
                                          </span>
                             </a>
+                            {% if is_granted('ROLE_ADMIN') %}
                             <div class="crud d-flex">
                                 <a class="btn btn-danger w-50 delete" href="{{ path('app_event_delete', {id:ev.id}) }}">SUPPRIMER</a>
                                 <a class="btn btn-success w-50 update" href="{{ path('app_event_update', {id:ev.id}) }}">Modifier</a>
                             </div>
+                            {% endif %}
 
                         </div>
                     </div>
@@ -42,10 +44,12 @@
                                 {{ event.enclosure.name |capitalize }}
                             </span>
                         </a>
+                    {% if is_granted('ROLE_ADMIN') %}
                         <div class="crud d-flex">
                             <a class="btn btn-danger w-50 delete" href="{{ path('app_event_delete', {id:event.id}) }}">SUPPRIMER</a>
                             <a class="btn btn-success w-50 update" href="{{ path('app_event_update', {id:event.id}) }}">Modifier</a>
                         </div>
+                    {% endif%}
                     </div>
                 </div>
 

@@ -7,7 +7,8 @@
     <ul class="container d-flex flex-wrap justify-content-center">
         {% for category in categories %}
                 <li class="card left-card m-3" style="width: 80vh">
-                    <img class="card-img-top" src="{{ category.image.image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256">
+                    {% set image = category.image.image|default(null) %}
+                    <img class="card-img-top" src="{{ image ?? asset('/img/default.png')}}" alt="Image inconnue" width="256" height="256">
                     <div class="card-body">
                         <h5 class="card-title">La catégorie des {{ category.name }}</h5>
                         <p class="card-text"

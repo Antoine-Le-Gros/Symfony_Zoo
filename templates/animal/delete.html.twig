@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% set title = "Suppression de #{animal.name}" %}
-
-{% block title %}{{ title }}{% endblock %}
+{% block title %}Suppression de {{animal.name | capitalize}}{% endblock %}
 
 {% block body %}
-    <h1 class="subsectionTitle">{{ title }}</h1>
+    <h1 class="subsectionTitle">Suppression de {{animal.name | capitalize}}</h1>
+    <div class="alert alert-danger" role="alert">
+        Voulez-vous vraiment supprimer l'animal {{animal.name | capitalize}} ?
+    </div>
     {{ form_start(form, {'attr': {'class': ' d-flex justify-content-around'}}) }}
     {{ form_row(form.cancel, {'label': 'Annuler', 'attr': {'class': 'btn btn-secondary'}}) }}
     {{ form_row(form.delete, {'label': 'Supprimer', 'attr': {'class': 'btn btn-primary'}}) }}

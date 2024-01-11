@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ event.name }} {% endblock %}
+{% block title %} {{ event.name | capitalize}} {% endblock %}
 
 {% block body %}
 
@@ -36,14 +36,14 @@
 
     <p>Pour en apprendre plus sur d'autres évènements</p>
     <div class="btn-group" role="group" aria-label="Basic mixed styles" >
-        <a  class="btn btn-warning" href="{{ path('app_event_show', {id:previous}) }}">Précédent</a>
-        <a class="btn btn-primary" href="{{ path('app_event_show', {id:next}) }}">Suivant</a>
+        <a  class="btn btn-warning" href="{{ path('app_event_show', {id:previous}) }}">Événement précédent</a>
+        <a class="btn btn-primary" href="{{ path('app_event_show', {id:next}) }}">Événement suivant</a>
     </div>
     {% if isRegister %}
-        <a class="btn btn-outline-success" href="{{ path('app_event_inscriptionupdate', {id:registration.id}) }}"> Modifier l'évènement {{ event.name }}</a>
-        <a class="btn btn-outline-danger" href="{{ path('app_event_deleteregistrations', {id:registration.id}) }}"> Supprimer l'inscription pour l'évènement {{ event.name }}</a>
+        <a class="btn btn-outline-success" href="{{ path('app_event_inscriptionupdate', {id:registration.id}) }}"> Modifier votre inscription à l'évènement {{ event.name }}</a>
+        <a class="btn btn-danger" href="{{ path('app_event_deleteregistrations', {id:registration.id}) }}"> Supprimer votre inscription à l'évènement {{ event.name }}</a>
     {% else %}
-        <a class="btn btn-outline-secondary " href="{{ path('app_event_inscriptioncreate', {id: event.id}) }}"> S'inscrire à l'évènement {{ event.name }}</a>
+        <a class="btn btn-outline-light " href="{{ path('app_event_inscriptioncreate', {id: event.id}) }}"> S'inscrire à l'évènement {{ event.name }}</a>
     {% endif %}
 
 
