@@ -29,7 +29,7 @@ class IndexCest
         $I->amOnPage('/species');
         $I->seeResponseCodeIs(200);
 
-        $I->click('.especesAnimal .species-list a.nav-link');
+        $I->click('ul.p-0>li>a');
         $I->seeCurrentUrlEquals('/animals/1');
     }
 
