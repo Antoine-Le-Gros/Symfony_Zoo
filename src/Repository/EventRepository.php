@@ -33,6 +33,18 @@ class EventRepository extends ServiceEntityRepository
             ->execute();
     }
 
+    public function getDateForEvent(string $eventName): array
+    {
+        $query = $this->createQueryBuilder('e');
+        $query->select('eventDate.date')
+            ->Join('e.eventDates', 'assoc')
+            ->Join('assoc.eventDatesId', 'eventDate')
+            ->Where('UPPER(e.name) = UPPER(:eventName)')
+            ->setParameter('eventName', $eventName);
+
+        return $query->getQuery()->execute();
+    }
+
     public function getHours(string $eventName): array
     {
         $dates = $this->getDateForEvent($eventName);
