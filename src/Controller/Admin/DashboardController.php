@@ -8,6 +8,7 @@ use App\Entity\AnimalDiet;
 use App\Entity\AnimalFamily;
 use App\Entity\Enclosure;
 use App\Entity\Event;
+use App\Entity\Registration;
 use App\Entity\Species;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
