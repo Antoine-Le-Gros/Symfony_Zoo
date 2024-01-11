@@ -76,7 +76,7 @@ class IndexCest
         $I->assertEquals([
             'cebidé',
             'cervidé',
-        ], $I->grabMultiple('.famillesAnimal li a p'));
+        ], $I->grabMultiple('.ul.container>li.card>.card'));
     }
 
     public function listOfFamilyAccordingCategory(ControllerTester $I): void
