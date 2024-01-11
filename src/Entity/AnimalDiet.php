@@ -18,7 +18,7 @@ class AnimalDiet
     #[ORM\Column(length: 128)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'regime', targetEntity: Species::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'diet', targetEntity: Species::class, orphanRemoval: true)]
     private Collection $species;
 
     public function __construct()
