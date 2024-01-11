@@ -74,6 +74,6 @@ class IndexCest
         $I->assertEquals([
             'Gabriellebg',
             'Gabriellebg2',
-        ], $I->grabMultiple('.libEspece'));
+        ], $I->grabMultiple('#name'));
     }
 }
