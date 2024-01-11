@@ -33,6 +33,7 @@ class AnimalController extends AbstractController
 
         return $this->render('animal/show.html.twig', [
             'animal' => $animal,
+            'nbRegister' => $animal->getEnclosure()->getNbRegister(),
         ]);
     }
 
