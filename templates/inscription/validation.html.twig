@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %} Validation d'inscription {% endblock %}
+{% block body %}
+    <div class="d-flex flex-column">
+        <h1 class="subsectionTitle text-center">Validation de l'inscription de l'évènement {{ event.name }} pour le {{ event.date|format_datetime('full', 'short', locale='fr') }}</h1>
+        {{ form_start(form, {'attr': {'class': ' d-flex justify-content-around'}}) }}
+        {{ form_row(form.cancel, {'label': 'Annuler', 'attr': {'class': 'btn btn-secondary'}}) }}
+        {{ form_row(form.validate, {'label': 'Valider', 'attr': {'class': 'btn btn-primary'}}) }}
+        {{ form_end(form) }}
+        <span>Merci de vous être inscrit !</span>
+        <a class="btn btn-primary ms-auto" style="" href="{{ path('app_event_inscriptioninvoice', {id: event.id}) }}">Voir votre facture</a>
+    </div>
+{% endblock %}

@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Event;
-use App\Form\EventType;
 use App\Entity\Registration;
+use App\Factory\AssocEventDateFactory;
+use App\Factory\EventDateFactory;
+use App\Form\EventType;
 use App\Form\RegistrationType;
+use App\Repository\AssocEventDateRepository;
 use App\Repository\EnclosureRepository;
 use App\Repository\EventRepository;
 use App\Repository\RegistrationRepository;
@@ -185,8 +188,8 @@ class EventController extends AbstractController
             $entityManager->persist($registration);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_event_show', [
-                'id' => $event->getId(),
+            return $this->redirectToRoute('app_event_inscriptionvalidation', [
+                'id' => $registration->getId(),
             ]);
         }
 
@@ -294,6 +297,33 @@ class EventController extends AbstractController
             'event' => $event,
             'registration' => $registrationRepository->find($idRegistration),
             'species' => $animalRepository->getAllASpeciesInEnclosure($event->getEnclosure()->getId()),
+        ]);
+    }
+
+    #[Route('/event/{id}/inscription/validation')]
+    public function inscriptionValidation(Registration $registration, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $form = $this->createFormBuilder()
+            ->add('validate', SubmitType::class)
+            ->add('cancel', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->get('validate')->isClicked()) {
+                return $this->redirectToRoute('app_event_showAll');
+            } elseif ($form->get('cancel')->isClicked()) {
+                $entityManager->remove($registration);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_event_inscriptioncreate', [
+                    'id' => $registration->getEvent()->getId(),
+                ]);
+            }
+        }
+
+        return $this->render('inscription/validation.html.twig', [
+            'event' => $registration->getEvent(),
+            'form' => $form,
         ]);
     }
 }
