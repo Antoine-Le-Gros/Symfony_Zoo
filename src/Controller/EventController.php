@@ -8,6 +8,7 @@ use App\Factory\AssocEventDateFactory;
 use App\Factory\EventDateFactory;
 use App\Form\EventType;
 use App\Form\RegistrationType;
+use App\Repository\AnimalRepository;
 use App\Repository\AssocEventDateRepository;
 use App\Repository\EnclosureRepository;
 use App\Repository\EventRepository;
@@ -193,15 +194,15 @@ class EventController extends AbstractController
                     'event' => $event,
                     'registration_done' => false,
                     'registerLeft' => $registersLeft,
-
                 ]);
             }
 
             $entityManager->persist($registration);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_event_inscriptionvalidation', [
-                'id' => $registration->getId(),
+            return $this->redirectToRoute('app_event_validation', [
+                'id' => $registration->getEvent()->getId(),
+                'idRegistration' => $registration->getId(),
             ]);
         }
 
@@ -255,7 +256,6 @@ class EventController extends AbstractController
                     'event' => $event,
                     'registration_done' => false,
                     'registerLeft' => $registersLeft,
-
                 ]);
             }
             $entityManager->flush();
@@ -321,30 +321,13 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/event/{id}/inscription/validation')]
-    public function inscriptionValidation(Registration $registration, EntityManagerInterface $entityManager, Request $request): Response
+    #[Route('/event/{id}/{idRegistration}/validation')]
+    public function validation(Event $event, int $idRegistration, RegistrationRepository $registrationRepository): Response
     {
-        $form = $this->createFormBuilder()
-            ->add('validate', SubmitType::class)
-            ->add('cancel', SubmitType::class)
-            ->getForm();
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            if ($form->get('validate')->isClicked()) {
-                return $this->redirectToRoute('app_event_showAll');
-            } elseif ($form->get('cancel')->isClicked()) {
-                $entityManager->remove($registration);
-                $entityManager->flush();
+        $registration = $registrationRepository->find($idRegistration);
 
-                return $this->redirectToRoute('app_event_inscriptioncreate', [
-                    'id' => $registration->getEvent()->getId(),
-                ]);
-            }
-        }
-
-        return $this->render('inscription/validation.html.twig', [
-            'event' => $registration->getEvent(),
-            'form' => $form,
+        return $this->render('event/validation.html.twig', [
+            'event' => $event,
             'registration' => $registration,
         ]);
     }

@@ -33,7 +33,7 @@ class AnimalController extends AbstractController
 
         return $this->render('animal/show.html.twig', [
             'animal' => $animal,
-            'nbRegister' => $animal->getEnclosure()->getNbRegister(),
+            'nbRegister' => $animal->getEnclosure()->getNbRegister(new \DateTimeImmutable(date('Y-m-d H:i:s'))),
         ]);
     }
 

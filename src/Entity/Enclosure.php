@@ -107,11 +107,11 @@ class Enclosure
         return $this;
     }
 
-    public function getNbRegister(): int
+    public function getNbRegister(\DateTimeImmutable $date): int
     {
         $nbRegister = 0;
         foreach ($this->events as $event) {
-            $nbRegister = $event->getnbRegister();
+            $nbRegister = $event->getnbRegisterSince($date);
         }
         return $nbRegister;
     }
