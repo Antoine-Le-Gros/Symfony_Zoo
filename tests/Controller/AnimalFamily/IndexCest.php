@@ -88,7 +88,7 @@ class IndexCest
 
         $I->amOnPage('/categories');
 
-        $I->click('mammifère description');
+        $I->click('Voir les familles appartenant à cette catégorie');
         $I->seeResponseCodeIs(200);
 
         $I->seeCurrentUrlEquals('/families/1');
