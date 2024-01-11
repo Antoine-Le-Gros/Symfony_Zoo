@@ -7,7 +7,7 @@ use App\Tests\Support\ControllerTester;
 
 class IndexCest
 {
-    public function defaultNumberOfAnimalCategory10(ControllerTester $I): void
+    public function defaultNumberOfAnimalCategoryIs10(ControllerTester $I): void
     {
         AnimalCategoryFactory::createMany(10);
 
@@ -16,7 +16,7 @@ class IndexCest
 
         $I->seeInTitle('Liste des catégories présentes au sein du zoo');
         $I->see('Liste des catégories présentes au sein du zoo', 'h1');
-        $I->seeNumberOfElements('.categoriesAnimal>li>a[href]', 10);
+        $I->seeNumberOfElements('ul.container>li.card', 10);
     }
 
     public function clickOnFirstElementOfCategoryList(ControllerTester $I): void
