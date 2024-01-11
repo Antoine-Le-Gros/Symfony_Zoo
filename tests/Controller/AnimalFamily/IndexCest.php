@@ -74,9 +74,9 @@ class IndexCest
         $I->seeResponseCodeIs(200);
 
         $I->assertEquals([
-            'cebidé',
-            'cervidé',
-        ], $I->grabMultiple('.ul.container>li.card>.card'));
+            'La famille des cebidé.(s)',
+            'La famille des cervidé.(s)',
+        ], $I->grabMultiple('ul>li>div>h5'));
     }
 
     public function listOfFamilyAccordingCategory(ControllerTester $I): void
