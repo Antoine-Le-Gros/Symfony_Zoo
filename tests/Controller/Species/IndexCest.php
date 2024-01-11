@@ -16,7 +16,7 @@ class IndexCest
 
         $I->seeInTitle('Liste des espèces');
         $I->see('Liste des espèces ', 'h1');
-        $I->seeNumberOfElements('.especesAnimal li>a[href]', 10);
+        $I->seeNumberOfElements('ul.p-0>li>a', 10);
     }
 
     public function listAnimalOfOneSpecies(ControllerTester $I): void
@@ -29,7 +29,7 @@ class IndexCest
         $I->amOnPage('/species');
         $I->seeResponseCodeIs(200);
 
-        $I->click('.especesAnimal .species-list a.nav-link');
+        $I->click('ul.p-0>li>a');
         $I->seeCurrentUrlEquals('/animals/1');
     }
 
@@ -53,7 +53,7 @@ class IndexCest
             'Gabriellebg',
             'Pierre',
         ],
-            $I->grabMultiple('.libEspece'));
+            $I->grabMultiple('#name'));
     }
 
     public function testSearchSpecies(ControllerTester $I): void
@@ -74,6 +74,6 @@ class IndexCest
         $I->assertEquals([
             'Gabriellebg',
             'Gabriellebg2',
-        ], $I->grabMultiple('.libEspece'));
+        ], $I->grabMultiple('#name'));
     }
 }

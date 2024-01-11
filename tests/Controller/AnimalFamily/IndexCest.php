@@ -74,9 +74,9 @@ class IndexCest
         $I->seeResponseCodeIs(200);
 
         $I->assertEquals([
-            'cebidé',
-            'cervidé',
-        ], $I->grabMultiple('.ul.container>li.card>.card'));
+            'La famille des cebidé.(s)',
+            'La famille des cervidé.(s)',
+        ], $I->grabMultiple('ul>li>div>h5'));
     }
 
     public function listOfFamilyAccordingCategory(ControllerTester $I): void
@@ -88,7 +88,7 @@ class IndexCest
 
         $I->amOnPage('/categories');
 
-        $I->click('mammifère description');
+        $I->click('Voir les familles appartenant à cette catégorie');
         $I->seeResponseCodeIs(200);
 
         $I->seeCurrentUrlEquals('/families/1');

@@ -12,7 +12,7 @@
                     {% set image = esp.image.image|default(asset('img/default.png')) %}
                     <li class="border-end border-bottom mb-3"><a class="nav-link" href="{{ path('app_animals', {'idSpecies': esp.id}) }}">
                             <div class="w-100 d-flex flex-column" >
-                                <span>{{ esp.name |capitalize }}</span>
+                                <span id="name">{{ esp.name |capitalize }}</span>
                                 <span>{{ esp.description |capitalize}}</span>
                             </div>
                                 <div>
@@ -29,7 +29,7 @@
                 {% set image = singleSpecies.image.image|default(asset('img/default.png')) %}
                 <li class="border-end border-bottom mb-3"><a class="nav-link" href="{{ path('app_animals', {'idSpecies': singleSpecies.id}) }}">
                         <div class="d-flex flex-column w-100">
-                            <span>{{ singleSpecies.name |capitalize }}</span>
+                            <span id="name">{{ singleSpecies.name |capitalize }}</span>
                             <span>{{ singleSpecies.description |capitalize}}</span>
                         </div>
                             <div>

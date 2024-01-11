@@ -48,6 +48,6 @@ class ShowCest
         $I->see('Pierre', 'dt:contains("Nom :") + dd');
         $I->see('Pierre est un cailloux', 'dt:contains("Description :") + dd');
         $I->see('stone', 'dt:contains("Espèce :") + dd');
-        $I->see('Le cirque', 'dt:contains("Enclosure :") + dd');
+        $I->see('Le cirque', 'dt:contains("Enclos :") + dd');
     }
 }
