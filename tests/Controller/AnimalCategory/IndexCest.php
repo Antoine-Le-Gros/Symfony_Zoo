@@ -106,10 +106,17 @@ class IndexCest
 
         $I->assertEquals(
             [
-                'amphibien description',
-                'mammifère description',
+                'La catégorie des amphibien',
+                'La catégorie des mammifère',
             ],
-            $I->grabMultiple('.categoriesAnimal li>a')
+            $I->grabMultiple('ul.container>li.card>.card-body>.card-title')
+        );
+        $I->assertEquals(
+            [
+                'description',
+                'description',
+            ],
+            $I->grabMultiple('ul.container>li.card>.card-body>.card-text')
         );
     }
 }
