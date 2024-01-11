@@ -23,6 +23,7 @@ class RegistrationFormType extends AbstractType
             ->add('dateOfBirth', DateType::class, [
                 'widget' => 'choice',
                 'input' => 'datetime_immutable',
+                'years' => range(1950, date('Y')),
             ])
             ->add('email')
             ->add('agreeTerms', CheckboxType::class, [

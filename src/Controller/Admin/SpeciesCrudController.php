@@ -51,7 +51,6 @@ class SpeciesCrudController extends AbstractCrudController
                     'multiple' => true,
                     'choice_label' => 'name',
                 ]),
-
         ];
     }
 }

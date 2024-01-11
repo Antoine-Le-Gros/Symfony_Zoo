@@ -113,6 +113,7 @@ class Enclosure
         foreach ($this->events as $event) {
             $nbRegister = $event->getnbRegisterSince($date);
         }
+
         return $nbRegister;
     }
 }

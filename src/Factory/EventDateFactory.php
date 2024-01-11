@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<EventDate>
  *
- * @method        EventDate|Proxy create(array|callable $attributes = [])
- * @method static EventDate|Proxy createOne(array $attributes = [])
- * @method static EventDate|Proxy find(object|array|mixed $criteria)
- * @method static EventDate|Proxy findOrCreate(array $attributes)
- * @method static EventDate|Proxy first(string $sortedField = 'id')
- * @method static EventDate|Proxy last(string $sortedField = 'id')
- * @method static EventDate|Proxy random(array $attributes = [])
- * @method static EventDate|Proxy randomOrCreate(array $attributes = [])
+ * @method        EventDate|Proxy                     create(array|callable $attributes = [])
+ * @method static EventDate|Proxy                     createOne(array $attributes = [])
+ * @method static EventDate|Proxy                     find(object|array|mixed $criteria)
+ * @method static EventDate|Proxy                     findOrCreate(array $attributes)
+ * @method static EventDate|Proxy                     first(string $sortedField = 'id')
+ * @method static EventDate|Proxy                     last(string $sortedField = 'id')
+ * @method static EventDate|Proxy                     random(array $attributes = [])
+ * @method static EventDate|Proxy                     randomOrCreate(array $attributes = [])
  * @method static EventDateRepository|RepositoryProxy repository()
- * @method static EventDate[]|Proxy[] all()
- * @method static EventDate[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static EventDate[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static EventDate[]|Proxy[] findBy(array $attributes)
- * @method static EventDate[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static EventDate[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static EventDate[]|Proxy[]                 all()
+ * @method static EventDate[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static EventDate[]|Proxy[]                 createSequence(iterable|callable $sequence)
+ * @method static EventDate[]|Proxy[]                 findBy(array $attributes)
+ * @method static EventDate[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static EventDate[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class EventDateFactory extends ModelFactory
 {

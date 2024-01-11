@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<AnimalFamily>
  *
- * @method        AnimalFamily|Proxy                      create(array|callable $attributes = [])
- * @method static AnimalFamily|Proxy                      createOne(array $attributes = [])
- * @method static AnimalFamily|Proxy                      find(object|array|mixed $criteria)
- * @method static AnimalFamily|Proxy                      findOrCreate(array $attributes)
- * @method static AnimalFamily|Proxy                      first(string $sortedField = 'id')
- * @method static AnimalFamily|Proxy                      last(string $sortedField = 'id')
- * @method static AnimalFamily|Proxy                      random(array $attributes = [])
- * @method static AnimalFamily|Proxy                      randomOrCreate(array $attributes = [])
+ * @method        AnimalFamily|Proxy                     create(array|callable $attributes = [])
+ * @method static AnimalFamily|Proxy                     createOne(array $attributes = [])
+ * @method static AnimalFamily|Proxy                     find(object|array|mixed $criteria)
+ * @method static AnimalFamily|Proxy                     findOrCreate(array $attributes)
+ * @method static AnimalFamily|Proxy                     first(string $sortedField = 'id')
+ * @method static AnimalFamily|Proxy                     last(string $sortedField = 'id')
+ * @method static AnimalFamily|Proxy                     random(array $attributes = [])
+ * @method static AnimalFamily|Proxy                     randomOrCreate(array $attributes = [])
  * @method static AnimalFamilyRepository|RepositoryProxy repository()
- * @method static AnimalFamily[]|Proxy[]                  all()
- * @method static AnimalFamily[]|Proxy[]                  createMany(int $number, array|callable $attributes = [])
- * @method static AnimalFamily[]|Proxy[]                  createSequence(iterable|callable $sequence)
- * @method static AnimalFamily[]|Proxy[]                  findBy(array $attributes)
- * @method static AnimalFamily[]|Proxy[]                  randomRange(int $min, int $max, array $attributes = [])
- * @method static AnimalFamily[]|Proxy[]                  randomSet(int $number, array $attributes = [])
+ * @method static AnimalFamily[]|Proxy[]                 all()
+ * @method static AnimalFamily[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static AnimalFamily[]|Proxy[]                 createSequence(iterable|callable $sequence)
+ * @method static AnimalFamily[]|Proxy[]                 findBy(array $attributes)
+ * @method static AnimalFamily[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static AnimalFamily[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class AnimalFamilyFactory extends ModelFactory
 {

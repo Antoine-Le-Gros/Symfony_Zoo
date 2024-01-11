@@ -29,7 +29,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Sae3 01');
+            ->setTitle('ZooTechPark');
     }
 
     public function configureMenuItems(): iterable
@@ -53,5 +53,4 @@ class DashboardController extends AbstractDashboardController
         return Assets::new()
             ->addCssFile('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
     }
-
 }
