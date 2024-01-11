@@ -39,10 +39,10 @@ class IndexCest
     {
         AnimalFamilyFactory::createSequence(
             [
-                ['name' => 'homnidé'],
-                ['name' => 'bovidé'],
-                ['name' => 'félidé'],
-                ['name' => 'cerbidé'],
+                ['name' => 'homnidés'],
+                ['name' => 'bovidés'],
+                ['name' => 'félidés'],
+                ['name' => 'cerbidés'],
             ]
         );
 
@@ -50,12 +50,12 @@ class IndexCest
         $I->seeResponseCodeIs(200);
 
         $I->assertEquals([
-            'bovidé',
-            'cerbidé',
-            'félidé',
-            'homnidé',
+            'La famille des bovidés.(s)',
+            'La famille des cerbidés.(s)',
+            'La famille des félidés.(s)',
+            'La famille des homnidés.(s)',
         ],
-            $I->grabMultiple('.famillesAnimal li a p'));
+            $I->grabMultiple('ul.container>li.card>.card-body>.card-title'));
     }
 
     public function testSearchForFamilyList(ControllerTester $I): void
