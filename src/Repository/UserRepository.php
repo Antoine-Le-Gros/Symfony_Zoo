@@ -40,6 +40,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+    public function getPossibleRegistration(int $id)
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->LeftJoin('u.registrations', 'registrations')
+            ->addSelect('registrations')
+            ->where('u.id = :id')
+            ->andWhere('registrations.user is null')
+            ->setParameter('id', $id);
+
+
+        return $qb->getQuery()->execute();
+    }
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */

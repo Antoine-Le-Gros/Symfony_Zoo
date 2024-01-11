@@ -18,10 +18,10 @@ class Enclosure
     #[ORM\Column(length: 128)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'enclos', targetEntity: Animal::class)]
+    #[ORM\OneToMany(mappedBy: 'enclosure', targetEntity: Animal::class)]
     private Collection $animals;
 
-    #[ORM\OneToMany(mappedBy: 'enclos', targetEntity: Event::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'enclosure', targetEntity: Event::class, orphanRemoval: true)]
     private Collection $events;
 
     public function __construct()

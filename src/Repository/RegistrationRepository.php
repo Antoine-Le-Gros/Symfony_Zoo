@@ -31,7 +31,6 @@ class RegistrationRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->execute();
     }
-
     //    /**
     //     * @return Registration[] Returns an array of Registration objects
     //     */
