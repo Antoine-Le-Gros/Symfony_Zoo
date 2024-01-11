@@ -264,15 +264,11 @@ class EventController extends AbstractController
         $event = $registration->getEvent();
         if ($form->isSubmitted()) {
             if ($form->getClickedButton() === $form->get('delete')) {
-                dump(date('Y-m-d H:i:s'));
                 $origin = new \DateTimeImmutable($event->getDate()->format('Y-m-d H:i:s'));
                 $target = new \DateTimeImmutable(date('Y-m-d H:i:s'));
                 $interval = $target->diff($origin);
                 if (0 == $interval->invert) {
-                    $entityManager->remove($registration);
-                    $entityManager->flush();
-
-                    return $this->redirectToRoute('app_event_showAll');
+                    return $this->redirectToRoute('app_event_refund', ['id' => $registration->getId()]);
                 }
 
                 return $this->render('inscription/delete.html.twig', [
@@ -324,6 +320,20 @@ class EventController extends AbstractController
         return $this->render('inscription/validation.html.twig', [
             'event' => $registration->getEvent(),
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/event/{id}/refund', requirements: ['id' => '\d+'])]
+    public function refund(int $id, RegistrationRepository $registrationRepository, EntityManagerInterface $entityManager): Response
+    {
+        $registration = $registrationRepository->find($id);
+        $event = $registration->getEvent();
+        $entityManager->remove($registration);
+        $entityManager->flush();
+
+        return $this->render('event/refund.html.twig', [
+            'event' => $event,
+            'registration' => $registration,
         ]);
     }
 }
