@@ -17,7 +17,7 @@ class IndexCest
 
         $I->seeInTitle('Liste des familles');
         $I->see('Liste des familles ', 'h1');
-        $I->seeNumberOfElements('.famillesAnimal li>a[href]', 10);
+        $I->seeNumberOfElements('ul.container>li.card', 10);
     }
 
     public function clickOnFirstElementOfFamilyList(ControllerTester $I): void
