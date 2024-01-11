@@ -3,12 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Event;
-use App\Factory\AssocEventDateFactory;
-use App\Factory\EventDateFactory;
 use App\Form\EventType;
 use App\Entity\Registration;
 use App\Form\RegistrationType;
-use App\Repository\AssocEventDateRepository;
 use App\Repository\EnclosureRepository;
 use App\Repository\EventRepository;
 use App\Repository\RegistrationRepository;
@@ -287,6 +284,16 @@ class EventController extends AbstractController
             'register' => $registration,
             'form' => $form,
             'not_deletable' => false,
+        ]);
+    }
+
+    #[Route('/event/{id}/{idRegistration}/invoice')]
+    public function invoice(Event $event, int $idRegistration, RegistrationRepository $registrationRepository, AnimalRepository $animalRepository): Response
+    {
+        return $this->render('event/invoice.html.twig', [
+            'event' => $event,
+            'registration' => $registrationRepository->find($idRegistration),
+            'species' => $animalRepository->getAllASpeciesInEnclosure($event->getEnclosure()->getId()),
         ]);
     }
 }
