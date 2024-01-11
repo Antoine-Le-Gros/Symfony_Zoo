@@ -3,12 +3,12 @@
 namespace Controller\Animal;
 
 use App\Entity\Animal;
-use App\Factory\AnimalFactory;
 use App\Factory\AnimalCategoryFactory;
-use App\Factory\EnclosureFactory;
-use App\Factory\SpeciesFactory;
+use App\Factory\AnimalFactory;
 use App\Factory\AnimalFamilyFactory;
 use App\Factory\DietFactory;
+use App\Factory\EnclosureFactory;
+use App\Factory\SpeciesFactory;
 use App\Tests\Support\ControllerTester;
 use Zenstruck\Foundry\Proxy;
 

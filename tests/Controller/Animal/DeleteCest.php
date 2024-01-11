@@ -3,7 +3,6 @@
 namespace Controller\Animal;
 
 use App\Entity\Animal;
-use App\Entity\User;
 use App\Factory\AnimalFactory;
 use App\Factory\UserFactory;
 use App\Tests\Support\ControllerTester;
