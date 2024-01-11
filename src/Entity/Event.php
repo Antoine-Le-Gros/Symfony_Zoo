@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -27,10 +26,6 @@ class Event
     #[Assert\Length(max: 512)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\NotBlank]
-    private ?\DateTimeInterface $date = null;
-
     #[ORM\Column]
     #[Assert\NotBlank]
     private ?int $duration = null;
@@ -46,9 +41,13 @@ class Event
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Registration::class, orphanRemoval: true)]
     private Collection $registrations;
 
+    #[ORM\OneToMany(mappedBy: 'eventId', targetEntity: AssocEventDate::class, orphanRemoval: true)]
+    private Collection $eventDates;
+
     public function __construct()
     {
         $this->registrations = new ArrayCollection();
+        $this->eventDates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -78,11 +77,6 @@ class Event
         $this->description = $description;
 
         return $this;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
     }
 
     public function setDate(\DateTimeInterface $date): static
@@ -164,6 +158,30 @@ class Event
         foreach ($this->registrations as $registration) {
             $nbRegister += $registration->getNbReservedPlaces();
         }
+
         return $nbRegister;
+    }
+
+    /**
+     * @return Collection<int, EventDate>
+     */
+    public function getEventDates(): Collection
+    {
+        return $this->eventDates;
+    }
+
+    public function addEventDate(EventDate $eventDate): static
+    {
+        if (!$this->eventDates->contains($eventDate)) {
+            $this->eventDates->add($eventDate);
+            $eventDate->addEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAssoc(): void
+    {
+        $this->eventDates->remove(0);
     }
 }
