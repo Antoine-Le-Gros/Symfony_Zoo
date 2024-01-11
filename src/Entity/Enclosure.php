@@ -106,4 +106,13 @@ class Enclosure
 
         return $this;
     }
+
+    public function getNbRegister(): int
+    {
+        $nbRegister = 0;
+        foreach ($this->events as $event) {
+            $nbRegister = $event->getnbRegister();
+        }
+        return $nbRegister;
+    }
 }
