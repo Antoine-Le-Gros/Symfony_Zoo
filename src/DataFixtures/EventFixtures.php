@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Factory\AnimalFactory;
 use App\Factory\EnclosureFactory;
+use App\Factory\EventDateFactory;
 use App\Factory\EventFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -20,7 +21,6 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 0; $i < count($file_j); ++$i) {
             $file_j[$i]['enclosure'] = $enclosures[$i];
-            $file_j[$i]['date'] = \DateTime::createFromFormat('Y-m-d', '2024-11-24');
         }
         EventFactory::createSequence($file_j);
     }
