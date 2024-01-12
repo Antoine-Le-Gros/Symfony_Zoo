@@ -24,6 +24,7 @@
 6. [Database](#database)
     - [Configuration](#configuration)
     - [Commande](#commande)
+7. [Machine virtuelle](#machine-virtuelle)
 
 ---
 
@@ -138,3 +139,21 @@ Détruit la base de donnée pour la récréée et ajouté des données factices
 ```bash
 composer db
 ```
+
+---
+
+## 🌐Machine virtuelle
+
+Pour accéder à la machine virtuelle, les identifiants sont :  
+- login : "zootechpark".  
+- mot de passe : "zootechpark".
+
+Et pour avoir accès à MySQL sur la machine virtuelle, les identifiants sont :
+- login : "Root".
+- mot de passe : "zootechpark".
+
+### Accès au serveur Web
+
+Naviguez sur le site à partir de cette adresse : <http://10.31.33.46/>
+
+---
